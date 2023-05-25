@@ -45,7 +45,7 @@ const CategoryListWrapper = styled.div`
 
   @media (max-width: 768px) {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 49px;
     padding: 0 20px;
   }
 `
