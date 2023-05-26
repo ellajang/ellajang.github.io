@@ -9,9 +9,10 @@
  */
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `프론트엔드 개발자의 개발 블로그`,
+    description: `더 나은 개발자가 되기 위해 노력하는 주니어 프론트엔드 개발자입니다. 개발 일지, CS지식, 알고리즘 공부 등을 정리하기 위한 용도로 만들었습니다.`,
+    author: `Ella`,
+    siteUrl: 'https://ellajang.github.io/',
   },
   plugins: [
     {
@@ -20,6 +21,17 @@ module.exports = {
         isTSX: true,
         allExtensions: true,
       },
+    },
+    {
+      resolve: 'gatsby-plugin-canonical-urls',
+      options: {
+        siteUrl: 'https://ellajang.github.io/',
+        stripQueryString: true,
+      },
+    },
+    `gatsby-plugin-layouts`,
+    {
+      resolve: `gatsby-plugin-material-ui`,
     },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,
