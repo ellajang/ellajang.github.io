@@ -44,7 +44,7 @@ const Template: FunctionComponent<TemplateProps> = ({
 
         <meta
           name="google-site-verification"
-          content="웹 마스터 도구가 제공하는 Meta 태그"
+          content="O8YdVrrHDwPVMU5DmsPmA04j2S9fZnYAFWfW3LgHiKI"
         />
 
         <html lang="ko" />
