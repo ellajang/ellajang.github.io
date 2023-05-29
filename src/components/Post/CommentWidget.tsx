@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import { FunctionComponent, createRef, useEffect } from 'react'
 
 const src = 'https://utteranc.es/client.js'
@@ -35,7 +36,13 @@ const CommentWidget: FunctionComponent = () => {
 
     element.current.appendChild(utterances)
   }, [])
-  return <div ref={element} />
+  return <UtterancesWrapper ref={element} />
 }
 
 export default CommentWidget
+
+const UtterancesWrapper = styled.div`
+  @media (max-width: 768px) {
+    padding: 0 20px;
+  }
+`

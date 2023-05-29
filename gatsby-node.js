@@ -55,7 +55,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
   result.data.allMarkdownRemark.edges.forEach(generatePostPage)
 
   // Create blog-list pages
-  const posts = result.data.allMarkdownRemark.edges
+  /* const posts = result.data.allMarkdownRemark.edges
   const postsPerPage = 6
   const numPages = Math.ceil(posts.length / postsPerPage)
   Array.from({ length: numPages }).forEach((_, i) => {
@@ -69,7 +69,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         currentPage: i + 1,
       },
     })
-  })
+  }) */
 }
 
 const path = require('path')
