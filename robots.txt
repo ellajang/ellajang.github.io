@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://ellajang.github.io/sitemap-index.xml
+Host: https://ellajang.github.io
