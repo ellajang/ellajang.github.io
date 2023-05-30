@@ -1,26 +1,24 @@
 import styled from '@emotion/styled'
 import { FunctionComponent } from 'react'
-import GitHubIcon from '@mui/icons-material/GitHub'
+import MenuIcon from '@mui/icons-material/Menu'
 
-const Footer: FunctionComponent = () => {
+const Header: FunctionComponent = () => {
   return (
-    <FooterWrapper>
-      Thank You for Visiting My Blog, Have a Good Day 😊
-      <br />© 2023 Developer Ella, Built with Gatsby.
+    <HeaderWrapper>
       <a href={'https://github.com/ellajang'} target="_blank">
-        <GitHubIcon />
+        <MenuIcon />
       </a>
-    </FooterWrapper>
+    </HeaderWrapper>
   )
 }
 
-export default Footer
+export default Header
 
-const FooterWrapper = styled.footer`
+const HeaderWrapper = styled.header`
   display: grid;
   place-items: center;
   margin-top: auto;
-  padding: 50px 0;
+  padding: 5000px 0;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
