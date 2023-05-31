@@ -42,10 +42,13 @@ export default Header
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   color: '#212121',
-  borderRadius: theme.shape.borderRadius,
+
+  border: '1px solid #b0bec5',
+  borderRadius: '10px',
   backgroundColor: alpha(theme.palette.grey[400], 0.15),
   '&:hover': {
     backgroundColor: alpha(theme.palette.grey[400], 0.15),
+    border: '1px solid #b0bec5',
   },
   marginLeft: 0,
   width: '100%',
@@ -66,8 +69,6 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }))
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  border: '1px solid #b0bec5',
-  borderRadius: '10px',
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
