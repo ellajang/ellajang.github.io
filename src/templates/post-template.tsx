@@ -1,7 +1,7 @@
 import PostHead from 'components/Post/PostHead'
 import Template from 'components/Common/Template'
 import { graphql } from 'gatsby'
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import PostContent from 'components/Post/PostContent'
 import CommentWidget from 'components/Post/CommentWidget'
@@ -24,7 +24,7 @@ export type PostPageItemType = {
   }
 }
 
-const PostTemplate: FunctionComponent<PostTemplateProps> = ({
+const PostTemplate: React.FC<PostTemplateProps> = ({
   data: {
     allMarkdownRemark: { edges },
   },

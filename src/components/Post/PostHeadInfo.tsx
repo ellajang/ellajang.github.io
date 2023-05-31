@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import ArrowCircleLeftIcon from '@mui/icons-material/ArrowCircleLeft'
 import styled from '@emotion/styled'
 import { Grid } from '@mui/material'
@@ -9,7 +9,7 @@ export type PostHeadInfoProps = {
   categories: string[]
 }
 
-const PostHeadInfo: FunctionComponent<PostHeadInfoProps> = ({
+const PostHeadInfo: React.FC<PostHeadInfoProps> = ({
   title,
   date,
   categories,

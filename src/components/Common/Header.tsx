@@ -1,29 +1,83 @@
-import styled from '@emotion/styled'
-import { FunctionComponent } from 'react'
-import MenuIcon from '@mui/icons-material/Menu'
+import * as React from 'react'
+import { styled, alpha } from '@mui/material/styles'
+import AppBar from '@mui/material/AppBar'
+import Box from '@mui/material/Box'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+import InputBase from '@mui/material/InputBase'
+import SearchIcon from '@mui/icons-material/Search'
+import MenuList from './Drawer'
 
-const Header: FunctionComponent = () => {
+const Header: React.FC = () => {
   return (
-    <HeaderWrapper>
-      <a href={'https://github.com/ellajang'} target="_blank">
-        <MenuIcon />
-      </a>
-    </HeaderWrapper>
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" color="inherit">
+        <Toolbar>
+          <MenuList />
+          <Typography
+            variant="h6"
+            noWrap
+            component="div"
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            프론트엔드 기술 블로그
+          </Typography>
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="검색어를 입력하세요."
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+        </Toolbar>
+      </AppBar>
+    </Box>
   )
 }
 
 export default Header
 
-const HeaderWrapper = styled.header`
-  display: grid;
-  place-items: center;
-  margin-top: auto;
-  padding: 5000px 0;
-  font-size: 15px;
-  text-align: center;
-  line-height: 1.5;
+const Search = styled('div')(({ theme }) => ({
+  position: 'relative',
+  color: '#212121',
+  borderRadius: theme.shape.borderRadius,
+  backgroundColor: alpha(theme.palette.grey[400], 0.15),
+  '&:hover': {
+    backgroundColor: alpha(theme.palette.grey[400], 0.15),
+  },
+  marginLeft: 0,
+  width: '100%',
+  [theme.breakpoints.up('sm')]: {
+    marginLeft: theme.spacing(1),
+    width: 'auto',
+  },
+}))
 
-  @media (max-width: 768px) {
-    font-size: 13px;
-  }
-`
+const SearchIconWrapper = styled('div')(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: '100%',
+  position: 'absolute',
+  pointerEvents: 'none',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+}))
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  border: '1px solid #b0bec5',
+  borderRadius: '10px',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1, 1, 1, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: '25ch',
+      '&:focus': {
+        width: '40ch',
+      },
+    },
+  },
+}))

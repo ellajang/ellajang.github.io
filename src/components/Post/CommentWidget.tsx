@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { FunctionComponent, createRef, useEffect } from 'react'
+import React, { createRef, useEffect } from 'react'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'ellajang/ellajang.github.io'
@@ -14,7 +14,7 @@ type UtterancesAttributesType = {
   async: string
 }
 
-const CommentWidget: FunctionComponent = () => {
+const CommentWidget: React.FC = () => {
   const element = createRef<HTMLDivElement>()
 
   useEffect(() => {

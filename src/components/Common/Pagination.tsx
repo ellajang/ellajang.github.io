@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Pagination as MUIPagination } from '@mui/material'
-import React, { ChangeEvent, FunctionComponent, useState } from 'react'
+import React, { ChangeEvent, useState } from 'react'
 
 type PaginationProps = {
   count: number
@@ -8,7 +8,7 @@ type PaginationProps = {
   onChange?: (page: number) => void
 }
 
-export const Pagination: FunctionComponent<PaginationProps> = ({
+export const Pagination: React.FC<PaginationProps> = ({
   count,
   defaultPage = 1,
   onChange = () => {},
@@ -25,9 +25,6 @@ export const Pagination: FunctionComponent<PaginationProps> = ({
         count={count}
         page={page}
         onChange={handlePageChange}
-        color="primary"
-        variant="outlined"
-        shape="rounded"
         showFirstButton
         showLastButton
       />
@@ -41,7 +38,7 @@ const PaginationWrapper = styled.div`
   display: grid;
   place-items: center;
   margin-top: auto;
-  padding: 5px 0;
+  padding: 15px 0;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;

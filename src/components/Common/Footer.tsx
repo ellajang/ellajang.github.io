@@ -1,8 +1,7 @@
 import styled from '@emotion/styled'
-import { FunctionComponent } from 'react'
 import GitHubIcon from '@mui/icons-material/GitHub'
 
-const Footer: FunctionComponent = () => {
+const Footer: React.FC = () => {
   return (
     <FooterWrapper>
       Thank You for Visiting My Blog, Have a Good Day 😊
@@ -24,7 +23,7 @@ const FooterWrapper = styled.footer`
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
-
+  background-image: linear-gradient(40deg, #faf9f9f4 100%, #faf9f9f4 100%);
   @media (max-width: 768px) {
     font-size: 13px;
   }

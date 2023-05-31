@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import PostHeadInfo from './PostHeadInfo'
@@ -16,7 +16,7 @@ type PostHeadProps = {
   categories: string[]
 }
 
-const PostHead: FunctionComponent<PostHeadProps> = ({
+const PostHead: React.FC<PostHeadProps> = ({
   title,
   date,
   categories,

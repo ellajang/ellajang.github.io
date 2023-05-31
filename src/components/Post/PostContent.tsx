@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 
 interface PostContentProps {
   html: string
 }
 
-const PostContent: FunctionComponent<PostContentProps> = ({ html }) => {
+const PostContent: React.FC<PostContentProps> = ({ html }) => {
   return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
 }
 

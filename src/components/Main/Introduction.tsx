@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import { FunctionComponent } from 'react'
+import React from 'react'
 import ProfileImage from './ProfileImage'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 
@@ -7,9 +7,7 @@ type IntroductionProps = {
   profileImage: IGatsbyImageData
 }
 
-const Introduction: FunctionComponent<IntroductionProps> = ({
-  profileImage,
-}) => {
+const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
   return (
     <Background>
       <Wrapper>
@@ -27,7 +25,7 @@ export default Introduction
 
 const Background = styled.div`
   width: 100%;
-  background-image: linear-gradient(60deg, #29323c 0%, #485563 100%);
+  background-image: linear-gradient(40deg, #90a4ae 100%, #90a4ae 100%);
   color: #ffffff;
 `
 
@@ -37,7 +35,7 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: flex-start;
   width: 768px;
-  height: 400px;
+  height: 350px;
   margin: 0 auto;
 
   @media (max-width: 768px) {

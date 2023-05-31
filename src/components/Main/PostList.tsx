@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
 import PostItem from './PostItem'
 import { PostListItemType } from 'types/PostItem.types'
@@ -8,10 +8,7 @@ type PostListProps = {
   posts: PostListItemType[]
 }
 
-const PostList: FunctionComponent<PostListProps> = ({
-  selectedCategory,
-  posts,
-}) => {
+const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(
     () =>
       posts.filter(

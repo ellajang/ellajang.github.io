@@ -1,4 +1,4 @@
-import React, { FunctionComponent, useMemo } from 'react'
+import React, { useMemo } from 'react'
 import Introduction from 'components/Main/Introduction'
 import Template from 'components/Common/Template'
 import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
@@ -8,6 +8,7 @@ import { PostListItemType } from 'types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { parse } from 'query-string'
 import Pagination from 'components/Common/Pagination'
+import Header from 'components/Common/Header'
 
 const POSTS_PER_PAGE = 10
 
@@ -35,7 +36,7 @@ type IndexPageProps = {
   }
 }
 
-const IndexPage: FunctionComponent<IndexPageProps> = ({
+const IndexPage: React.FC<IndexPageProps> = ({
   location: { search },
   data: {
     site: {
@@ -86,23 +87,26 @@ const IndexPage: FunctionComponent<IndexPageProps> = ({
   }, [edges, page])
 
   return (
-    <Template
-      title={title}
-      description={description}
-      url={siteUrl}
-      image={publicURL}
-    >
-      <Introduction profileImage={gatsbyImageData} />
-      <CategoryList
-        selectedCategory={selectedCategory}
-        categoryList={categoryList}
-      />
-      <PostList posts={paginatedPosts} selectedCategory={selectedCategory} />
-      <Pagination
-        count={Math.ceil(edges.length / POSTS_PER_PAGE)}
-        onChange={handlePageChange}
-      />
-    </Template>
+    <>
+      <Header />
+      <Template
+        title={title}
+        description={description}
+        url={siteUrl}
+        image={publicURL}
+      >
+        <Introduction profileImage={gatsbyImageData} />
+        <CategoryList
+          selectedCategory={selectedCategory}
+          categoryList={categoryList}
+        />
+        <PostList posts={paginatedPosts} selectedCategory={selectedCategory} />
+        <Pagination
+          count={Math.ceil(edges.length / POSTS_PER_PAGE)}
+          onChange={handlePageChange}
+        />
+      </Template>
+    </>
   )
 }
 

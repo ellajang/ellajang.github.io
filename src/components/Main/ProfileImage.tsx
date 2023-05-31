@@ -1,14 +1,12 @@
 import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import { FunctionComponent } from 'react'
+import React from 'react'
 
 type ProfileImageProps = {
   profileImage: IGatsbyImageData
 }
 
-const ProfileImage: FunctionComponent<ProfileImageProps> = ({
-  profileImage,
-}) => {
+const ProfileImage: React.FC<ProfileImageProps> = ({ profileImage }) => {
   return <ProfileImageWrapper image={profileImage} alt="Profile Image" />
 }
 

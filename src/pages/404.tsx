@@ -1,11 +1,11 @@
-import React, { FunctionComponent } from 'react'
+import React from 'react'
 import styled from '@emotion/styled'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { Button } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
 
-const NotFoundPage: FunctionComponent = function () {
+const NotFoundPage: React.FC = function () {
   return (
     <NotFoundPageWrapper>
       <GlobalStyle />

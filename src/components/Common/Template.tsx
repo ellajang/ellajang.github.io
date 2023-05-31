@@ -1,5 +1,5 @@
 import styled from '@emotion/styled'
-import React, { FunctionComponent, ReactNode } from 'react'
+import React, { ReactNode } from 'react'
 import GlobalStyle from './GlobalStyle'
 import Footer from './Footer'
 import { Helmet } from 'react-helmet'
@@ -12,7 +12,7 @@ type TemplateProps = {
   children: ReactNode
 }
 
-const Template: FunctionComponent<TemplateProps> = ({
+const Template: React.FC<TemplateProps> = ({
   title,
   description,
   url,
