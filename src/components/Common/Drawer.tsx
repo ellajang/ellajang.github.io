@@ -41,21 +41,6 @@ const MenuList: React.FC = () => {
           <ListItem button>
             <ListItemText primary="Item 3" />
           </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 4" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 1" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 2" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 3" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Item 4" />
-          </ListItem>
         </List>
       </DrawerStyle>
     </>
