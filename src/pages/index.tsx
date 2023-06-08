@@ -9,6 +9,8 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { parse } from 'query-string'
 import Pagination from 'components/Common/Pagination'
 import Header from 'components/Common/Header'
+import { ThemeContextProvider } from 'hooks/Theme'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 const POSTS_PER_PAGE = 10
 
@@ -89,23 +91,29 @@ const IndexPage: React.FC<IndexPageProps> = ({
   return (
     <>
       <Header />
-      <Template
-        title={title}
-        description={description}
-        url={siteUrl}
-        image={publicURL}
-      >
-        <Introduction profileImage={gatsbyImageData} />
-        <CategoryList
-          selectedCategory={selectedCategory}
-          categoryList={categoryList}
-        />
-        <PostList posts={paginatedPosts} selectedCategory={selectedCategory} />
-        <Pagination
-          count={Math.ceil(edges.length / POSTS_PER_PAGE)}
-          onChange={handlePageChange}
-        />
-      </Template>
+      <ThemeContextProvider>
+        <GlobalStyle />
+        <Template
+          title={title}
+          description={description}
+          url={siteUrl}
+          image={publicURL}
+        >
+          <Introduction profileImage={gatsbyImageData} />
+          <CategoryList
+            selectedCategory={selectedCategory}
+            categoryList={categoryList}
+          />
+          <PostList
+            posts={paginatedPosts}
+            selectedCategory={selectedCategory}
+          />
+          <Pagination
+            count={Math.ceil(edges.length / POSTS_PER_PAGE)}
+            onChange={handlePageChange}
+          />
+        </Template>
+      </ThemeContextProvider>
     </>
   )
 }

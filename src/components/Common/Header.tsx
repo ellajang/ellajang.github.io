@@ -7,33 +7,38 @@ import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuList from './Drawer'
+import DarkModeToggle from './DarkModeToggle'
+import { ThemeContextProvider } from 'hooks/Theme'
 
 const Header: React.FC = () => {
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="inherit">
-        <Toolbar>
-          <MenuList />
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-          >
-            프론트엔드 기술 블로그
-          </Typography>
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="검색어를 입력하세요."
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
-        </Toolbar>
-      </AppBar>
-    </Box>
+    <ThemeContextProvider>
+      <Box sx={{ flexGrow: 1 }}>
+        <AppBar position="static" color="inherit">
+          <Toolbar>
+            <MenuList />
+            <Typography
+              variant="h6"
+              noWrap
+              component="div"
+              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+            >
+              프론트엔드 기술 블로그
+            </Typography>
+            <DarkModeToggle />
+            <Search>
+              <SearchIconWrapper>
+                <SearchIcon />
+              </SearchIconWrapper>
+              <StyledInputBase
+                placeholder="검색어를 입력하세요."
+                inputProps={{ 'aria-label': 'search' }}
+              />
+            </Search>
+          </Toolbar>
+        </AppBar>
+      </Box>
+    </ThemeContextProvider>
   )
 }
 
