@@ -90,8 +90,8 @@ const IndexPage: React.FC<IndexPageProps> = ({
 
   return (
     <>
-      <Header />
       <ThemeContextProvider>
+        <Header />
         <GlobalStyle />
         <Template
           title={title}

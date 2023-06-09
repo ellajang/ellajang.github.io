@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
-import React, { createRef, useEffect } from 'react'
+import { ThemeContext } from 'hooks/Theme'
+import React, { createRef, useContext, useEffect } from 'react'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'ellajang/ellajang.github.io'
@@ -16,9 +17,15 @@ type UtterancesAttributesType = {
 
 const CommentWidget: React.FC = () => {
   const element = createRef<HTMLDivElement>()
+  const { theme } = useContext(ThemeContext)
 
   useEffect(() => {
     if (element.current === null) return
+
+    while (element.current.firstChild) {
+      element.current.firstChild.remove()
+    }
+
     const utterances: HTMLScriptElement = document.createElement('script')
 
     const attributes: UtterancesAttributesType = {
@@ -26,7 +33,7 @@ const CommentWidget: React.FC = () => {
       repo,
       'issue-term': 'pathname',
       label: 'Comment',
-      theme: `github-light`,
+      theme: theme === 'light' ? `github-light` : 'dark-blue',
       crossorigin: 'anonymous',
       async: 'true',
     }
@@ -35,7 +42,7 @@ const CommentWidget: React.FC = () => {
     })
 
     element.current.appendChild(utterances)
-  }, [])
+  }, [theme])
   return <UtterancesWrapper ref={element} />
 }
 

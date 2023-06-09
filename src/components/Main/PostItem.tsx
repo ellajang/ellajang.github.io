@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import React from 'react'
+import { ThemeContext } from 'hooks/Theme'
+import React, { useContext } from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 
 type PostItemProps = PostFrontmatterType & { link: string }
@@ -16,16 +17,18 @@ const PostItem: React.FC<PostItemProps> = ({
   },
   link,
 }) => {
+  const { theme } = useContext(ThemeContext)
   return (
-    <PostItemWrapper to={link}>
+    <PostItemWrapper to={link} theme={theme}>
       <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
-
-      <PostItemContent>
+      <PostItemContent theme={theme}>
         <Title>{title}</Title>
         <Date>{date}</Date>
         <Category>
           {categories.map(item => (
-            <CategoryItem key={item}>{item}</CategoryItem>
+            <CategoryItem key={item} theme={theme}>
+              {item}
+            </CategoryItem>
           ))}
         </Category>
         <Summary>{summary}</Summary>
@@ -41,17 +44,23 @@ const PostItemContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 15px;
+  color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
 `
 const PostItemWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  box-shadow: ${props =>
+    props.theme === 'light'
+      ? '0 0 8px rgba(0, 0, 0, 0.15)'
+      : '0 0 8px rgba(255, 255, 255, 0.4)'};
   transition: 0.3s box-shadow;
   cursor: pointer;
-
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: ${props =>
+      props.theme === 'light'
+        ? '0 0 10px rgba(0, 0, 0, 0.3)'
+        : '0 0 10px rgba(255, 255, 255, 0.3)'};
   }
 `
 
@@ -90,10 +99,10 @@ const CategoryItem = styled.div`
   margin: 2.5px 5px;
   padding: 3px 5px;
   border-radius: 3px;
-  background: black;
+  background: ${props => (props.theme === 'light' ? 'black' : '#263238')};
   font-size: 14px;
   font-weight: 700;
-  color: white;
+  color: ${props => (props.theme === 'light' ? 'white' : '#cfd8dc')};
 `
 
 const Summary = styled.div`

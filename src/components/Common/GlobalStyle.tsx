@@ -1,7 +1,8 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Global, css } from '@emotion/react'
+import { ThemeContext } from 'hooks/Theme'
 
-const defaultStyle = css`
+export const lightMode = css`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');
 
   * {
@@ -25,8 +26,34 @@ const defaultStyle = css`
   }
 `
 
-const GlobalStyle: React.FC = function () {
-  return <Global styles={defaultStyle} />
+export const darkMode = css`
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Nanum Myeongjo', serif;
+  }
+  body {
+    background-color: #0d1215;
+  }
+
+  a,
+  a:hover {
+    text-decoration: none;
+    cursor: pointer;
+  }
+  h3,
+  p,
+  h2,
+  ul {
+    color: #c3c7cc;
+  }
+`
+
+const GlobalStyle: React.FC = () => {
+  const { theme } = useContext(ThemeContext)
+
+  return <Global styles={theme === 'light' ? lightMode : darkMode} />
 }
 
 export default GlobalStyle

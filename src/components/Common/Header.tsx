@@ -1,44 +1,38 @@
 import * as React from 'react'
 import { styled, alpha } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
-import Box from '@mui/material/Box'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
-import { ThemeContextProvider } from 'hooks/Theme'
 
 const Header: React.FC = () => {
   return (
-    <ThemeContextProvider>
-      <Box sx={{ flexGrow: 1 }}>
-        <AppBar position="static" color="inherit">
-          <Toolbar>
-            <MenuList />
-            <Typography
-              variant="h6"
-              noWrap
-              component="div"
-              sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-            >
-              프론트엔드 기술 블로그
-            </Typography>
-            <DarkModeToggle />
-            <Search>
-              <SearchIconWrapper>
-                <SearchIcon />
-              </SearchIconWrapper>
-              <StyledInputBase
-                placeholder="검색어를 입력하세요."
-                inputProps={{ 'aria-label': 'search' }}
-              />
-            </Search>
-          </Toolbar>
-        </AppBar>
-      </Box>
-    </ThemeContextProvider>
+    <AppBar position="fixed" color="inherit">
+      <Toolbar>
+        <MenuList />
+        <Typography
+          variant="h6"
+          noWrap
+          component="div"
+          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+        >
+          프론트엔드 기술 블로그
+        </Typography>
+        <DarkModeToggle />
+        <Search>
+          <SearchIconWrapper>
+            <SearchIcon />
+          </SearchIconWrapper>
+          <StyledInputBase
+            placeholder="검색어를 입력하세요."
+            inputProps={{ 'aria-label': 'search' }}
+          />
+        </Search>
+      </Toolbar>
+    </AppBar>
   )
 }
 
@@ -47,7 +41,6 @@ export default Header
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   color: '#212121',
-
   border: '1px solid #b0bec5',
   borderRadius: '10px',
   backgroundColor: alpha(theme.palette.grey[400], 0.15),

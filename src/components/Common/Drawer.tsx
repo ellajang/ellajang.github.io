@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext, useState } from 'react'
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
 import Drawer from '@mui/material/Drawer'
@@ -9,10 +9,11 @@ import MenuIcon from '@mui/icons-material/Menu'
 import FirstPageIcon from '@mui/icons-material/FirstPage'
 import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
 import { Collapse } from '@mui/material'
+import { ThemeContext } from 'hooks/Theme'
 
 const MenuList: React.FC = () => {
-  const [drawerOpen, setDrawerOpen] = React.useState<boolean>(false)
-  const [subMenuOpen, setSubMenuOpen] = React.useState<{
+  const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
+  const [subMenuOpen, setSubMenuOpen] = useState<{
     [key: string]: boolean
   }>({
     개발환경: false,
@@ -35,13 +36,12 @@ const MenuList: React.FC = () => {
       [category]: !prevMenuOpen[category],
     }))
   }
-
+  const { theme } = useContext(ThemeContext)
   return (
     <>
       <IconButton
         size="large"
         edge="start"
-        color="inherit"
         aria-label="open drawer"
         sx={{ mr: 1.5 }}
         onClick={handleDrawerOpen}

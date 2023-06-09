@@ -7,6 +7,7 @@
   "dependencies": {
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
+    "@mui/styles": "^5.13.2",
     "gatsby": "^5.10.0",
     "gatsby-plugin-canonical-urls": "^5.10.0",
     "gatsby-plugin-emotion": "^8.10.0",

@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import React, { ReactNode } from 'react'
+import { ThemeContext } from 'hooks/Theme'
+import React, { ReactNode, useContext } from 'react'
 
 export type CategoryListProps = {
   selectedCategory: string
@@ -20,6 +21,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
   selectedCategory,
   categoryList,
 }) => {
+  const { theme } = useContext(ThemeContext)
   return (
     <CategoryListWrapper>
       {Object.entries(categoryList).map(([name, count]) => (
@@ -27,6 +29,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
           to={`/?category=${name}`}
           active={name === selectedCategory}
           key={name}
+          theme={theme}
         >
           #{name}({count})
         </CategoryItem>
@@ -42,7 +45,6 @@ const CategoryListWrapper = styled.div`
   flex-wrap: wrap;
   width: 768px;
   margin: 100px auto 0;
-
   @media (max-width: 768px) {
     width: 100%;
     margin-top: 49px;
@@ -56,9 +58,9 @@ const CategoryItem = styled(({ active, ...props }: GatsbyLinkProps) => (
   margin-right: 20px;
   padding: 5px 0;
   font-size: 18px;
-  font-weight: ${({ active }) => (active ? '1000' : '400')};
+  font-weight: ${({ active }) => (active ? '900' : '400')};
   cursor: pointer;
-
+  color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
   &:last-of-type {
     margin-right: 0;
   }

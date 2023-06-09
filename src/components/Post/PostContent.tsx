@@ -79,7 +79,8 @@ const MarkdownRenderer = styled.div`
 
   // Adjust Horizontal Rule style
   hr {
-    border: 1px solid #000000;
+    border: ${props =>
+      props.theme === 'light' ? '1px solid #000000' : '0.1px solid #c3c7cc'};
     margin: 100px 0;
   }
 

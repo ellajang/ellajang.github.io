@@ -19,12 +19,13 @@ const DarkModeToggle: React.FC = () => {
 
     setTimeout(() => {
       setTheme(prevTheme => (prevTheme === 'light' ? 'dark' : 'light'))
+
       setIsTransitioning(false)
-    }, 300)
+    }, 200)
 
     setTimeout(() => {
       setShowDarkModeIcon(prevShowDarkModeIcon => !prevShowDarkModeIcon)
-    }, 300)
+    }, 200)
   }
 
   return (
@@ -59,10 +60,6 @@ const ModeButton = styled.div`
 
 const TransitionIcon = styled.div`
   opacity: 0;
-
-  &.show {
-    opacity: 2;
-  }
 `
 
 const InstantIcon = styled.div`

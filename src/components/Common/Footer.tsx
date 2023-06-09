@@ -1,11 +1,14 @@
 import styled from '@emotion/styled'
 import GitHubIcon from '@mui/icons-material/GitHub'
+import { ThemeContext } from 'hooks/Theme'
+import { useContext } from 'react'
 
 const Footer: React.FC = () => {
+  const { theme } = useContext(ThemeContext)
+
   return (
-    <FooterWrapper>
-      Thank You for Visiting My Blog, Have a Good Day 😊
-      <br />© 2023 Developer Ella, Built with Gatsby.
+    <FooterWrapper theme={theme}>
+      © 2023 Developer Ella, Built with Gatsby.
       <a href={'https://github.com/ellajang'} target="_blank">
         <GitHubIcon />
       </a>
@@ -19,11 +22,13 @@ const FooterWrapper = styled.footer`
   display: grid;
   place-items: center;
   margin-top: auto;
-  padding: 50px 0;
+  padding: 15px 0;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
-  background-image: linear-gradient(40deg, #faf9f9f4 100%, #faf9f9f4 100%);
+  color: ${props => (props.theme === 'light' ? '#263238' : '#c4d0d7')};
+  background-color: ${props =>
+    props.theme === 'light' ? '#f7fafc' : '#12171b'};
   @media (max-width: 768px) {
     font-size: 13px;
   }

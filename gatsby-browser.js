@@ -11,7 +11,7 @@ import React from 'react'
 import { ThemeContextProvider } from './src/hooks/Theme'
 import GlobalStyle from './src/components/Common/GlobalStyle'
 
-export const wrapRootElement = ({ element }) => (
+const wrapRootElement = ({ element }) => (
   <ThemeContextProvider>
     <GlobalStyle />
     {element}

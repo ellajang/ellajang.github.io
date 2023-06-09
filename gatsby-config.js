@@ -32,6 +32,10 @@ module.exports = {
     `gatsby-plugin-layouts`,
     {
       resolve: `gatsby-plugin-material-ui`,
+      options: {
+        disableAutoprefixing: true,
+        disableMinification: true,
+      },
     },
     `gatsby-plugin-emotion`,
     `gatsby-plugin-react-helmet`,

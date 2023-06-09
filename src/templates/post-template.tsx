@@ -5,6 +5,7 @@ import React from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import PostContent from 'components/Post/PostContent'
 import CommentWidget from 'components/Post/CommentWidget'
+import { ThemeContextProvider } from 'hooks/Theme'
 
 type PostTemplateProps = {
   data: {
@@ -47,16 +48,23 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   } = edges[0]
 
   return (
-    <Template title={title} description={summary} url={href} image={publicUrl}>
-      <PostHead
+    <ThemeContextProvider>
+      <Template
         title={title}
-        date={date}
-        categories={categories}
-        thumbnail={gatsbyImageData}
-      />
-      <PostContent html={html} />
-      <CommentWidget />
-    </Template>
+        description={summary}
+        url={href}
+        image={publicUrl}
+      >
+        <PostHead
+          title={title}
+          date={date}
+          categories={categories}
+          thumbnail={gatsbyImageData}
+        />
+        <PostContent html={html} />
+        <CommentWidget />
+      </Template>
+    </ThemeContextProvider>
   )
 }
 
