@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import { Pagination as MUIPagination } from '@mui/material'
-import React, { ChangeEvent, useState } from 'react'
+import { ThemeContext } from 'hooks/Theme'
+import React, { ChangeEvent, useContext, useState } from 'react'
 
 type PaginationProps = {
   count: number
@@ -21,7 +22,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   }
   return (
     <PaginationWrapper>
-      <MUIPagination
+      <CustomMUIPagination
         count={count}
         page={page}
         onChange={handlePageChange}
@@ -47,3 +48,15 @@ const PaginationWrapper = styled.div`
     font-size: 13px;
   }
 `
+
+const CustomMUIPagination = styled(MUIPagination)(() => {
+  const { theme } = useContext(ThemeContext)
+  return {
+    '& .MuiPaginationItem-root': {
+      color: theme === 'light' ? 'black' : 'white',
+    },
+    '& .MuiPaginationItem-root.Mui-selected': {
+      backgroundColor: theme === 'light' ? '#E0E0E0' : '#616161',
+    },
+  }
+})

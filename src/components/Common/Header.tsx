@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { useContext } from 'react'
 import { styled, alpha } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
@@ -7,20 +7,20 @@ import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
+import { ThemeContext } from 'hooks/Theme'
 
 const Header: React.FC = () => {
   return (
-    <AppBar position="fixed" color="inherit">
+    <AppBarStyle position="fixed">
       <Toolbar>
         <MenuList />
-        <Typography
+        <TypographyStyle
           variant="h6"
           noWrap
-          component="div"
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
         >
           프론트엔드 기술 블로그
-        </Typography>
+        </TypographyStyle>
         <DarkModeToggle />
         <Search>
           <SearchIconWrapper>
@@ -32,11 +32,25 @@ const Header: React.FC = () => {
           />
         </Search>
       </Toolbar>
-    </AppBar>
+    </AppBarStyle>
   )
 }
 
 export default Header
+
+const AppBarStyle = styled(AppBar)(() => {
+  const appTheme = useContext(ThemeContext)
+  return {
+    backgroundColor: appTheme.theme === 'light' ? 'white' : '#263238',
+  }
+})
+
+const TypographyStyle = styled(Typography)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    color: theme.theme === 'light' ? 'black' : 'white',
+  }
+})
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',

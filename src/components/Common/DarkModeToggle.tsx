@@ -33,17 +33,29 @@ const DarkModeToggle: React.FC = () => {
       {isTransitioning ? (
         <TransitionIcon>
           {showDarkModeIcon ? (
-            <DarkModeIcon fontSize="large" />
+            <DarkModeIcon
+              fontSize="large"
+              sx={{ color: theme === 'light' ? 'black' : 'white' }}
+            />
           ) : (
-            <LightModeIcon fontSize="large" />
+            <LightModeIcon
+              fontSize="large"
+              sx={{ color: theme === 'light' ? 'black' : 'white' }}
+            />
           )}
         </TransitionIcon>
       ) : (
         <InstantIcon>
           {theme === 'light' ? (
-            <DarkModeIcon fontSize="large" />
+            <DarkModeIcon
+              fontSize="large"
+              sx={{ color: theme === 'light' ? 'black' : 'white' }}
+            />
           ) : (
-            <LightModeIcon fontSize="large" />
+            <LightModeIcon
+              fontSize="large"
+              sx={{ color: theme === 'light' ? 'black' : 'white' }}
+            />
           )}
         </InstantIcon>
       )}

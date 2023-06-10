@@ -36,10 +36,10 @@ const MenuList: React.FC = () => {
       [category]: !prevMenuOpen[category],
     }))
   }
-  const { theme } = useContext(ThemeContext)
+
   return (
     <>
-      <IconButton
+      <IconButtonStyle
         size="large"
         edge="start"
         aria-label="open drawer"
@@ -47,7 +47,7 @@ const MenuList: React.FC = () => {
         onClick={handleDrawerOpen}
       >
         <MenuIcon />
-      </IconButton>
+      </IconButtonStyle>
       <DrawerStyle anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
         <List>
           <FirstPageIconStyle fontSize="large" onClick={handleDrawerClose} />
@@ -168,14 +168,25 @@ const MenuList: React.FC = () => {
 
 export default MenuList
 
-const DrawerStyle = styled(Drawer)(() => ({
-  width: 350,
-  flexShrink: 0,
-  '& .MuiDrawer-paper': {
-    width: 380,
-    boxSizing: 'border-box',
-  },
-}))
+const IconButtonStyle = styled(IconButton)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    color: theme.theme === 'light' ? 'black' : 'white',
+  }
+})
+
+const DrawerStyle = styled(Drawer)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    width: 350,
+    flexShrink: 0,
+    '& .MuiDrawer-paper': {
+      width: 380,
+      boxSizing: 'border-box',
+      backgroundColor: theme.theme === 'dark' ? '#263238' : 'white',
+    },
+  }
+})
 
 const FirstPageIconStyle = styled(FirstPageIcon)`
   display: flex;
