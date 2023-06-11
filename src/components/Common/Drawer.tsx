@@ -10,6 +10,8 @@ import FirstPageIcon from '@mui/icons-material/FirstPage'
 import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
 import { Collapse } from '@mui/material'
 import { ThemeContext } from 'hooks/Theme'
+import { Link } from 'gatsby'
+import { navMenu } from 'constants/navMenu'
 
 const MenuList: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
