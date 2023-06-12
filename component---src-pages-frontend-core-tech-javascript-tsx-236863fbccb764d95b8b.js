@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[673],{3561:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 JAVASCRIPT 페이지 입니다.")}}}]);
+//# sourceMappingURL=component---src-pages-frontend-core-tech-javascript-tsx-236863fbccb764d95b8b.js.map

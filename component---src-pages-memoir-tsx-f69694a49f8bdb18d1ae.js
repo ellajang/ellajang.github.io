@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[374],{8864:function(t,e,u){u.r(e),u.d(e,{default:function(){return n}});var r=u(917);function n(){return(0,r.jsx)("div",null,"이곳이 memoir 페이지 입니다.")}}}]);
+//# sourceMappingURL=component---src-pages-memoir-tsx-f69694a49f8bdb18d1ae.js.map

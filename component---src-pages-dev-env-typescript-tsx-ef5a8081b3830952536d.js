@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[672],{4777:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 TYPESCRIPT 페이지 입니다.")}}}]);
+//# sourceMappingURL=component---src-pages-dev-env-typescript-tsx-ef5a8081b3830952536d.js.map

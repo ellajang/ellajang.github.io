@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[110],{1372:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 NETWORK 페이지 입니다.")}}}]);
+//# sourceMappingURL=component---src-pages-basic-resource-network-tsx-7de68a631e5ea8b48360.js.map
