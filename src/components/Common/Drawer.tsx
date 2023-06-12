@@ -11,7 +11,6 @@ import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
 import { Collapse } from '@mui/material'
 import { ThemeContext } from 'hooks/Theme'
 import { Link } from 'gatsby'
-import { navMenu } from 'constants/navMenu'
 
 const MenuList: React.FC = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
@@ -64,6 +63,7 @@ const MenuList: React.FC = () => {
               <ExpandMoreRounded />
             )}
           </ListItem>
+
           <Collapse
             in={subMenuOpen['기초 및 학습 리소스']}
             timeout="auto"
@@ -71,10 +71,29 @@ const MenuList: React.FC = () => {
           >
             <List component="div" disablePadding>
               <ListItem button>
-                <ListItemText primary="서브 메뉴 1" />
+                <Link to="/basicResource/DB">
+                  <ListItemText primary="데이터베이스" />
+                </Link>
               </ListItem>
               <ListItem button>
-                <ListItemText primary="서브 메뉴 2" />
+                <Link to="/basicResource/OS">
+                  <ListItemText primary="운영체제" />
+                </Link>
+              </ListItem>
+              <ListItem button>
+                <Link to="/basicResource/DS">
+                  <ListItemText primary="자료구조" />
+                </Link>
+              </ListItem>
+              <ListItem button>
+                <Link to="/basicResource/CS">
+                  <ListItemText primary="컴퓨터구조" />
+                </Link>
+              </ListItem>
+              <ListItem button>
+                <Link to="/basicResource/NETWORK">
+                  <ListItemText primary="네트워크" />
+                </Link>
               </ListItem>
             </List>
           </Collapse>
@@ -99,13 +118,19 @@ const MenuList: React.FC = () => {
                 button
                 onClick={() => handleSubMenuToggle('웹 프론트엔드 핵심 기술')}
               >
-                <ListItemText primary="HTML" />
+                <Link to="frontendCoreTech/HTML">
+                  <ListItemText primary="HTML" />
+                </Link>
               </ListItem>
               <ListItem button>
-                <ListItemText primary="JAVASCRIPT" />
+                <Link to="frontendCoreTech/JAVASCRIPT">
+                  <ListItemText primary="JAVASCRIPT" />
+                </Link>
               </ListItem>
               <ListItem button>
-                <ListItemText primary="CSS" />
+                <Link to="frontendCoreTech/CSS">
+                  <ListItemText primary="CSS" />
+                </Link>
               </ListItem>
             </List>
           </Collapse>
@@ -119,48 +144,32 @@ const MenuList: React.FC = () => {
           </ListItem>
           <Collapse in={subMenuOpen['개발환경']} timeout="auto" unmountOnExit>
             <List component="div" disablePadding>
-              <ListItem button onClick={() => handleSubMenuToggle('개발환경')}>
-                <ListItemText primary="REACT" />
+              <ListItem button>
+                <Link to="/devEnv/REACT">
+                  <ListItemText primary="REACT" />
+                </Link>
               </ListItem>
               <ListItem button>
-                <ListItemText primary="TypeScript" />
-              </ListItem>
-            </List>
-          </Collapse>
-          <ListItem
-            button
-            onClick={() => handleSubMenuToggle('디버깅 및 이슈 해결')}
-          >
-            <ListItemText primary="디버깅 및 이슈 해결" />
-            {subMenuOpen['디버깅 및 이슈 해결'] ? (
-              <ExpandLessRounded />
-            ) : (
-              <ExpandMoreRounded />
-            )}
-          </ListItem>
-          <Collapse
-            in={subMenuOpen['디버깅 및 이슈 해결']}
-            timeout="auto"
-            unmountOnExit
-          >
-            <List component="div" disablePadding>
-              <ListItem
-                button
-                onClick={() => handleSubMenuToggle('디버깅 및 이슈 해결')}
-              >
-                <ListItemText primary="서브 메뉴 3" />
-              </ListItem>
-              <ListItem button>
-                <ListItemText primary="서브 메뉴 4" />
+                <Link to="/devEnv/TYPESCRIPT">
+                  <ListItemText primary="TypeScript" />
+                </Link>
               </ListItem>
             </List>
           </Collapse>
           <ListItem button>
-            <ListItemText primary="알고리즘" />
+            <Link to="/debugging">
+              <ListItemText primary="디버깅 및 이슈 해결" />
+            </Link>
           </ListItem>
-
           <ListItem button>
-            <ListItemText primary="회고록" />
+            <Link to="/algorithm">
+              <ListItemText primary="알고리즘" />
+            </Link>
+          </ListItem>
+          <ListItem button>
+            <Link to="/memoir">
+              <ListItemText primary="회고록" />
+            </Link>
           </ListItem>
         </List>
       </DrawerStyle>
