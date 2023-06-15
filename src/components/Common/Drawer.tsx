@@ -167,6 +167,11 @@ const MenuList: React.FC = () => {
             </Link>
           </ListItem>
           <ListItem button>
+            <Link to="/algorithm">
+              <ListItemText primary="알고리즘" />
+            </Link>
+          </ListItem>
+          <ListItem button>
             <Link to="/memoir">
               <ListItemText primary="회고록" />
             </Link>
