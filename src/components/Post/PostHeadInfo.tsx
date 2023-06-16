@@ -46,7 +46,7 @@ export default PostHeadInfo
 const Title = styled.div`
   overflow: hidden;
   overflow-wrap: break-word;
-  margin-top: 130px;
+  margin-top: 120px;
   padding: 0px 0px 20px 470px;
   text-overflow: ellipsis;
   white-space: normal;
@@ -65,7 +65,7 @@ const Title = styled.div`
 
 const ArrowCircleLeftIconDisplay = styled.div`
   cursor: pointer;
-  padding: 90px 0px 0px 470px;
+  padding: 120px 0px 0px 470px;
   @media (max-width: 1168px) {
     font-size: 30px;
     margin-top: 50px;

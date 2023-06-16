@@ -2,6 +2,7 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import PostHeadInfo from './PostHeadInfo'
+import Header from 'components/Common/Header'
 
 type GatsbyImgProps = {
   image: IGatsbyImageData
@@ -24,6 +25,7 @@ const PostHead: React.FC<PostHeadProps> = ({
 }) => {
   return (
     <PostHeadWrapper>
+      <Header />
       <BackgroundImage image={thumbnail} alt="thumbnail" />
       <PostHeadInfo title={title} date={date} categories={categories} />
     </PostHeadWrapper>
@@ -35,7 +37,7 @@ export default PostHead
 const PostHeadWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 400px;
+  height: 420px;
   margin: 0;
   padding: 0;
   @media (max-width: 768px) {

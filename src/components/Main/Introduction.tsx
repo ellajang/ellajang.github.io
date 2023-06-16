@@ -40,7 +40,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   width: 768px;
-  height: 330px;
+  height: 380px;
   margin: 0px auto;
   margin-bottom: 40px;
   @media (max-width: 768px) {
@@ -60,7 +60,7 @@ const SubTitle = styled.div`
 `
 
 const Title = styled.div`
-  margin-top: 15px;
+  margin-top: 20px;
   font-size: 30px;
   font-weight: 700;
 

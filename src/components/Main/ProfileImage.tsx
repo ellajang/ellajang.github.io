@@ -13,9 +13,9 @@ const ProfileImage: React.FC<ProfileImageProps> = ({ profileImage }) => {
 export default ProfileImage
 
 const ProfileImageWrapper = styled(GatsbyImage)`
-  width: 120px;
-  height: 120px;
-  margin-bottom: 30px;
+  width: 130px;
+  height: 130px;
+  margin-bottom: 40px;
   border-radius: 50%;
 
   @media (max-width: 768px) {
