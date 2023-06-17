@@ -1,5 +1,11 @@
+import Header from 'components/Common/Header'
 import React from 'react'
+import BlogListTemplate from 'templates/blog-list-template'
 
 export default function CS() {
-  return <div>이곳이 CS 페이지 입니다.</div>
+  return (
+    <>
+      <Header />
+    </>
+  )
 }

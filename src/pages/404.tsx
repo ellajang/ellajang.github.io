@@ -5,7 +5,7 @@ import { Button } from '@mui/material'
 import HomeIcon from '@mui/icons-material/Home'
 import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied'
 
-const NotFoundPage: React.FC = function () {
+const NotFoundPage: React.FC = () => {
   return (
     <NotFoundPageWrapper>
       <GlobalStyle />

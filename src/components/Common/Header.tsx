@@ -8,19 +8,22 @@ import SearchIcon from '@mui/icons-material/Search'
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
 import { ThemeContext } from 'hooks/Theme'
+import { Link } from 'gatsby'
 
 const Header: React.FC = () => {
   return (
     <AppBarStyle position="fixed">
       <Toolbar>
         <MenuList />
+
         <TypographyStyle
           variant="h6"
           noWrap
           sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
         >
-          프론트엔드 기술 블로그
+          <LinkStyle to="/">프론트엔드 기술 블로그</LinkStyle>
         </TypographyStyle>
+
         <DarkModeToggle />
         <Search>
           <SearchIconWrapper>
@@ -94,3 +97,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
     },
   },
 }))
+const LinkStyle = styled(Link)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+    textDecoration: 'none',
+  }
+})

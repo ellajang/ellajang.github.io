@@ -234,6 +234,7 @@ const LinkStyle = styled(Link)(() => {
     display: 'flex',
     alignItems: 'center',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+    textDecoration: 'none',
   }
 })
 
