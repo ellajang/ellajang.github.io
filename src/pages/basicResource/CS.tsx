@@ -6,6 +6,7 @@ export default function CS() {
   return (
     <>
       <Header />
+      <BlogListTemplate />
     </>
   )
 }
