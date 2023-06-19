@@ -1,4 +1,4 @@
-import PostHead from 'components/Post/PostHead'
+/* import PostHead from 'components/Post/PostHead'
 import Template from 'components/Common/Template'
 import { graphql } from 'gatsby'
 import React from 'react'
@@ -93,3 +93,4 @@ export const queryMarkdownDataBySlug = graphql`
     }
   }
 `
+ */

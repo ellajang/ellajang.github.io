@@ -3,7 +3,7 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/Theme'
 import React from 'react'
 
-const frontendCoreTech = () => {
+const frontEndCoreTech = () => {
   return (
     <>
       <ThemeContextProvider>
@@ -14,4 +14,4 @@ const frontendCoreTech = () => {
   )
 }
 
-export default frontendCoreTech
+export default frontEndCoreTech
