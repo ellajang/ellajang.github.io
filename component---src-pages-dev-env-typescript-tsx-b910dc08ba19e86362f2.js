@@ -1,0 +1,2 @@
+"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[672],{4777:function(t,u,e){e.r(u),e.d(u,{default:function(){return s}});var n=e(46),r=e(7294),a=e(917);function s(){return(0,a.jsx)(r.Fragment,null,(0,a.jsx)(n.Z,null))}}}]);
+//# sourceMappingURL=component---src-pages-dev-env-typescript-tsx-b910dc08ba19e86362f2.js.map
