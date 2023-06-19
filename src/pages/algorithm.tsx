@@ -1,10 +1,15 @@
+import Title from 'components/CategoryPage/Title'
 import Header from 'components/Common/Header'
+import { ThemeContextProvider } from 'hooks/Theme'
 import React from 'react'
 
 export default function algorithm() {
   return (
     <>
-      <Header />
+      <ThemeContextProvider>
+        <Header />
+        <Title titleText="알고리즘" />
+      </ThemeContextProvider>
     </>
   )
 }

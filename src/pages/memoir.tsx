@@ -1,10 +1,17 @@
+import Title from 'components/CategoryPage/Title'
 import Header from 'components/Common/Header'
+import { ThemeContextProvider } from 'hooks/Theme'
 import React from 'react'
 
-export default function memoir() {
+const memoir = () => {
   return (
     <>
-      <Header />
+      <ThemeContextProvider>
+        <Header />
+        <Title titleText="회고록" />
+      </ThemeContextProvider>
     </>
   )
 }
+
+export default memoir

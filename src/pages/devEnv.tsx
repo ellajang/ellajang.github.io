@@ -3,13 +3,15 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/Theme'
 import React from 'react'
 
-export default function CS() {
+const devEnv = () => {
   return (
     <>
       <ThemeContextProvider>
         <Header />
-        <Title titleText="기초 및 학습 리소스 / 컴퓨터구조" />
+        <Title titleText="개발환경" />
       </ThemeContextProvider>
     </>
   )
 }
+
+export default devEnv

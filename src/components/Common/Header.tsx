@@ -15,7 +15,6 @@ const Header: React.FC = () => {
     <AppBarStyle position="fixed">
       <Toolbar>
         <MenuList />
-
         <TypographyStyle
           variant="h6"
           noWrap
