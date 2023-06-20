@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[31],{548:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 DB 페이지 입니다.")}}}]);
-//# sourceMappingURL=component---src-pages-basic-resource-db-tsx-c35b6aee961be46aad3a.js.map

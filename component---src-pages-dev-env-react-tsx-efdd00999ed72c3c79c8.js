@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[301],{3597:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 REACT 페이지 입니다.")}}}]);
-//# sourceMappingURL=component---src-pages-dev-env-react-tsx-efdd00999ed72c3c79c8.js.map

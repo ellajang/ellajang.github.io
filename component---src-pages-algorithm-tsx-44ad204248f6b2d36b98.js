@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[509],{8618:function(t,u,e){e.r(u),e.d(u,{default:function(){return a}});var r=e(917);function a(){return(0,r.jsx)("div",null,"이곳이 algorithm 페이지 입니다.")}}}]);
-//# sourceMappingURL=component---src-pages-algorithm-tsx-44ad204248f6b2d36b98.js.map

@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkgatsby_starter_default=self.webpackChunkgatsby_starter_default||[]).push([[547],{5862:function(t,u,e){e.r(u),e.d(u,{default:function(){return r}});var n=e(917);function r(){return(0,n.jsx)("div",null,"이곳이 CSS 페이지 입니다.")}}}]);
-//# sourceMappingURL=component---src-pages-frontend-core-tech-css-tsx-942d0f381bb212cb1c7a.js.map
