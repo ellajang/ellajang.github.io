@@ -113,7 +113,7 @@ const MenuList: React.FC = () => {
             </List>
           </Collapse>
           <ListItem>
-            <LinkStyle to="/frontEndCoreTech">
+            <LinkStyle to="/frontendCoreTech">
               <ListItemText
                 primary="웹 프론트엔드 핵심 기술"
                 primaryTypographyProps={{ style: { fontSize: '20px' } }}
@@ -142,19 +142,19 @@ const MenuList: React.FC = () => {
               <ListItem
                 onClick={() => handleSubMenuToggle('웹 프론트엔드 핵심 기술')}
               >
-                <LinkStyle to="/frontEndCoreTech/HTML">
+                <LinkStyle to="/frontendCoreTech/HTML">
                   <ArrowRightIcon />
                   <ListItemText primary="HTML" />
                 </LinkStyle>
               </ListItem>
               <ListItem>
-                <LinkStyle to="/frontEndCoreTech/JAVASCRIPT">
+                <LinkStyle to="/frontendCoreTech/JAVASCRIPT">
                   <ArrowRightIcon />
                   <ListItemText primary="JAVASCRIPT" />
                 </LinkStyle>
               </ListItem>
               <ListItem>
-                <LinkStyle to="/frontEndCoreTech/CSS">
+                <LinkStyle to="/frontendCoreTech/CSS">
                   <ArrowRightIcon />
                   <ListItemText primary="CSS" />
                 </LinkStyle>
