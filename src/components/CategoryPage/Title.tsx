@@ -24,10 +24,10 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   width: 100%;
-  height: 150px;
+  height: 170px;
   @media (max-width: 768px) {
     width: 100%;
-    height: 120px;
+    height: 140px;
   }
 `
 const Background = styled.div`
@@ -35,6 +35,7 @@ const Background = styled.div`
   width: 100%;
   left: 0px;
   position: fixed;
+  margin-bottom: 150px;
   background-color: ${props =>
     props.theme === 'light' ? '#90a4ae' : '#0b1118'};
   color: #ffffff;
@@ -43,9 +44,9 @@ const Background = styled.div`
 const TitleStyle = styled.div`
   font-size: 30px;
   font-weight: 600;
-  margin: 26px 50px;
+  margin: 36px 50px;
   @media (max-width: 768px) {
     font-size: 20px;
-    margin: 22px 20px;
+    margin: 31px 20px;
   }
 `
