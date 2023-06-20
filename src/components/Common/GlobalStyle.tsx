@@ -16,6 +16,8 @@ export const lightMode = css`
   body,
   #___gatsby {
     height: 100%;
+    width: 100%; // 추가된 코드
+    box-sizing: border-box;
   }
 
   a,
@@ -33,8 +35,12 @@ export const darkMode = css`
     box-sizing: border-box;
     font-family: 'Nanum Myeongjo', serif;
   }
+
+  html,
   body {
     background-color: #0d1215;
+    width: 100%;
+    box-sizing: border-box;
   }
 
   a,

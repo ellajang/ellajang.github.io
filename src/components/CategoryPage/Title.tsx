@@ -28,13 +28,13 @@ const Wrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
     height: 120px;
-    padding: 0 20px;
   }
 `
 const Background = styled.div`
   box-sizing: border-box;
-  width: 100vw;
-  margin: 2px 0px 0px -8px;
+  width: 100%;
+  left: 0px;
+  position: fixed;
   background-color: ${props =>
     props.theme === 'light' ? '#90a4ae' : '#0b1118'};
   color: #ffffff;
