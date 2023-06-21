@@ -1,12 +1,7 @@
 import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
 import PostItem from './PostItem'
-import { PostListItemType } from 'types/PostItem.types'
-
-type PostListProps = {
-  selectedCategory: string
-  posts: PostListItemType[]
-}
+import { PostListItemType, PostListProps } from 'types/PostItem.types'
 
 const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(

@@ -25,7 +25,7 @@ const DetailList: FunctionComponent<DetailListProps> = ({
 }) => {
   return (
     <TabContainer>
-      <Tabs value={selectedDetailCategory}>
+      <StyledTabs value={selectedDetailCategory}>
         {Object.entries(detailCategoryList).map(([name, count]) => (
           <TabStyle
             component={Link}
@@ -35,7 +35,8 @@ const DetailList: FunctionComponent<DetailListProps> = ({
             key={name}
           />
         ))}
-      </Tabs>
+      </StyledTabs>
+      <Divider />
     </TabContainer>
   )
 }
@@ -49,19 +50,44 @@ const TabContainer = styled.div`
   align-items: flex-start;
   width: 100%;
   height: 260px;
-  margin-left: 40px;
+  position: fixed;
+  z-index: 1;
+  top: 10;
+  background-color: white;
   @media (max-width: 768px) {
     width: 100%;
     height: 200px;
     margin-left: 9px;
     font-size: 20px;
+    top: 10;
   }
 `
 const TabStyle = styled(CustomTab)`
   font-size: 18px;
-  margin-right: 20px;
+  margin-left: 40px;
   @media (max-width: 768px) {
     font-size: 12px;
     margin-right: -14px;
+    margin-left: 1px;
+  }
+`
+const StyledTabs = styled(Tabs)`
+  @media (max-width: 768px) {
+    .MuiTabs-indicator {
+      height: 1.5px;
+      max-width: 10%;
+      margin-left: 20px;
+    }
+  }
+`
+const Divider = styled.div`
+  border-top: 0.1px solid #c3c7cc;
+  width: calc(100% - 80px);
+  margin-left: 40px;
+  margin-top: 25px;
+  @media (max-width: 768px) {
+    width: calc(100% - 80px);
+    margin-left: 40px;
+    margin-top: 10px;
   }
 `

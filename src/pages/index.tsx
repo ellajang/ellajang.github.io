@@ -12,7 +12,7 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/Theme'
 import GlobalStyle from 'components/Common/GlobalStyle'
 
-const POSTS_PER_PAGE = 10
+export const POSTS_PER_PAGE = 10
 
 type IndexPageProps = {
   location: {

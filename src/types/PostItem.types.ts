@@ -9,7 +9,7 @@ export type PostFrontmatterType = {
     childImageSharp: {
       gatsbyImageData: IGatsbyImageData
     }
-    publicUrl: string
+    publicURL: string
   }
 }
 
@@ -21,4 +21,9 @@ export type PostListItemType = {
     }
     frontmatter: PostFrontmatterType
   }
+}
+
+export type PostListProps = {
+  selectedCategory: string
+  posts: PostListItemType[]
 }
