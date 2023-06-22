@@ -8,7 +8,7 @@ import 'prismjs/themes/prism-tomorrow.css'
 
 // You can delete this file if you're not using it
 import React from 'react'
-import { ThemeContextProvider } from './src/hooks/Theme'
+import { ThemeContextProvider } from './src/hooks/useTheme'
 import GlobalStyle from './src/components/Common/GlobalStyle'
 
 const wrapRootElement = ({ element }) => (

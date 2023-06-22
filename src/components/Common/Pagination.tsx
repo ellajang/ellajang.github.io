@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Pagination as MUIPagination } from '@mui/material'
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 import React, { ChangeEvent, useContext, useState } from 'react'
 
 type PaginationProps = {

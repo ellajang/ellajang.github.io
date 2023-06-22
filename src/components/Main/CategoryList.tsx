@@ -1,6 +1,6 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 import React, { ReactNode, useContext } from 'react'
 
 export type CategoryListProps = {

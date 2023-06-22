@@ -27,3 +27,14 @@ export type PostListProps = {
   selectedCategory: string
   posts: PostListItemType[]
 }
+
+export type PageDataProps = {
+  location: {
+    search: string
+  }
+  data: {
+    allMarkdownRemark: {
+      edges: PostListItemType[]
+    }
+  }
+}

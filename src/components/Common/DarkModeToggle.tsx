@@ -1,4 +1,4 @@
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 import React, { useContext, useEffect, useState } from 'react'
 import LightModeIcon from '@mui/icons-material/LightMode'
 import DarkModeIcon from '@mui/icons-material/DarkMode'

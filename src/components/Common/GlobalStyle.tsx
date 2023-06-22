@@ -1,6 +1,6 @@
 import React, { useContext } from 'react'
 import { Global, css } from '@emotion/react'
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 
 export const lightMode = css`
   @import url('https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap');

@@ -7,7 +7,7 @@ import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 import { Link } from 'gatsby'
 
 const Header: React.FC = () => {

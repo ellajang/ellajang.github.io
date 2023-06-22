@@ -5,7 +5,7 @@ import React from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import PostContent from 'components/Post/PostContent'
 import CommentWidget from 'components/Post/CommentWidget'
-import { ThemeContextProvider } from 'hooks/Theme'
+import { ThemeContextProvider } from 'hooks/useTheme'
 
 type PostTemplateProps = {
   data: {

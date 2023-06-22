@@ -9,7 +9,7 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { parse } from 'query-string'
 import Pagination from 'components/Common/Pagination'
 import Header from 'components/Common/Header'
-import { ThemeContextProvider } from 'hooks/Theme'
+import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
 
 export const POSTS_PER_PAGE = 10

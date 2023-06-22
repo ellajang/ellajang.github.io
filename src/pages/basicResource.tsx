@@ -4,25 +4,15 @@ import Title from 'components/CategoryPage/Title'
 import Footer from 'components/Common/Footer'
 import Header from 'components/Common/Header'
 import Pagination from 'components/Common/Pagination'
+import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
 import { graphql } from 'gatsby'
-import { ThemeContextProvider } from 'hooks/Theme'
+import { ThemeContextProvider } from 'hooks/useTheme'
 import { POSTS_PER_PAGE } from 'pages'
 import { parse } from 'query-string'
 import React, { useMemo } from 'react'
-import { PostListItemType } from 'types/PostItem.types'
+import { PageDataProps } from 'types/PostItem.types'
 
-type BasicResourceProps = {
-  location: {
-    search: string
-  }
-  data: {
-    allMarkdownRemark: {
-      edges: PostListItemType[]
-    }
-  }
-}
-
-const basicResource: React.FC<BasicResourceProps> = ({
+const basicResource: React.FC<PageDataProps> = ({
   location: { search },
   data: {
     allMarkdownRemark: { edges },
@@ -33,6 +23,14 @@ const basicResource: React.FC<BasicResourceProps> = ({
     typeof parsed.category !== 'string' || !parsed.category
       ? 'All'
       : parsed.category
+
+  const initialCategoryList: DetailListProps['detailCategoryList'] = {
+    All: 0,
+    ...BASIC_RESOURCE_CATEGORIES.reduce((list, category) => {
+      list[category] = 0
+      return list
+    }, {} as DetailListProps['detailCategoryList']),
+  }
   const detailcategoryList = useMemo(
     () =>
       edges.reduce(
@@ -45,13 +43,15 @@ const basicResource: React.FC<BasicResourceProps> = ({
           },
         ) => {
           categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
+            if (BASIC_RESOURCE_CATEGORIES.includes(category)) {
+              if (list[category] === undefined) list[category] = 1
+              else list[category]++
+            }
           })
           list['All']++
           return list
         },
-        { All: 0 },
+        initialCategoryList,
       ),
     [],
   )
@@ -90,6 +90,7 @@ export const getDetailPostList = graphql`
   query getDetailPostList {
     allMarkdownRemark(
       sort: { order: DESC, fields: [frontmatter___date, frontmatter___title] }
+      filter: { fileAbsolutePath: { regex: "/contents/basicResource/" } }
     ) {
       edges {
         node {

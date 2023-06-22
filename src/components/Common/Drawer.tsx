@@ -10,7 +10,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage'
 import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
 import { Collapse, ListItemSecondaryAction } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
-import { ThemeContext } from 'hooks/Theme'
+import { ThemeContext } from 'hooks/useTheme'
 import { Link } from 'gatsby'
 
 const MenuList: React.FC = () => {
