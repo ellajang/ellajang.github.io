@@ -51,6 +51,9 @@ const DetailPostItemWrapper = styled(Link)`
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     text-decoration: underline;
   }
+  @media (max-width: 768px) {
+    margin-top: 60px;
+  }
 `
 
 const PostItemContent = styled.div`

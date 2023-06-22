@@ -35,15 +35,24 @@ const DetailList: FunctionComponent<DetailListProps> = ({
   return (
     <TabContainer>
       <StyledTabs value={selectedDetailCategory}>
-        {Object.entries(detailCategoryList).map(([name, count]) => (
-          <TabStyle
-            component={Link}
-            to={name === 'All' ? `/${basePath}` : `/${basePath}/${name}`}
-            label={`${labelFromValue(name)}(${count})`}
-            value={name}
-            key={name}
-          />
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            flexWrap: 'wrap',
+            justifyContent: 'center',
+          }}
+        >
+          {Object.entries(detailCategoryList).map(([name, count]) => (
+            <TabStyle
+              component={Link}
+              to={name === 'All' ? `/${basePath}` : `/${basePath}/${name}`}
+              label={`${labelFromValue(name)}(${count})`}
+              value={name}
+              selected={name === selectedDetailCategory}
+              key={name}
+            />
+          ))}
+        </div>
       </StyledTabs>
       <Divider />
     </TabContainer>
@@ -61,42 +70,57 @@ const TabContainer = styled.div`
   height: 260px;
   position: fixed;
   z-index: 1;
-  top: 10;
+  font-size: 30px;
   background-color: white;
+  margin: 10px 0 0 40px;
   @media (max-width: 768px) {
     width: 100%;
-    height: 200px;
-    margin-left: 9px;
+    height: 250px;
     font-size: 20px;
-    top: 10;
+    margin: 10px 0px 0px 25px;
   }
 `
-const TabStyle = styled(CustomTab)`
+const TabStyle = styled(CustomTab)<{ selected: boolean }>`
   font-size: 18px;
-  margin-left: 40px;
+  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+  position: relative;
+  &::after {
+    content: '';
+    display: ${props => (props.selected ? 'block' : 'none')};
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #000;
+  }
   @media (max-width: 768px) {
     font-size: 12px;
-    margin-right: -14px;
-    margin-left: 1px;
   }
 `
+
 const StyledTabs = styled(Tabs)`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: start;
+  width: 100%;
+  & .Mui-selected {
+    color: #000;
+    font-weight: bold;
+  }
   @media (max-width: 768px) {
-    .MuiTabs-indicator {
-      height: 1.5px;
-      max-width: 10%;
-      margin-left: 20px;
-    }
+    justify-content: center;
+    font-size: 12px;
+    margin-right: -1px;
+    margin-left: 2px;
   }
 `
 const Divider = styled.div`
   border-top: 0.1px solid #c3c7cc;
-  width: calc(100% - 80px);
-  margin-left: 40px;
-  margin-top: 25px;
+  width: calc(100% - 85px);
+  margin: 20px 0 0 -5px;
   @media (max-width: 768px) {
     width: calc(100% - 80px);
-    margin-left: 40px;
-    margin-top: 10px;
+    margin: 20px 0px 0px 0px;
   }
 `
