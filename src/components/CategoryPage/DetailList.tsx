@@ -9,6 +9,10 @@ export type DetailListProps = {
   detailCategoryList: {
     [key: string]: number
   }
+  categoriesMap: {
+    value: string
+    label: string
+  }[]
 }
 
 interface CustomTabProps extends React.ComponentPropsWithoutRef<typeof Tab> {
@@ -22,7 +26,12 @@ const DetailList: FunctionComponent<DetailListProps> = ({
   basePath,
   selectedDetailCategory,
   detailCategoryList,
+  categoriesMap,
 }) => {
+  const labelFromValue = (value: string) => {
+    const found = categoriesMap.find(category => category.value === value)
+    return found ? found.label : value
+  }
   return (
     <TabContainer>
       <StyledTabs value={selectedDetailCategory}>
@@ -30,7 +39,7 @@ const DetailList: FunctionComponent<DetailListProps> = ({
           <TabStyle
             component={Link}
             to={name === 'All' ? `/${basePath}` : `/${basePath}/${name}`}
-            label={`${name}(${count})`}
+            label={`${labelFromValue(name)}(${count})`}
             value={name}
             key={name}
           />

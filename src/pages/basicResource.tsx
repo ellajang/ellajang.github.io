@@ -1,16 +1,14 @@
-import DetailList, { DetailListProps } from 'components/CategoryPage/DetailList'
+import React from 'react'
+import { graphql } from 'gatsby'
+import { parse } from 'query-string'
+import DetailList from 'components/CategoryPage/DetailList'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 import Title from 'components/CategoryPage/Title'
-import Footer from 'components/Common/Footer'
 import Header from 'components/Common/Header'
-import Pagination from 'components/Common/Pagination'
-import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
-import { graphql } from 'gatsby'
 import { ThemeContextProvider } from 'hooks/useTheme'
-import { POSTS_PER_PAGE } from 'pages'
-import { parse } from 'query-string'
-import React, { useMemo } from 'react'
 import { PageDataProps } from 'types/PostItem.types'
+import useDetailCategoryList from 'hooks/useDetailCategoryList'
+import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
 
 const basicResource: React.FC<PageDataProps> = ({
   location: { search },
@@ -24,54 +22,23 @@ const basicResource: React.FC<PageDataProps> = ({
       ? 'All'
       : parsed.category
 
-  const initialCategoryList: DetailListProps['detailCategoryList'] = {
-    All: 0,
-    ...BASIC_RESOURCE_CATEGORIES.reduce((list, category) => {
-      list[category] = 0
-      return list
-    }, {} as DetailListProps['detailCategoryList']),
-  }
-  const detailcategoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: DetailListProps['detailCategoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          },
-        ) => {
-          categories.forEach(category => {
-            if (BASIC_RESOURCE_CATEGORIES.includes(category)) {
-              if (list[category] === undefined) list[category] = 1
-              else list[category]++
-            }
-          })
-          list['All']++
-          return list
-        },
-        initialCategoryList,
-      ),
-    [],
+  const categoriesName = BASIC_RESOURCE_CATEGORIES.map(
+    category => category.value,
   )
-  /*  const [page, setPage] = React.useState(1)
-  const handlePageChange = (value: number) => {
-    setPage(value)
-  }
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (page - 1) * POSTS_PER_PAGE
-    return edges.slice(startIndex, startIndex + POSTS_PER_PAGE)
-  }, [edges, page]) */
+  const detailCategoryList = useDetailCategoryList({
+    edges,
+    categoriesName,
+  })
   return (
     <>
       <ThemeContextProvider>
         <Header />
         <Title titleText="기초 및 학습 리소스" />
         <DetailList
-          detailCategoryList={detailcategoryList}
+          detailCategoryList={detailCategoryList}
           selectedDetailCategory={selectedCategory}
           basePath={'basicResource'}
+          categoriesMap={BASIC_RESOURCE_CATEGORIES}
         />
         <DetailPostList selectedCategory={selectedCategory} posts={edges} />
         {/* <Footer /> */}

@@ -1,13 +1,14 @@
-import DetailList, { DetailListProps } from 'components/CategoryPage/DetailList'
-import DetailPostList from 'components/CategoryPage/DetailPostList'
-import Title from 'components/CategoryPage/Title'
-import Header from 'components/Common/Header'
-import { BASIC_RESOURCE_CATEGORIES } from '../../constants/CategoryName'
+import React from 'react'
 import { graphql } from 'gatsby'
-import { ThemeContextProvider } from 'hooks/useTheme'
 import { parse } from 'query-string'
-import React, { useMemo } from 'react'
+import Header from 'components/Common/Header'
+import Title from 'components/CategoryPage/Title'
+import DetailList from 'components/CategoryPage/DetailList'
+import DetailPostList from 'components/CategoryPage/DetailPostList'
+import { BASIC_RESOURCE_CATEGORIES } from '../../constants/CategoryName'
+import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
+import useDetailCategoryList from 'hooks/useDetailCategoryList'
 
 const CS: React.FC<PageDataProps> = ({
   location: { search },
@@ -21,47 +22,23 @@ const CS: React.FC<PageDataProps> = ({
       ? 'CS'
       : parsed.category
 
-  const initialCategoryList: DetailListProps['detailCategoryList'] = {
-    All: 0,
-    ...BASIC_RESOURCE_CATEGORIES.reduce((list, category) => {
-      list[category] = 0
-      return list
-    }, {} as DetailListProps['detailCategoryList']),
-  }
-  const detailcategoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: DetailListProps['detailCategoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          },
-        ) => {
-          categories.forEach(category => {
-            if (BASIC_RESOURCE_CATEGORIES.includes(category)) {
-              if (list[category] === undefined) list[category] = 1
-              else list[category]++
-            }
-          })
-          list['All']++
-          return list
-        },
-        initialCategoryList,
-      ),
-    [],
+  const categoriesName = BASIC_RESOURCE_CATEGORIES.map(
+    category => category.value,
   )
-
+  const detailCategoryList = useDetailCategoryList({
+    edges,
+    categoriesName,
+  })
   return (
     <>
       <ThemeContextProvider>
         <Header />
         <Title titleText="기초 및 학습 리소스 / 컴퓨터구조" />
         <DetailList
-          detailCategoryList={detailcategoryList}
+          detailCategoryList={detailCategoryList}
           selectedDetailCategory={selectedCategory}
           basePath={'basicResource'}
+          categoriesMap={BASIC_RESOURCE_CATEGORIES}
         />
         <DetailPostList selectedCategory={selectedCategory} posts={edges} />
       </ThemeContextProvider>
