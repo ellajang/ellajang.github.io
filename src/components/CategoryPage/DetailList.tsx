@@ -72,12 +72,12 @@ const TabContainer = styled.div`
   z-index: 1;
   font-size: 30px;
   background-color: white;
-  margin: 10px 0 0 40px;
+  margin: 10px 0 0 34px;
   @media (max-width: 768px) {
     width: 100%;
     height: 250px;
     font-size: 20px;
-    margin: 10px 0px 0px 25px;
+    margin: 10px 0px 0px 10px;
   }
 `
 const TabStyle = styled(CustomTab)<{ selected: boolean }>`

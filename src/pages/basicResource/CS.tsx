@@ -9,6 +9,7 @@ import { BASIC_RESOURCE_CATEGORIES } from '../../constants/CategoryName'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
+import Footer from 'components/Common/Footer'
 
 const CS: React.FC<PageDataProps> = ({
   location: { search },
@@ -41,6 +42,7 @@ const CS: React.FC<PageDataProps> = ({
           categoriesMap={BASIC_RESOURCE_CATEGORIES}
         />
         <DetailPostList selectedCategory={selectedCategory} posts={edges} />
+        <Footer />
       </ThemeContextProvider>
     </>
   )

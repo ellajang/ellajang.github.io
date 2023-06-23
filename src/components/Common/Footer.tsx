@@ -21,7 +21,6 @@ export default Footer
 const FooterWrapper = styled.footer`
   display: grid;
   place-items: center;
-  margin-top: auto;
   padding: 15px 0;
   font-size: 15px;
   text-align: center;
@@ -29,9 +28,8 @@ const FooterWrapper = styled.footer`
   color: ${props => (props.theme === 'light' ? '#263238' : '#c4d0d7')};
   background-color: ${props =>
     props.theme === 'light' ? '#f7fafc' : '#12171b'};
-  position: fixed;
+  position: static;
   left: 0;
-  bottom: 0;
   width: 100%;
   @media (max-width: 768px) {
     font-size: 13px;

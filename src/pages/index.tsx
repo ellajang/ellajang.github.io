@@ -11,8 +11,7 @@ import Pagination from 'components/Common/Pagination'
 import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
-
-export const POSTS_PER_PAGE = 10
+import { POSTS_PER_PAGE } from '../constants/PageEA'
 
 type IndexPageProps = {
   location: {

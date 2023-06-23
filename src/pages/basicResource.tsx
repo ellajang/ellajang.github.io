@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import { graphql } from 'gatsby'
 import { parse } from 'query-string'
 import DetailList from 'components/CategoryPage/DetailList'
@@ -9,6 +9,9 @@ import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
+import Footer from 'components/Common/Footer'
+import Pagination from 'components/Common/Pagination'
+import { POSTS_PER_PAGE } from '../constants/PageEA'
 
 const basicResource: React.FC<PageDataProps> = ({
   location: { search },
@@ -29,6 +32,15 @@ const basicResource: React.FC<PageDataProps> = ({
     edges,
     categoriesName,
   })
+  const [page, setPage] = React.useState(1)
+  const handlePageChange = (value: number) => {
+    setPage(value)
+  }
+  const paginatedPosts = useMemo(() => {
+    const startIndex = (page - 1) * POSTS_PER_PAGE
+    return edges.slice(startIndex, startIndex + POSTS_PER_PAGE)
+  }, [edges, page])
+
   return (
     <>
       <ThemeContextProvider>
@@ -40,12 +52,16 @@ const basicResource: React.FC<PageDataProps> = ({
           basePath={'basicResource'}
           categoriesMap={BASIC_RESOURCE_CATEGORIES}
         />
-        <DetailPostList selectedCategory={selectedCategory} posts={edges} />
-        {/* <Footer /> */}
-        {/* <Pagination
+        <DetailPostList
+          selectedCategory={selectedCategory}
+          posts={paginatedPosts}
+        />
+
+        <Pagination
           count={Math.ceil(edges.length / POSTS_PER_PAGE)}
           onChange={handlePageChange}
-        /> */}
+        />
+        <Footer />
       </ThemeContextProvider>
     </>
   )
