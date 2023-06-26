@@ -55,6 +55,9 @@ export const getDetailPostList = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             summary

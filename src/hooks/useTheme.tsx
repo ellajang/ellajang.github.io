@@ -1,3 +1,4 @@
+import styled from '@emotion/styled'
 import React, { createContext, useEffect, useState } from 'react'
 
 interface ThemeContextProps {
@@ -25,8 +26,14 @@ export const ThemeContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [theme])
 
   return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
+    <ThemeContextStyle value={{ theme, setTheme }}>
       {children}
-    </ThemeContext.Provider>
+    </ThemeContextStyle>
   )
 }
+
+const ThemeContextStyle = styled(ThemeContext.Provider)`
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+`

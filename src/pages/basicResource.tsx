@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import { parse } from 'query-string'
 import DetailList from 'components/CategoryPage/DetailList'
@@ -12,14 +12,21 @@ import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
 import Footer from 'components/Common/Footer'
 import Pagination from 'components/Common/Pagination'
 import { POSTS_PER_PAGE } from '../constants/PageEA'
+import styled from '@emotion/styled'
+import GlobalStyle from 'components/Common/GlobalStyle'
+import { useLocation } from '@reach/router'
+import { usePagination } from 'hooks/usePagination'
 
 const basicResource: React.FC<PageDataProps> = ({
-  location: { search },
   data: {
     allMarkdownRemark: { edges },
   },
 }) => {
-  const parsed: { [key: string]: string | string[] | null } = parse(search)
+  const location = useLocation()
+  const parsed: { [key: string]: string | string[] | null } = parse(
+    location.search,
+  )
+
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
       ? 'All'
@@ -32,41 +39,49 @@ const basicResource: React.FC<PageDataProps> = ({
     edges,
     categoriesName,
   })
-  const [page, setPage] = React.useState(1)
-  const handlePageChange = (value: number) => {
-    setPage(value)
-  }
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (page - 1) * POSTS_PER_PAGE
-    return edges.slice(startIndex, startIndex + POSTS_PER_PAGE)
-  }, [edges, page])
+  const initialPage: number =
+    typeof parsed.page === 'string' ? parseInt(parsed.page, 10) : 1
+
+  const {
+    currentItems: paginatedPosts,
+    setCurrentPage,
+    maxPage,
+  } = usePagination(edges, POSTS_PER_PAGE)
+
+  useEffect(() => {
+    setCurrentPage(initialPage)
+  }, [location.search])
 
   return (
-    <>
-      <ThemeContextProvider>
-        <Header />
-        <Title titleText="기초 및 학습 리소스" />
-        <DetailList
-          detailCategoryList={detailCategoryList}
-          selectedDetailCategory={selectedCategory}
-          basePath={'basicResource'}
-          categoriesMap={BASIC_RESOURCE_CATEGORIES}
-        />
-        <DetailPostList
-          selectedCategory={selectedCategory}
-          posts={paginatedPosts}
-        />
-
+    <ThemeContextProvider>
+      <Header />
+      <Title titleText="기초 및 학습 리소스" />
+      <GlobalStyle />
+      <DetailList
+        detailCategoryList={detailCategoryList}
+        selectedDetailCategory={selectedCategory}
+        basePath={'basicResource'}
+        categoriesMap={BASIC_RESOURCE_CATEGORIES}
+      />
+      <DetailPostList
+        selectedCategory={selectedCategory}
+        posts={paginatedPosts}
+      />
+      <PaginationContainer>
         <Pagination
-          count={Math.ceil(edges.length / POSTS_PER_PAGE)}
-          onChange={handlePageChange}
+          count={maxPage}
+          onChange={setCurrentPage}
+          defaultPage={initialPage}
+          path={'/basicResource/'}
+          category={selectedCategory}
         />
+      </PaginationContainer>
+      <FooterContainer>
         <Footer />
-      </ThemeContextProvider>
-    </>
+      </FooterContainer>
+    </ThemeContextProvider>
   )
 }
-
 export default basicResource
 
 export const getDetailPostList = graphql`
@@ -78,6 +93,9 @@ export const getDetailPostList = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             summary
@@ -93,4 +111,10 @@ export const getDetailPostList = graphql`
       }
     }
   }
+`
+const FooterContainer = styled.footer`
+  transform: translateY(280%);
+`
+const PaginationContainer = styled.div`
+  margin-top: 280px;
 `

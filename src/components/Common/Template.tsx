@@ -12,14 +12,6 @@ type TemplateProps = {
   children: ReactNode
 }
 
-type TemplatePropss = {
-  title: string
-  description: string
-  url: string
-  image: string
-  children: ReactNode
-}
-
 const Template: React.FC<TemplateProps> = ({
   title,
   description,

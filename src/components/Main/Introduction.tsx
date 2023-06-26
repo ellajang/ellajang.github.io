@@ -27,7 +27,7 @@ export default Introduction
 
 const Background = styled.div`
   box-sizing: border-box;
-  width: 100vw;
+  width: 98vw;
   background-image: ${props =>
     props.theme === 'light'
       ? 'linear-gradient(30deg, #90a4ae 100%, #90a4ae 100%)'

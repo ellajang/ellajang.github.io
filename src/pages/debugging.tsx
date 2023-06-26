@@ -7,6 +7,7 @@ import DetailList from 'components/CategoryPage/DetailList'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
+import { useLocation } from '@reach/router'
 
 const debugging: React.FC<PageDataProps> = ({
   location: { search },
@@ -14,6 +15,7 @@ const debugging: React.FC<PageDataProps> = ({
     allMarkdownRemark: { edges },
   },
 }) => {
+  const location = useLocation()
   const parsed: { [key: string]: string | string[] | null } = parse(search)
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
@@ -50,6 +52,9 @@ export const getDetailPostList = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             summary

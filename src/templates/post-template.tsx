@@ -41,7 +41,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         categories,
         thumbnail: {
           childImageSharp: { gatsbyImageData },
-          publicUrl,
+          publicURL,
         },
       },
     },
@@ -53,7 +53,7 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
         title={title}
         description={summary}
         url={href}
-        image={publicUrl}
+        image={publicURL}
       >
         <PostHead
           title={title}

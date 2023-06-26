@@ -16,3 +16,16 @@ export const FRONTEND_CORE_TECH = [
   { value: 'HTML', label: 'HTML' },
   { value: 'JAVASCRIPT', label: 'JAVASCRIPT' },
 ]
+
+export const CATEGORY_MAP = [
+  { value: 'CS', label: 'CS' },
+  { value: 'DB', label: 'DB' },
+  { value: 'DS', label: 'DS' },
+  { value: 'NETWORK', label: 'NETWORK' },
+  { value: 'OS', label: 'OS' },
+  { value: 'REACT', label: 'REACT' },
+  { value: 'TYPESCRIPT', label: 'TYPESCRIPT' },
+  { value: 'CSS', label: 'CSS' },
+  { value: 'HTML', label: 'HTML' },
+  { value: 'JAVASCRIPT', label: 'JAVASCRIPT' },
+]

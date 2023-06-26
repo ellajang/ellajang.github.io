@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { graphql } from 'gatsby'
 import { parse } from 'query-string'
 import Header from 'components/Common/Header'
@@ -10,14 +10,22 @@ import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import Footer from 'components/Common/Footer'
+import styled from '@emotion/styled'
+import Pagination from 'components/Common/Pagination'
+import { POSTS_PER_PAGE } from '../../constants/PageEA'
+import { useLocation } from '@reach/router'
+import { usePagination } from 'hooks/usePagination'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 const CS: React.FC<PageDataProps> = ({
-  location: { search },
   data: {
     allMarkdownRemark: { edges },
   },
 }) => {
-  const parsed: { [key: string]: string | string[] | null } = parse(search)
+  const location = useLocation()
+  const parsed: { [key: string]: string | string[] | null } = parse(
+    location.search,
+  )
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
       ? 'CS'
@@ -30,9 +38,23 @@ const CS: React.FC<PageDataProps> = ({
     edges,
     categoriesName,
   })
+  const initialPage: number =
+    typeof parsed.page === 'string' ? parseInt(parsed.page, 10) : 1
+
+  const {
+    currentItems: paginatedPosts,
+    setCurrentPage,
+    maxPage,
+  } = usePagination(edges, POSTS_PER_PAGE)
+
+  useEffect(() => {
+    setCurrentPage(initialPage)
+  }, [location.search])
+
   return (
     <>
       <ThemeContextProvider>
+        <GlobalStyle />
         <Header />
         <Title titleText="기초 및 학습 리소스 / 컴퓨터구조" />
         <DetailList
@@ -41,8 +63,22 @@ const CS: React.FC<PageDataProps> = ({
           basePath={'basicResource'}
           categoriesMap={BASIC_RESOURCE_CATEGORIES}
         />
-        <DetailPostList selectedCategory={selectedCategory} posts={edges} />
-        <Footer />
+        <DetailPostList
+          selectedCategory={selectedCategory}
+          posts={paginatedPosts}
+        />
+        <PaginationContainer>
+          <Pagination
+            count={maxPage}
+            onChange={setCurrentPage}
+            defaultPage={initialPage}
+            path={'/basicResource/CS'}
+            category={selectedCategory}
+          />
+        </PaginationContainer>
+        <FooterContainer>
+          <Footer />
+        </FooterContainer>
       </ThemeContextProvider>
     </>
   )
@@ -59,6 +95,9 @@ export const getDetailPostList = graphql`
       edges {
         node {
           id
+          fields {
+            slug
+          }
           frontmatter {
             title
             summary
@@ -74,4 +113,11 @@ export const getDetailPostList = graphql`
       }
     }
   }
+`
+
+const FooterContainer = styled.footer`
+  transform: translateY(280%);
+`
+const PaginationContainer = styled.div`
+  margin-top: 280px;
 `

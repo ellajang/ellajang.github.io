@@ -12,6 +12,8 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { POSTS_PER_PAGE } from '../constants/PageEA'
+import { usePagination } from 'hooks/usePagination'
+import { useLocation } from '@reach/router'
 
 type IndexPageProps = {
   location: {
@@ -38,7 +40,6 @@ type IndexPageProps = {
 }
 
 const IndexPage: React.FC<IndexPageProps> = ({
-  location: { search },
   data: {
     site: {
       siteMetadata: { title, description, siteUrl },
@@ -50,7 +51,10 @@ const IndexPage: React.FC<IndexPageProps> = ({
     },
   },
 }) => {
-  const parsed: { [key: string]: string | string[] | null } = parse(search)
+  const location = useLocation()
+  const parsed: { [key: string]: string | string[] | null } = parse(
+    location.search,
+  )
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
       ? 'All'
@@ -78,14 +82,15 @@ const IndexPage: React.FC<IndexPageProps> = ({
       ),
     [],
   )
-  const [page, setPage] = React.useState(1)
+  const {
+    currentItems: paginatedPosts,
+    setCurrentPage,
+    maxPage,
+  } = usePagination(edges, POSTS_PER_PAGE)
+
   const handlePageChange = (value: number) => {
-    setPage(value)
+    setCurrentPage(value)
   }
-  const paginatedPosts = useMemo(() => {
-    const startIndex = (page - 1) * POSTS_PER_PAGE
-    return edges.slice(startIndex, startIndex + POSTS_PER_PAGE)
-  }, [edges, page])
 
   return (
     <>
@@ -107,10 +112,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
             posts={paginatedPosts}
             selectedCategory={selectedCategory}
           />
-          <Pagination
-            count={Math.ceil(edges.length / POSTS_PER_PAGE)}
-            onChange={handlePageChange}
-          />
+          <Pagination count={maxPage} onChange={handlePageChange} path={''} />
         </Template>
       </ThemeContextProvider>
     </>

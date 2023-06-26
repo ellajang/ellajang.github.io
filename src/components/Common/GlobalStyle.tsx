@@ -26,6 +26,10 @@ export const lightMode = css`
     text-decoration: none;
     cursor: pointer;
   }
+  .footer {
+    position: absolute;
+    bottom: 0;
+  }
 `
 
 export const darkMode = css`
@@ -53,6 +57,10 @@ export const darkMode = css`
   h2,
   ul {
     color: #c3c7cc;
+  }
+  .footer {
+    position: absolute;
+    bottom: 0;
   }
 `
 

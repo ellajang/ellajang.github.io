@@ -25,12 +25,11 @@ const FooterWrapper = styled.footer`
   font-size: 15px;
   text-align: center;
   line-height: 1.5;
+  left: 0;
+  width: 100%;
   color: ${props => (props.theme === 'light' ? '#263238' : '#c4d0d7')};
   background-color: ${props =>
     props.theme === 'light' ? '#f7fafc' : '#12171b'};
-  position: static;
-  left: 0;
-  width: 100%;
   @media (max-width: 768px) {
     font-size: 13px;
   }
