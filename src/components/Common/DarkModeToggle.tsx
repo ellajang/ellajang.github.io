@@ -29,37 +29,39 @@ const DarkModeToggle: React.FC = () => {
   }
 
   return (
-    <ModeButton onClick={toggleTheme}>
-      {isTransitioning ? (
-        <TransitionIcon>
-          {showDarkModeIcon ? (
-            <DarkModeIcon
-              fontSize="large"
-              sx={{ color: theme === 'light' ? 'black' : 'white' }}
-            />
-          ) : (
-            <LightModeIcon
-              fontSize="large"
-              sx={{ color: theme === 'light' ? 'black' : 'white' }}
-            />
-          )}
-        </TransitionIcon>
-      ) : (
-        <InstantIcon>
-          {theme === 'light' ? (
-            <DarkModeIcon
-              fontSize="large"
-              sx={{ color: theme === 'light' ? 'black' : 'white' }}
-            />
-          ) : (
-            <LightModeIcon
-              fontSize="large"
-              sx={{ color: theme === 'light' ? 'black' : 'white' }}
-            />
-          )}
-        </InstantIcon>
-      )}
-    </ModeButton>
+    <>
+      <ModeButton onClick={toggleTheme}>
+        {isTransitioning ? (
+          <TransitionIcon>
+            {showDarkModeIcon ? (
+              <DarkModeIcon
+                fontSize="large"
+                sx={{ color: theme === 'light' ? 'black' : 'white' }}
+              />
+            ) : (
+              <LightModeIcon
+                fontSize="large"
+                sx={{ color: theme === 'light' ? 'black' : 'white' }}
+              />
+            )}
+          </TransitionIcon>
+        ) : (
+          <InstantIcon>
+            {theme === 'light' ? (
+              <DarkModeIcon
+                fontSize="large"
+                sx={{ color: theme === 'light' ? 'black' : 'white' }}
+              />
+            ) : (
+              <LightModeIcon
+                fontSize="large"
+                sx={{ color: theme === 'light' ? 'black' : 'white' }}
+              />
+            )}
+          </InstantIcon>
+        )}
+      </ModeButton>
+    </>
   )
 }
 

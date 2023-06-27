@@ -21,7 +21,7 @@ export default Footer
 const FooterWrapper = styled.footer`
   display: grid;
   place-items: center;
-  padding: 15px 0;
+  padding: 17px 0;
   font-size: 15px;
   text-align: center;
   line-height: 1.5;

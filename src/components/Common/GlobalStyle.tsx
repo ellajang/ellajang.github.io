@@ -14,12 +14,6 @@ export const lightMode = css`
 
   html,
   body,
-  #___gatsby {
-    height: 100%;
-    width: 100%; // 추가된 코드
-    box-sizing: border-box;
-  }
-
   a,
   a:hover {
     color: inherit;
@@ -49,6 +43,7 @@ export const darkMode = css`
 
   a,
   a:hover {
+    color: inherit;
     text-decoration: none;
     cursor: pointer;
   }
@@ -67,7 +62,11 @@ export const darkMode = css`
 const GlobalStyle: React.FC = () => {
   const { theme } = useContext(ThemeContext)
 
-  return <Global styles={theme === 'light' ? lightMode : darkMode} />
+  return (
+    <>
+      <Global styles={theme === 'light' ? lightMode : darkMode} />
+    </>
+  )
 }
 
 export default GlobalStyle

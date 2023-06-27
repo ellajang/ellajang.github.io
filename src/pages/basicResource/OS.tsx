@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import { parse } from 'query-string'
 import Header from 'components/Common/Header'
@@ -11,10 +11,8 @@ import { PageDataProps } from 'types/PostItem.types'
 import { POSTS_PER_PAGE } from '../../constants/PageEA'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { useLocation } from '@reach/router'
-import styled from '@emotion/styled'
-import { usePagination } from 'hooks/usePagination'
-import Pagination from 'components/Common/Pagination'
-import Footer from 'components/Common/Footer'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 const OS: React.FC<PageDataProps> = ({
   data: {
@@ -38,22 +36,18 @@ const OS: React.FC<PageDataProps> = ({
     categoriesName,
   })
 
-  const initialPage: number =
-    typeof parsed.page === 'string' ? parseInt(parsed.page, 10) : 1
+  const filteredEdges = edges.filter(edge =>
+    edge.node.frontmatter.categories.includes(selectedCategory),
+  )
 
-  const {
-    currentItems: paginatedPosts,
-    setCurrentPage,
-    maxPage,
-  } = usePagination(edges, POSTS_PER_PAGE)
+  const { currentItems: paginatedPosts, PaginationNFooter } =
+    usePaginationFooter(filteredEdges, POSTS_PER_PAGE)
 
-  useEffect(() => {
-    setCurrentPage(initialPage)
-  }, [location.search])
   return (
     <>
       <ThemeContextProvider>
         <Header />
+        <GlobalStyle />
         <Title titleText="기초 및 학습 리소스 / 운영체제" />
         <DetailList
           detailCategoryList={detailCategoryList}
@@ -65,18 +59,10 @@ const OS: React.FC<PageDataProps> = ({
           selectedCategory={selectedCategory}
           posts={paginatedPosts}
         />
-        <PaginationContainer>
-          <Pagination
-            count={maxPage}
-            onChange={setCurrentPage}
-            defaultPage={initialPage}
-            path={'/basicResource/OS'}
-            category={selectedCategory}
-          />
-        </PaginationContainer>
-        <FooterContainer>
-          <Footer />
-        </FooterContainer>
+        <PaginationNFooter
+          path={'/basicResource/OS'}
+          category={selectedCategory}
+        />
       </ThemeContextProvider>
     </>
   )
@@ -111,10 +97,4 @@ export const getDetailPostList = graphql`
       }
     }
   }
-`
-const FooterContainer = styled.footer`
-  transform: translateY(280%);
-`
-const PaginationContainer = styled.div`
-  margin-top: 280px;
 `

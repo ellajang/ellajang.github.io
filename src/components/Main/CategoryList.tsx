@@ -23,18 +23,20 @@ const CategoryList: React.FC<CategoryListProps> = ({
 }) => {
   const { theme } = useContext(ThemeContext)
   return (
-    <CategoryListWrapper>
-      {Object.entries(categoryList).map(([name, count]) => (
-        <CategoryItem
-          to={`/?category=${name}`}
-          active={name === selectedCategory}
-          key={name}
-          theme={theme}
-        >
-          #{name}({count})
-        </CategoryItem>
-      ))}
-    </CategoryListWrapper>
+    <>
+      <CategoryListWrapper>
+        {Object.entries(categoryList).map(([name, count]) => (
+          <CategoryItem
+            to={`/?category=${name}`}
+            active={name === selectedCategory}
+            key={name}
+            theme={theme}
+          >
+            #{name}({count})
+          </CategoryItem>
+        ))}
+      </CategoryListWrapper>
+    </>
   )
 }
 

@@ -6,15 +6,22 @@ import Title from 'components/CategoryPage/Title'
 import DetailList from 'components/CategoryPage/DetailList'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
+import { POSTS_PER_PAGE } from '../constants/PageEA'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 
+import GlobalStyle from 'components/Common/GlobalStyle'
+import { useLocation } from '@reach/router'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
+
 const algorithm: React.FC<PageDataProps> = ({
-  location: { search },
   data: {
     allMarkdownRemark: { edges },
   },
 }) => {
-  const parsed: { [key: string]: string | string[] | null } = parse(search)
+  const location = useLocation()
+  const parsed: { [key: string]: string | string[] | null } = parse(
+    location.search,
+  )
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
       ? 'All'
@@ -23,10 +30,13 @@ const algorithm: React.FC<PageDataProps> = ({
   const detailCategoryList = {
     All: edges.length,
   }
+  const { currentItems: paginatedPosts, PaginationNFooter } =
+    usePaginationFooter(edges, POSTS_PER_PAGE)
   return (
     <>
       <ThemeContextProvider>
         <Header />
+        <GlobalStyle />
         <Title titleText="알고리즘" />
         <DetailList
           detailCategoryList={detailCategoryList}
@@ -34,7 +44,11 @@ const algorithm: React.FC<PageDataProps> = ({
           basePath={'algorithm'}
           categoriesMap={[{ value: 'All', label: 'All' }]}
         />
-        <DetailPostList selectedCategory={selectedCategory} posts={edges} />
+        <DetailPostList
+          selectedCategory={selectedCategory}
+          posts={paginatedPosts}
+        />
+        <PaginationNFooter path={'/algorithm/'} category={selectedCategory} />
       </ThemeContextProvider>
     </>
   )

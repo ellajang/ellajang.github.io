@@ -11,15 +11,17 @@ type IntroductionProps = {
 const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
   const { theme } = useContext(ThemeContext)
   return (
-    <Background theme={theme}>
-      <Wrapper>
-        <ProfileImage profileImage={profileImage} />
-        <div>
-          <SubTitle>Frontend Developer's Diary</SubTitle>
-          <Title>Record and Share Space of Frontend Developer, Ella</Title>
-        </div>
-      </Wrapper>
-    </Background>
+    <>
+      <Background theme={theme}>
+        <Wrapper>
+          <ProfileImage profileImage={profileImage} />
+          <div>
+            <SubTitle>Frontend Developer's Diary</SubTitle>
+            <Title>Record and Share Space of Frontend Developer, Ella</Title>
+          </div>
+        </Wrapper>
+      </Background>
+    </>
   )
 }
 

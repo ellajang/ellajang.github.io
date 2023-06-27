@@ -24,7 +24,7 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   width: 100%;
-  height: 170px;
+  height: 160px;
   @media (max-width: 768px) {
     width: 100%;
     height: 140px;

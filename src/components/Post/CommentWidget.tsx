@@ -43,7 +43,11 @@ const CommentWidget: React.FC = () => {
 
     element.current.appendChild(utterances)
   }, [theme])
-  return <UtterancesWrapper ref={element} />
+  return (
+    <>
+      <UtterancesWrapper ref={element} />
+    </>
+  )
 }
 
 export default CommentWidget

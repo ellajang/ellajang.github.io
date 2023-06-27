@@ -12,7 +12,7 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { POSTS_PER_PAGE } from '../constants/PageEA'
-import { usePagination } from 'hooks/usePagination'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
 import { useLocation } from '@reach/router'
 
 type IndexPageProps = {
@@ -82,15 +82,10 @@ const IndexPage: React.FC<IndexPageProps> = ({
       ),
     [],
   )
-  const {
-    currentItems: paginatedPosts,
-    setCurrentPage,
-    maxPage,
-  } = usePagination(edges, POSTS_PER_PAGE)
-
-  const handlePageChange = (value: number) => {
-    setCurrentPage(value)
-  }
+  const { currentItems: paginatedPosts, maxPage } = usePaginationFooter(
+    edges,
+    POSTS_PER_PAGE,
+  )
 
   return (
     <>
@@ -112,7 +107,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
             posts={paginatedPosts}
             selectedCategory={selectedCategory}
           />
-          <Pagination count={maxPage} onChange={handlePageChange} path={''} />
+          <Pagination count={maxPage} path={''} />
         </Template>
       </ThemeContextProvider>
     </>

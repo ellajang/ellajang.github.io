@@ -6,7 +6,11 @@ interface PostContentProps {
 }
 
 const PostContent: React.FC<PostContentProps> = ({ html }) => {
-  return <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+  return (
+    <>
+      <MarkdownRenderer dangerouslySetInnerHTML={{ __html: html }} />
+    </>
+  )
 }
 
 export default PostContent

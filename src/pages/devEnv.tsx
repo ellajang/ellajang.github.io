@@ -8,15 +8,21 @@ import { DEV_ENV } from '../constants/CategoryName'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
+import { POSTS_PER_PAGE } from '../constants/PageEA'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
+import GlobalStyle from 'components/Common/GlobalStyle'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
+import { useLocation } from '@reach/router'
 
 const devEnv: React.FC<PageDataProps> = ({
-  location: { search },
   data: {
     allMarkdownRemark: { edges },
   },
 }) => {
-  const parsed: { [key: string]: string | string[] | null } = parse(search)
+  const location = useLocation()
+  const parsed: { [key: string]: string | string[] | null } = parse(
+    location.search,
+  )
   const selectedCategory: string =
     typeof parsed.category !== 'string' || !parsed.category
       ? 'All'
@@ -27,10 +33,14 @@ const devEnv: React.FC<PageDataProps> = ({
     edges,
     categoriesName,
   })
+  const { currentItems: paginatedPosts, PaginationNFooter } =
+    usePaginationFooter(edges, POSTS_PER_PAGE)
+
   return (
     <>
       <ThemeContextProvider>
         <Header />
+        <GlobalStyle />
         <Title titleText="개발환경" />
         <DetailList
           detailCategoryList={detailCategoryList}
@@ -38,7 +48,11 @@ const devEnv: React.FC<PageDataProps> = ({
           basePath={'devEnv'}
           categoriesMap={DEV_ENV}
         />
-        <DetailPostList selectedCategory={selectedCategory} posts={edges} />
+        <DetailPostList
+          selectedCategory={selectedCategory}
+          posts={paginatedPosts}
+        />
+        <PaginationNFooter path={'/devEnv/'} category={selectedCategory} />
       </ThemeContextProvider>
     </>
   )

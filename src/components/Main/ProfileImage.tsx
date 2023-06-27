@@ -7,7 +7,11 @@ type ProfileImageProps = {
 }
 
 const ProfileImage: React.FC<ProfileImageProps> = ({ profileImage }) => {
-  return <ProfileImageWrapper image={profileImage} alt="Profile Image" />
+  return (
+    <>
+      <ProfileImageWrapper image={profileImage} alt="Profile Image" />
+    </>
+  )
 }
 
 export default ProfileImage

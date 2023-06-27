@@ -19,19 +19,21 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
     [selectedCategory],
   )
   return (
-    <PostListWrapper>
-      {postListData.map(
-        ({
-          node: {
-            id,
-            fields: { slug },
-            frontmatter,
-          },
-        }: PostListItemType) => (
-          <PostItem {...frontmatter} link={slug} key={id} />
-        ),
-      )}
-    </PostListWrapper>
+    <>
+      <PostListWrapper>
+        {postListData.map(
+          ({
+            node: {
+              id,
+              fields: { slug },
+              frontmatter,
+            },
+          }: PostListItemType) => (
+            <PostItem {...frontmatter} link={slug} key={id} />
+          ),
+        )}
+      </PostListWrapper>
+    </>
   )
 }
 

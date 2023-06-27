@@ -24,11 +24,13 @@ const PostHead: React.FC<PostHeadProps> = ({
   thumbnail,
 }) => {
   return (
-    <PostHeadWrapper>
-      <Header />
-      <BackgroundImage image={thumbnail} alt="thumbnail" />
-      <PostHeadInfo title={title} date={date} categories={categories} />
-    </PostHeadWrapper>
+    <>
+      <PostHeadWrapper>
+        <Header />
+        <BackgroundImage image={thumbnail} alt="thumbnail" />
+        <PostHeadInfo title={title} date={date} categories={categories} />
+      </PostHeadWrapper>
+    </>
   )
 }
 

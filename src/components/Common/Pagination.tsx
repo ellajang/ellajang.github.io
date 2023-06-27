@@ -2,12 +2,11 @@ import styled from '@emotion/styled'
 import { Pagination as MUIPagination } from '@mui/material'
 import { navigate } from 'gatsby'
 import { ThemeContext } from 'hooks/useTheme'
-import React, { ChangeEvent, useContext, useEffect, useState } from 'react'
+import React, { ChangeEvent, useContext, useState } from 'react'
 
 type PaginationProps = {
   count: number
   defaultPage?: number
-  onChange?: (page: number) => void
   path: string
   category?: string
 }
@@ -15,32 +14,30 @@ type PaginationProps = {
 export const Pagination: React.FC<PaginationProps> = ({
   count,
   defaultPage = 1,
-  onChange = () => {},
   path,
   category = '',
 }) => {
-  const [page, setPage] = useState(defaultPage)
-
-  useEffect(() => {
-    navigate(`${path}?page=${page}&category=${category}`, { replace: true })
-  }, [page, category, path])
+  const [page, setPage] = useState(Math.max(1, Math.min(count, defaultPage)))
 
   const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
-    if (value > 0 && value <= count) {
-      setPage(value)
-      onChange(value)
-    }
+    const validPage = Math.max(1, Math.min(count, value))
+    setPage(validPage)
+    navigate(`${path}?page=${validPage}&category=${category}`, {
+      replace: true,
+    })
   }
   return (
-    <PaginationWrapper>
-      <CustomMUIPagination
-        count={count}
-        page={page}
-        onChange={handlePageChange}
-        showFirstButton
-        showLastButton
-      />
-    </PaginationWrapper>
+    <>
+      <PaginationWrapper>
+        <CustomMUIPagination
+          count={count}
+          page={page}
+          onChange={handlePageChange}
+          showFirstButton
+          showLastButton
+        />
+      </PaginationWrapper>
+    </>
   )
 }
 

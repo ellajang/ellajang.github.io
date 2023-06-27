@@ -48,23 +48,25 @@ const PostTemplate: React.FC<PostTemplateProps> = ({
   } = edges[0]
 
   return (
-    <ThemeContextProvider>
-      <Template
-        title={title}
-        description={summary}
-        url={href}
-        image={publicURL}
-      >
-        <PostHead
+    <>
+      <ThemeContextProvider>
+        <Template
           title={title}
-          date={date}
-          categories={categories}
-          thumbnail={gatsbyImageData}
-        />
-        <PostContent html={html} />
-        <CommentWidget />
-      </Template>
-    </ThemeContextProvider>
+          description={summary}
+          url={href}
+          image={publicURL}
+        >
+          <PostHead
+            title={title}
+            date={date}
+            categories={categories}
+            thumbnail={gatsbyImageData}
+          />
+          <PostContent html={html} />
+          <CommentWidget />
+        </Template>
+      </ThemeContextProvider>
+    </>
   )
 }
 

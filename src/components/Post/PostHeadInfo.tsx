@@ -21,23 +21,25 @@ const PostHeadInfo: React.FC<PostHeadInfoProps> = ({
   }
 
   return (
-    <PostHeadInfoWrapper>
-      <ArrowCircleLeftIconDisplay>
-        <ArrowCircleLeftIcon
-          onClick={goBackPage}
-          sx={{ fontSize: 45, color: 'white' }}
-        />
-      </ArrowCircleLeftIconDisplay>
-      <Title>{title}</Title>
-      <AllGrid>
-        <Grid color="white" container spacing={-130}>
-          <div>{categories.join(' / ')}</div>
-        </Grid>
-        <Grid color="white">
-          <div>{date}</div>
-        </Grid>
-      </AllGrid>
-    </PostHeadInfoWrapper>
+    <>
+      <PostHeadInfoWrapper>
+        <ArrowCircleLeftIconDisplay>
+          <ArrowCircleLeftIcon
+            onClick={goBackPage}
+            sx={{ fontSize: 45, color: 'white' }}
+          />
+        </ArrowCircleLeftIconDisplay>
+        <Title>{title}</Title>
+        <AllGrid>
+          <Grid color="white" container spacing={-130}>
+            <div>{categories.join(' / ')}</div>
+          </Grid>
+          <Grid color="white">
+            <div>{date}</div>
+          </Grid>
+        </AllGrid>
+      </PostHeadInfoWrapper>
+    </>
   )
 }
 

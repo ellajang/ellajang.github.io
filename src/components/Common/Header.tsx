@@ -12,29 +12,31 @@ import { Link } from 'gatsby'
 
 const Header: React.FC = () => {
   return (
-    <AppBarStyle position="fixed">
-      <Toolbar>
-        <MenuList />
-        <TypographyStyle
-          variant="h6"
-          noWrap
-          sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
-        >
-          <LinkStyle to="/">프론트엔드 기술 블로그</LinkStyle>
-        </TypographyStyle>
+    <>
+      <AppBarStyle position="fixed">
+        <Toolbar>
+          <MenuList />
+          <TypographyStyle
+            variant="h6"
+            noWrap
+            sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
+          >
+            <LinkStyle to="/">프론트엔드 기술 블로그</LinkStyle>
+          </TypographyStyle>
 
-        <DarkModeToggle />
-        <Search>
-          <SearchIconWrapper>
-            <SearchIcon />
-          </SearchIconWrapper>
-          <StyledInputBase
-            placeholder="검색어를 입력하세요."
-            inputProps={{ 'aria-label': 'search' }}
-          />
-        </Search>
-      </Toolbar>
-    </AppBarStyle>
+          <DarkModeToggle />
+          <Search>
+            <SearchIconWrapper>
+              <SearchIcon />
+            </SearchIconWrapper>
+            <StyledInputBase
+              placeholder="검색어를 입력하세요."
+              inputProps={{ 'aria-label': 'search' }}
+            />
+          </Search>
+        </Toolbar>
+      </AppBarStyle>
+    </>
   )
 }
 

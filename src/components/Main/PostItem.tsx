@@ -19,21 +19,23 @@ const PostItem: React.FC<PostItemProps> = ({
 }) => {
   const { theme } = useContext(ThemeContext)
   return (
-    <PostItemWrapper to={link} theme={theme}>
-      <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
-      <PostItemContent theme={theme}>
-        <Title>{title}</Title>
-        <Date>{date}</Date>
-        <Category>
-          {categories.map(item => (
-            <CategoryItem key={item} theme={theme}>
-              {item}
-            </CategoryItem>
-          ))}
-        </Category>
-        <Summary>{summary}</Summary>
-      </PostItemContent>
-    </PostItemWrapper>
+    <>
+      <PostItemWrapper to={link} theme={theme}>
+        <ThumbnailImage image={gatsbyImageData} alt="Post Item Image" />
+        <PostItemContent theme={theme}>
+          <Title>{title}</Title>
+          <Date>{date}</Date>
+          <Category>
+            {categories.map(item => (
+              <CategoryItem key={item} theme={theme}>
+                {item}
+              </CategoryItem>
+            ))}
+          </Category>
+          <Summary>{summary}</Summary>
+        </PostItemContent>
+      </PostItemWrapper>
+    </>
   )
 }
 

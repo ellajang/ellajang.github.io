@@ -1,7 +1,8 @@
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
-import { FunctionComponent } from 'react'
+import { ThemeContext } from 'hooks/useTheme'
+import { FunctionComponent, useContext } from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 
 type DetailPostItemProps = PostFrontmatterType & {
@@ -18,9 +19,10 @@ const DetailPostItem: FunctionComponent<DetailPostItemProps> = ({
   },
   link,
 }) => {
+  const { theme } = useContext(ThemeContext)
   return (
-    <DetailPostItemWrapper to={link}>
-      <PostItemContent>
+    <DetailPostItemWrapper to={link} theme={theme}>
+      <PostItemContent theme={theme}>
         <Title>{title}</Title>
         <Summary>{summary}</Summary>
         <Category>
@@ -43,16 +45,22 @@ const DetailPostItemWrapper = styled(Link)`
   display: flex;
   justify-content: space-between;
   border-radius: 10px;
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.15);
+  box-shadow: ${props =>
+    props.theme === 'light'
+      ? '0 0 4px rgba(0, 0, 0, 0.15)'
+      : '0 0 4px rgba(255, 255, 255, 0.4)'};
   transition: 0.3s box-shadow;
   cursor: pointer;
   text-decoration: none;
   &:hover {
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    box-shadow: ${props =>
+      props.theme === 'light'
+        ? '0 0 3px rgba(0, 0, 0, 0.3)'
+        : '0 0 3px rgba(255, 255, 255, 0.3)'};
     text-decoration: underline;
   }
   @media (max-width: 768px) {
-    margin-top: 60px;
+    margin-top: 50px;
   }
 `
 
@@ -60,7 +68,13 @@ const PostItemContent = styled.div`
   display: flex;
   flex-direction: column;
   padding: 25px;
+  width: 200px;
   flex-grow: 1;
+  position: relative;
+  color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
+  @media (max-width: 768px) {
+    margin-bottom: 50px;
+  }
 `
 const ThumbnailImageContainer = styled.div`
   display: flex;
@@ -102,25 +116,33 @@ const Category = styled.span`
   display: flex;
   flex-wrap: wrap;
   margin: 40px 0 0 -5px;
+  position: absolute;
+  bottom: 50px;
   order: 1;
+  @media (max-width: 768px) {
+    top: 75px;
+  }
 `
 const Date = styled.span`
   font-size: 14px;
   font-weight: 400;
   opacity: 0.7;
-  margin-top: 20px;
-  margin-bottom: -20px;
+  position: absolute;
+  bottom: 20px;
   order: 2;
+  @media (max-width: 768px) {
+    top: 150px;
+  }
 `
 
 const CategoryItem = styled.div`
   margin: 2.5px 5px;
   padding: 3px 5px;
   border-radius: 3px;
-  background: black;
+  background: ${props => (props.theme === 'light' ? 'black' : '#263238')};
   font-size: 14px;
   font-weight: 700;
-  color: white;
+  color: ${props => (props.theme === 'light' ? 'white' : '#cfd8dc')};
 `
 
 const Summary = styled.div`

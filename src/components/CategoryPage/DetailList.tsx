@@ -1,7 +1,7 @@
-import styled from '@emotion/styled'
-import { Tabs, Tab } from '@mui/material'
+import React, { FunctionComponent, useContext, useState } from 'react'
 import { Link } from 'gatsby'
-import { FunctionComponent } from 'react'
+import styled from '@emotion/styled'
+import { ThemeContext } from 'hooks/useTheme'
 
 export type DetailListProps = {
   basePath: string
@@ -15,12 +15,27 @@ export type DetailListProps = {
   }[]
 }
 
-interface CustomTabProps extends React.ComponentPropsWithoutRef<typeof Tab> {
+interface CustomTabProps {
   to: string
-  component: React.ElementType
+  label: string
+  selected: boolean
+  theme: string
+  onClick: () => void
 }
 
-const CustomTab: React.FC<CustomTabProps> = props => <Tab {...props} />
+const CustomTab: FunctionComponent<CustomTabProps> = ({
+  to,
+  label,
+  selected,
+  theme,
+  onClick,
+}) => {
+  return (
+    <TabStyle to={to} selected={selected} onClick={onClick} theme={theme}>
+      {label}
+    </TabStyle>
+  )
+}
 
 const DetailList: FunctionComponent<DetailListProps> = ({
   basePath,
@@ -28,32 +43,37 @@ const DetailList: FunctionComponent<DetailListProps> = ({
   detailCategoryList,
   categoriesMap,
 }) => {
+  const [selectedTab, setSelectedTab] = useState(selectedDetailCategory)
+
+  const handleTabClick = (value: string) => {
+    setSelectedTab(value)
+  }
+
   const labelFromValue = (value: string) => {
     const found = categoriesMap.find(category => category.value === value)
     return found ? found.label : value
   }
+  const { theme } = useContext(ThemeContext)
   return (
-    <TabContainer>
-      <StyledTabs value={selectedDetailCategory}>
-        <div
-          style={{
-            display: 'flex',
-            flexWrap: 'wrap',
-            justifyContent: 'center',
-          }}
-        >
-          {Object.entries(detailCategoryList).map(([name, count]) => (
-            <TabStyle
-              component={Link}
-              to={name === 'All' ? `/${basePath}` : `/${basePath}/${name}`}
-              label={`${labelFromValue(name)}(${count})`}
-              value={name}
-              selected={name === selectedDetailCategory}
-              key={name}
-            />
-          ))}
-        </div>
-      </StyledTabs>
+    <TabContainer theme={theme}>
+      <div
+        style={{
+          display: 'flex',
+          flexWrap: 'wrap',
+          justifyContent: 'center',
+        }}
+      >
+        {Object.entries(detailCategoryList).map(([name, count]) => (
+          <CustomTab
+            to={name === 'All' ? `/${basePath}` : `/${basePath}/${name}`}
+            label={`${labelFromValue(name)}(${count})`}
+            selected={name === selectedTab}
+            onClick={() => handleTabClick(name)}
+            key={name}
+            theme={theme}
+          />
+        ))}
+      </div>
       <Divider />
     </TabContainer>
   )
@@ -67,60 +87,49 @@ const TabContainer = styled.div`
   justify-content: flex-end;
   align-items: flex-start;
   width: 100%;
-  height: 260px;
+  height: 230px;
   position: fixed;
   z-index: 1;
   font-size: 30px;
-  background-color: white;
-  margin: 10px 0 0 34px;
+  background-color: ${props =>
+    props.theme === 'light' ? '#f7fafc' : '#030d11ca'};
+  color: ${props => (props.theme === 'light' ? '#0b1118' : '#f7fafc')};
+  margin: 10px 0 0 0px;
   @media (max-width: 768px) {
     width: 100%;
     height: 250px;
     font-size: 20px;
-    margin: 10px 0px 0px 10px;
+    margin: 20px 0px 0px 0px;
   }
 `
-const TabStyle = styled(CustomTab)<{ selected: boolean }>`
+
+const TabStyle = styled(Link)<{ selected: boolean; theme: string }>`
   font-size: 18px;
-  font-weight: ${props => (props.selected ? 'bold' : 'normal')};
+  font-weight: ${({ selected }) => (selected ? 'bold' : 'normal')};
   position: relative;
+  margin: 0px 30px 10px 43px;
   &::after {
     content: '';
-    display: ${props => (props.selected ? 'block' : 'none')};
+    display: ${({ selected }) => (selected ? 'block' : 'none')};
     position: absolute;
-    bottom: 0;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #000;
+    top: 30px;
+    transform: translateX(-4%);
+    height: 3px;
+    width: 110%;
+    background-color: ${props =>
+      props.theme === 'light' ? '#000' : '#f7fafc'};
   }
   @media (max-width: 768px) {
     font-size: 12px;
   }
 `
 
-const StyledTabs = styled(Tabs)`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: start;
-  width: 100%;
-  & .Mui-selected {
-    color: #000;
-    font-weight: bold;
-  }
-  @media (max-width: 768px) {
-    justify-content: center;
-    font-size: 12px;
-    margin-right: -1px;
-    margin-left: 2px;
-  }
-`
 const Divider = styled.div`
   border-top: 0.1px solid #c3c7cc;
-  width: calc(100% - 85px);
-  margin: 20px 0 0 -5px;
+  width: calc(100% - 80px);
+  margin: 27px 0 -12px 40px;
   @media (max-width: 768px) {
     width: calc(100% - 80px);
-    margin: 20px 0px 0px 0px;
+    margin: 20px 0px 0px 20px;
   }
 `

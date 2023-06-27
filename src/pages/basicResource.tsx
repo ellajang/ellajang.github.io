@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { graphql } from 'gatsby'
 import { parse } from 'query-string'
 import DetailList from 'components/CategoryPage/DetailList'
@@ -9,13 +9,10 @@ import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps } from 'types/PostItem.types'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
-import Footer from 'components/Common/Footer'
-import Pagination from 'components/Common/Pagination'
 import { POSTS_PER_PAGE } from '../constants/PageEA'
-import styled from '@emotion/styled'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { useLocation } from '@reach/router'
-import { usePagination } from 'hooks/usePagination'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
 
 const basicResource: React.FC<PageDataProps> = ({
   data: {
@@ -39,18 +36,9 @@ const basicResource: React.FC<PageDataProps> = ({
     edges,
     categoriesName,
   })
-  const initialPage: number =
-    typeof parsed.page === 'string' ? parseInt(parsed.page, 10) : 1
 
-  const {
-    currentItems: paginatedPosts,
-    setCurrentPage,
-    maxPage,
-  } = usePagination(edges, POSTS_PER_PAGE)
-
-  useEffect(() => {
-    setCurrentPage(initialPage)
-  }, [location.search])
+  const { currentItems: paginatedPosts, PaginationNFooter } =
+    usePaginationFooter(edges, POSTS_PER_PAGE)
 
   return (
     <ThemeContextProvider>
@@ -67,18 +55,7 @@ const basicResource: React.FC<PageDataProps> = ({
         selectedCategory={selectedCategory}
         posts={paginatedPosts}
       />
-      <PaginationContainer>
-        <Pagination
-          count={maxPage}
-          onChange={setCurrentPage}
-          defaultPage={initialPage}
-          path={'/basicResource/'}
-          category={selectedCategory}
-        />
-      </PaginationContainer>
-      <FooterContainer>
-        <Footer />
-      </FooterContainer>
+      <PaginationNFooter path={'/basicResource/'} category={selectedCategory} />
     </ThemeContextProvider>
   )
 }
@@ -111,10 +88,4 @@ export const getDetailPostList = graphql`
       }
     }
   }
-`
-const FooterContainer = styled.footer`
-  transform: translateY(280%);
-`
-const PaginationContainer = styled.div`
-  margin-top: 280px;
 `
