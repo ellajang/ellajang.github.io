@@ -7,12 +7,9 @@ import { graphql } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { parse } from 'query-string'
-import Pagination from 'components/Common/Pagination'
 import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
-import { POSTS_PER_PAGE } from '../constants/PageEA'
-import { usePaginationFooter } from 'hooks/usePaginationFooter'
 import { useLocation } from '@reach/router'
 
 type IndexPageProps = {
@@ -82,10 +79,13 @@ const IndexPage: React.FC<IndexPageProps> = ({
       ),
     [],
   )
-  const { currentItems: paginatedPosts, maxPage } = usePaginationFooter(
-    edges,
-    POSTS_PER_PAGE,
+
+  const sortedPosts = edges.sort(
+    (a, b) =>
+      new Date(b.node.frontmatter.date).getTime() -
+      new Date(a.node.frontmatter.date).getTime(),
   )
+  const recentPosts = sortedPosts.slice(0, 6)
 
   return (
     <>
@@ -99,15 +99,13 @@ const IndexPage: React.FC<IndexPageProps> = ({
           image={publicURL}
         >
           <Introduction profileImage={gatsbyImageData} />
+
+          <PostList posts={recentPosts} selectedCategory={selectedCategory} />
+
           <CategoryList
             selectedCategory={selectedCategory}
             categoryList={categoryList}
           />
-          <PostList
-            posts={paginatedPosts}
-            selectedCategory={selectedCategory}
-          />
-          <Pagination count={maxPage} path={''} />
         </Template>
       </ThemeContextProvider>
     </>

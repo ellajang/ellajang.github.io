@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
-import PostItem from './PostItem'
 import { PostListItemType, PostListProps } from 'types/PostItem.types'
+import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
+import CustomSlider from './Slider'
 
 const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(
@@ -18,20 +19,34 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
       ),
     [selectedCategory],
   )
+
+  const sortedPosts = postListData.sort(
+    (a, b) =>
+      new Date(b.node.frontmatter.date).getTime() -
+      new Date(a.node.frontmatter.date).getTime(),
+  )
+
+  const recentPosts = sortedPosts.slice(0, 6)
+
+  const sliderPosts = recentPosts.map(
+    ({
+      node: {
+        fields: { slug },
+        frontmatter,
+      },
+    }: PostListItemType) => ({
+      ...frontmatter,
+      description: frontmatter.summary,
+      url: slug,
+    }),
+  )
+
   return (
     <>
       <PostListWrapper>
-        {postListData.map(
-          ({
-            node: {
-              id,
-              fields: { slug },
-              frontmatter,
-            },
-          }: PostListItemType) => (
-            <PostItem {...frontmatter} link={slug} key={id} />
-          ),
-        )}
+        <DriveFileRenameOutlineIcon />
+        최근 게시물
+        <CustomSlider posts={sliderPosts} />
       </PostListWrapper>
     </>
   )
@@ -40,12 +55,8 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
 export default PostList
 
 const PostListWrapper = styled.div`
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-gap: 20px;
-  width: 768px;
-  margin: 0 auto;
-  padding: 50px 0 100px;
+  height: 350px;
+  margin: 60px 0 50px 0;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     width: 100%;

@@ -42,13 +42,13 @@ const PostItem: React.FC<PostItemProps> = ({
 export default PostItem
 
 const PostItemContent = styled.div`
-  flex: 1;
   display: flex;
   flex-direction: column;
-  padding: 15px;
+  padding: 14px;
   color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
 `
 const PostItemWrapper = styled(Link)`
+  width: 250px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -68,7 +68,7 @@ const PostItemWrapper = styled(Link)`
 
 const ThumbnailImage = styled(GatsbyImage)`
   width: 100%;
-  height: 200px;
+  height: 160px;
   border-radius: 10px 10px 0 0;
 `
 const Title = styled.div`
@@ -80,12 +80,12 @@ const Title = styled.div`
   overflow-wrap: break-word;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 20px;
+  font-size: 17px;
   font-weight: 700;
 `
 
 const Date = styled.div`
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   opacity: 0.7;
 `
@@ -93,16 +93,15 @@ const Date = styled.div`
 const Category = styled.div`
   display: flex;
   flex-wrap: wrap;
-  margin-top: 10px;
-  margin: 10px -5px;
+  margin: 9px -5px;
 `
 
 const CategoryItem = styled.div`
-  margin: 2.5px 5px;
-  padding: 3px 5px;
+  margin: 2px 3px;
+  padding: 2px 5px;
   border-radius: 3px;
   background: ${props => (props.theme === 'light' ? 'black' : '#263238')};
-  font-size: 14px;
+  font-size: 10px;
   font-weight: 700;
   color: ${props => (props.theme === 'light' ? 'white' : '#cfd8dc')};
 `
@@ -114,8 +113,8 @@ const Summary = styled.div`
   text-overflow: ellipsis;
   white-space: normal;
   overflow-wrap: break-word;
-  -webkit-line-clamp: 2;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
-  font-size: 16px;
+  font-size: 12px;
   opacity: 0.8;
 `

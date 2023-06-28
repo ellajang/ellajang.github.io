@@ -57,7 +57,6 @@ const Title = styled.div`
   font-size: 45px;
   font-weight: 800;
   color: white;
-
   @media (max-width: 1168px) {
     font-size: 30px;
     margin-top: 80px;
@@ -88,6 +87,8 @@ const AllGrid = styled.div`
 const PostHeadInfoWrapper = styled.div`
   padding: 0px 150px 0px 0px;
   place-items: center;
+  position: relative;
+  z-index: 1;
   @media (max-width: 1168px) {
     font-size: 11px;
     margin-top: 20px;
