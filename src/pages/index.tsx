@@ -80,13 +80,6 @@ const IndexPage: React.FC<IndexPageProps> = ({
     [],
   )
 
-  const sortedPosts = edges.sort(
-    (a, b) =>
-      new Date(b.node.frontmatter.date).getTime() -
-      new Date(a.node.frontmatter.date).getTime(),
-  )
-  const recentPosts = sortedPosts.slice(0, 6)
-
   return (
     <>
       <ThemeContextProvider>
@@ -100,7 +93,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
         >
           <Introduction profileImage={gatsbyImageData} />
 
-          <PostList posts={recentPosts} selectedCategory={selectedCategory} />
+          <PostList posts={edges} selectedCategory={selectedCategory} />
 
           <CategoryList
             selectedCategory={selectedCategory}

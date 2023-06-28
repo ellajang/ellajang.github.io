@@ -8,6 +8,7 @@
     "@emotion/react": "^11.11.0",
     "@emotion/styled": "^11.11.0",
     "@mui/styles": "^5.13.2",
+    "@types/swiper": "^6.0.0",
     "gatsby": "^5.10.0",
     "gatsby-plugin-canonical-urls": "^5.10.0",
     "gatsby-plugin-emotion": "^8.10.0",
@@ -28,7 +29,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-helmet": "^6.1.0",
-    "react-slick": "^0.29.0"
+    "swiper": "^9.4.1"
   },
   "devDependencies": {
     "gh-pages": "^5.0.0",

@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import styled from '@emotion/styled'
 import { PostListItemType, PostListProps } from 'types/PostItem.types'
 import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
-import CustomSlider from './Slider'
+import CustomSlider from './Swiper'
 
 const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(
@@ -28,7 +28,7 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
 
   const recentPosts = sortedPosts.slice(0, 6)
 
-  const sliderPosts = recentPosts.map(
+  const swiperPosts = recentPosts.map(
     ({
       node: {
         fields: { slug },
@@ -46,7 +46,7 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
       <PostListWrapper>
         <DriveFileRenameOutlineIcon />
         최근 게시물
-        <CustomSlider posts={sliderPosts} />
+        <CustomSlider posts={swiperPosts} />
       </PostListWrapper>
     </>
   )
@@ -56,7 +56,7 @@ export default PostList
 
 const PostListWrapper = styled.div`
   height: 350px;
-  margin: 60px 0 50px 0;
+  margin: 50px 310px 10px 255px;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     width: 100%;
