@@ -63,6 +63,22 @@ const PostItemWrapper = styled(Link)`
       props.theme === 'light'
         ? '0 0 10px rgba(0, 0, 0, 0.3)'
         : '0 0 10px rgba(255, 255, 255, 0.3)'};
+
+    &:before {
+      content: '';
+      z-index: 10;
+      position: absolute;
+      top: -20;
+      right: -1;
+      width: 10;
+      height: 30;
+      border-top: 30px solid transparent;
+      border-right: 50px solid #828181;
+      border-bottom-right-radius: 10px;
+      transition: 0.3s width;
+      background-color: ${props =>
+        props.theme === 'light' ? '#d9dee0' : 'black'};
+    }
   }
 `
 

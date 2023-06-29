@@ -1,7 +1,7 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import Introduction from 'components/Main/Introduction'
 import Template from 'components/Common/Template'
-import CategoryList, { CategoryListProps } from 'components/Main/CategoryList'
+import CategoryList from 'components/Main/CategoryList'
 import PostList from 'components/Main/PostList'
 import { graphql } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
@@ -11,6 +11,8 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { useLocation } from '@reach/router'
+import styled from '@emotion/styled'
+import useCategoryPosts from 'hooks/useCategoryPost'
 
 type IndexPageProps = {
   location: {
@@ -57,28 +59,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
       ? 'All'
       : parsed.category
 
-  const categoryList = useMemo(
-    () =>
-      edges.reduce(
-        (
-          list: CategoryListProps['categoryList'],
-          {
-            node: {
-              frontmatter: { categories },
-            },
-          },
-        ) => {
-          categories.forEach(category => {
-            if (list[category] === undefined) list[category] = 1
-            else list[category]++
-          })
-          list['All']++
-          return list
-        },
-        { All: 0 },
-      ),
-    [],
-  )
+  const postsByCategory = useCategoryPosts(edges)
 
   return (
     <>
@@ -92,13 +73,9 @@ const IndexPage: React.FC<IndexPageProps> = ({
           image={publicURL}
         >
           <Introduction profileImage={gatsbyImageData} />
-
           <PostList posts={edges} selectedCategory={selectedCategory} />
-
-          <CategoryList
-            selectedCategory={selectedCategory}
-            categoryList={categoryList}
-          />
+          <Divider />
+          <CategoryList postsByCategory={postsByCategory} />
         </Template>
       </ThemeContextProvider>
     </>
@@ -145,5 +122,14 @@ export const getPostList = graphql`
       }
       publicURL
     }
+  }
+`
+const Divider = styled.div`
+  border-top: 0.1px solid #c3c7cc;
+  width: calc(100% - 240px);
+  margin: 27px 0 -12px 120px;
+  @media (max-width: 768px) {
+    width: calc(100% - 75px);
+    margin: 10px 0px 0px 40px;
   }
 `
