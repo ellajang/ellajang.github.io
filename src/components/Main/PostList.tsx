@@ -1,8 +1,8 @@
-import React, { useMemo } from 'react'
+import React, { useContext, useMemo } from 'react'
 import styled from '@emotion/styled'
 import { PostListItemType, PostListProps } from 'types/PostItem.types'
-import DriveFileRenameOutlineIcon from '@mui/icons-material/DriveFileRenameOutline'
 import CustomSlider from './Swiper'
+import { ThemeContext } from 'hooks/useTheme'
 
 const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(
@@ -44,8 +44,7 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   return (
     <>
       <PostListWrapper>
-        <DriveFileRenameOutlineIcon />
-        최근 게시물
+        <IconWrapper>📌&nbsp;최근 게시물</IconWrapper>
         <CustomSlider posts={swiperPosts} />
       </PostListWrapper>
     </>
@@ -55,11 +54,28 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
 export default PostList
 
 const PostListWrapper = styled.div`
-  height: 350px;
-  margin: 50px 310px 10px 255px;
   @media (max-width: 768px) {
     grid-template-columns: 1fr;
     width: 100%;
-    padding: 50px 20px;
+    padding-right: 220px;
+    margin: 10px 0 50px 0px;
+  }
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr;
+    width: 100%;
+    padding-right: 400px;
+    margin: 50px 0px 0px 0px;
   }
 `
+const IconWrapper = styled.div(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    margin: '0px 0px 0px 240px',
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+    '@media (max-width: 768px)': {
+      margin: '20px 0px 0px 120px',
+    },
+  }
+})

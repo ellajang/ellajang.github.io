@@ -9,7 +9,7 @@ export const lightMode = css`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Gowun Dodum', sans-serif;
   }
 
   html,
@@ -18,7 +18,6 @@ export const lightMode = css`
   a:hover {
     color: inherit;
     text-decoration: none;
-    cursor: pointer;
   }
   .footer {
     position: absolute;
@@ -31,7 +30,7 @@ export const darkMode = css`
     padding: 0;
     margin: 0;
     box-sizing: border-box;
-    font-family: 'Nanum Myeongjo', serif;
+    font-family: 'Gowun Dodum', sans-serif;
   }
 
   html,
