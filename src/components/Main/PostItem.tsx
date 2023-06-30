@@ -72,12 +72,13 @@ const PostItemWrapper = styled(Link)`
       right: -1;
       width: 10;
       height: 30;
-      border-top: 30px solid transparent;
-      border-right: 50px solid #828181;
+      border-top: 40px solid transparent;
+      border-right: 60px solid #828181;
       border-bottom-right-radius: 10px;
       transition: 0.3s width;
       background-color: ${props =>
         props.theme === 'light' ? '#d9dee0' : 'black'};
+      box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
   }
 `

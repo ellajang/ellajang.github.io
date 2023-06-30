@@ -1,7 +1,8 @@
-import React, { useMemo } from 'react'
-import { Link, navigate } from 'gatsby'
+import React, { useContext, useMemo } from 'react'
+import { navigate } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
 import styled from '@emotion/styled'
+import { ThemeContext } from 'hooks/useTheme'
 
 type CategoryListProps = {
   postsByCategory: {
@@ -47,85 +48,184 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
     return categoryNames[category]
   }
   const handleCategoryClick = (category: string) => {
-    // 해당 카테고리로 이동
     navigate(`/${category}`)
   }
+  const theme = useContext(ThemeContext)
   return (
-    <CategoryContainer>
-      {Object.keys(recentPostsByCategory).map(category => (
-        <Category key={category} onClick={() => handleCategoryClick(category)}>
-          <CategoryFolder />
-          <CategoryHeader>{getCategoryName(category)}</CategoryHeader>
-          <CategoryContent>
-            <NameWrapper>
-              <span>제목</span>
-              <span>작성일</span>
-            </NameWrapper>
-            {recentPostsByCategory[category].map(({ node }, index) => (
-              <li key={index}>
-                <Link to={node.fields.slug}>{node.frontmatter.title}</Link>
-                <span>{node.frontmatter.date}</span>
-              </li>
-            ))}
-          </CategoryContent>
-        </Category>
-      ))}
-    </CategoryContainer>
+    <CategoryWrapper theme={theme}>
+      <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
+
+      <CategoryContainer>
+        {Object.keys(recentPostsByCategory).map(category => (
+          <CategoryItemWrapper>
+            <Category
+              key={category}
+              onClick={() => handleCategoryClick(category)}
+            >
+              <CategoryFolder />
+              <CategoryHeader>
+                🔎&nbsp;&nbsp;
+                {getCategoryName(category)}
+              </CategoryHeader>
+              <CategoryContent>
+                <NameWrapper>
+                  <span>제목</span>
+                  <span>작성일</span>
+                </NameWrapper>
+                <hr />
+                {recentPostsByCategory[category].map(({ node }, index) => (
+                  <ContentWrapper key={index}>
+                    <span>{node.frontmatter.title}</span>
+                    <span>{node.frontmatter.date}</span>
+                  </ContentWrapper>
+                ))}
+              </CategoryContent>
+            </Category>
+          </CategoryItemWrapper>
+        ))}
+      </CategoryContainer>
+    </CategoryWrapper>
   )
 }
 
 export default CategoryList
 
+const CategoryWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
 const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 50px 200px;
-
+  margin: 100px 0px 20px 190px;
   @media (max-width: 1200px) {
-    margin: 0px 100px;
+    margin: 90px 80px 30px 100px;
+  }
+
+  @media (max-width: 900px) {
+    margin: 90px 100px 0px 100px;
   }
 
   @media (max-width: 768px) {
-    margin: 0px 20px;
+    margin: 60px 20px;
   }
 `
 
 const Category = styled.div`
-  width: calc(33.33% - 20px);
-  padding: 20px;
+  width: 100%;
+  margin: 20px 0px 0px 0px;
+  padding: 15px;
   box-sizing: border-box;
-  border: 1px solid #ddd;
-  margin-bottom: 50px;
-  position: relative;
+  background-color: #c7e2ece7;
+  border-radius: 0px 25px 10px 10px;
   cursor: pointer;
-  @media (max-width: 1200px) {
-    width: calc(50% - 20px);
-  }
-
   @media (max-width: 768px) {
     width: 100%;
+  }
+  &:hover {
+    margin: 20px 0px 0px 10px;
+    box-shadow: 0px 1px 8px rgba(96, 134, 148, 0.9);
   }
 `
 
 const CategoryFolder = styled.div`
   position: absolute;
-  top: -10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  background-color: #3f51b5;
-  border-top-left-radius: 4px;
-  border-top-right-radius: 4px;
+  top: -30px;
+  left: 0;
+  z-index: 0;
+  width: 120px;
+  height: 30px;
+  background-color: rgba(96, 134, 148, 0.9);
+  border-top-left-radius: 8px;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding-left: 5px;
+  clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
+  transition: clip-path 0.3s ease;
+  &:hover {
+    top: -29.5px;
+  }
 `
 
-const CategoryHeader = styled.h2`
-  margin-left: 20px;
+const CategoryHeader = styled.h3`
+  display: flex;
+  align-items: center;
 `
+
+const CategoryContent = styled.ul``
+
 const NameWrapper = styled.li`
   list-style-type: none;
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 35px 12px 0px;
 `
-const CategoryContent = styled.ul``
+
+const ContentWrapper = styled.li`
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0 0 0;
+  span:first-of-type {
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+`
+
+const IconWrapper = styled.h3(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    position: 'absolute',
+    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+    '@media (max-width: 770px)': {
+      margin: '0px 0px 1470px 40px',
+    },
+    '@media (min-width: 771px)': {
+      margin: '0px 0px 780px 120px',
+    },
+
+    '@media (min-width: 900px)': {
+      margin: '0px 0px 780px 120px',
+    },
+    '@media (min-width: 1000px)': {
+      margin: '0px 0px 590px 120px',
+    },
+
+    '@media (min-width: 1200px)': {
+      margin: '40px 40px 620px 210px',
+    },
+  }
+})
+
+const CategoryItemWrapper = styled.div`
+  position: relative;
+  flex-basis: 30%;
+  flex-grow: 1;
+  display: flex;
+  flex-wrap: wrap;
+  box-sizing: border-box;
+  background-color: rgba(96, 134, 148, 0.9);
+  margin: 40px 10px 20px 20px;
+  border-radius: 0px 15px 10px 10px;
+  transition: border-radius 0.3s ease;
+  @media (max-width: 768px) {
+    flex-basis: 132%;
+  }
+  &:hover {
+    transform: scale(0.92);
+  }
+
+  &:hover ${Category} {
+    margin: 20px 0px 0px 10px;
+    box-shadow: 0px 1px 8px rgba(96, 134, 148, 0.9);
+  }
+  &:hover ${CategoryFolder} {
+    top: -29.5px;
+  }
+`

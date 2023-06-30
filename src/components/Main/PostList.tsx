@@ -67,7 +67,7 @@ const PostListWrapper = styled.div`
     margin: 50px 0px 0px 0px;
   }
 `
-const IconWrapper = styled.div(() => {
+const IconWrapper = styled.h3(() => {
   const theme = useContext(ThemeContext)
   return {
     margin: '0px 0px 0px 240px',
