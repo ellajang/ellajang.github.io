@@ -52,7 +52,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
   }
   const theme = useContext(ThemeContext)
   return (
-    <CategoryWrapper theme={theme}>
+    <CategoryWrapper>
       <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
 
       <CategoryContainer>
@@ -63,18 +63,18 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
               onClick={() => handleCategoryClick(category)}
             >
               <CategoryFolder />
-              <CategoryHeader>
+              <CategoryHeader theme={theme}>
                 🔎&nbsp;&nbsp;
                 {getCategoryName(category)}
               </CategoryHeader>
               <CategoryContent>
-                <NameWrapper>
+                <NameWrapper theme={theme}>
                   <span>제목</span>
                   <span>작성일</span>
                 </NameWrapper>
                 <hr />
                 {recentPostsByCategory[category].map(({ node }, index) => (
-                  <ContentWrapper key={index}>
+                  <ContentWrapper key={index} theme={theme}>
                     <span>{node.frontmatter.title}</span>
                     <span>{node.frontmatter.date}</span>
                   </ContentWrapper>
@@ -119,6 +119,7 @@ const Category = styled.div`
   padding: 15px;
   box-sizing: border-box;
   background-color: #c7e2ece7;
+
   border-radius: 0px 25px 10px 10px;
   cursor: pointer;
   @media (max-width: 768px) {
@@ -153,6 +154,7 @@ const CategoryFolder = styled.div`
 const CategoryHeader = styled.h3`
   display: flex;
   align-items: center;
+  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
 `
 
 const CategoryContent = styled.ul``
@@ -162,12 +164,14 @@ const NameWrapper = styled.li`
   display: flex;
   justify-content: space-between;
   margin: 12px 35px 12px 0px;
+  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
 `
 
 const ContentWrapper = styled.li`
   display: flex;
   justify-content: space-between;
   margin: 8px 0 0 0;
+  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
   span:first-of-type {
     flex: 1;
     white-space: nowrap;
@@ -177,12 +181,10 @@ const ContentWrapper = styled.li`
 `
 
 const IconWrapper = styled.h3(() => {
-  const theme = useContext(ThemeContext)
   return {
     display: 'flex',
     justifyContent: 'space-between',
     position: 'absolute',
-    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
     '@media (max-width: 770px)': {
       margin: '0px 0px 1470px 40px',
     },

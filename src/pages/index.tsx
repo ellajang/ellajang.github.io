@@ -9,7 +9,6 @@ import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { parse } from 'query-string'
 import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
-import GlobalStyle from 'components/Common/GlobalStyle'
 import { useLocation } from '@reach/router'
 import styled from '@emotion/styled'
 import useCategoryPosts from 'hooks/useCategoryPost'
@@ -65,7 +64,6 @@ const IndexPage: React.FC<IndexPageProps> = ({
     <>
       <ThemeContextProvider>
         <Header />
-        <GlobalStyle />
         <Template
           title={title}
           description={description}
