@@ -9,6 +9,9 @@ type PaginationProps = {
   defaultPage?: number
   path: string
   category?: string
+  showFirstButton?: boolean
+  showLastButton?: boolean
+  onChange?: (page: number) => void
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -22,6 +25,7 @@ export const Pagination: React.FC<PaginationProps> = ({
   const handlePageChange = (_event: ChangeEvent<unknown>, value: number) => {
     const validPage = Math.max(1, Math.min(count, value))
     setPage(validPage)
+
     navigate(`${path}?page=${validPage}&category=${category}`, {
       replace: true,
     })

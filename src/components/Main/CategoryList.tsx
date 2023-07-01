@@ -59,6 +59,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
         {Object.keys(recentPostsByCategory).map(category => (
           <CategoryItemWrapper>
             <Category
+              theme={theme}
               key={category}
               onClick={() => handleCategoryClick(category)}
             >
@@ -127,10 +128,12 @@ const Category = styled.div`
   }
   &:hover {
     margin: 20px 0px 0px 10px;
-    box-shadow: 0px 1px 8px rgba(96, 134, 148, 0.9);
+    box-shadow: ${props =>
+      props.theme === 'light'
+        ? '0px 1px 8px rgba(96, 134, 148, 0.9)'
+        : '0 1 8px rgba(255, 255, 255, 0.3)'};
   }
 `
-
 const CategoryFolder = styled.div`
   position: absolute;
   top: -30px;
@@ -146,9 +149,6 @@ const CategoryFolder = styled.div`
   padding-left: 5px;
   clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
   transition: clip-path 0.3s ease;
-  &:hover {
-    top: -29.5px;
-  }
 `
 
 const CategoryHeader = styled.h3`
@@ -225,9 +225,16 @@ const CategoryItemWrapper = styled.div`
 
   &:hover ${Category} {
     margin: 20px 0px 0px 10px;
-    box-shadow: 0px 1px 8px rgba(96, 134, 148, 0.9);
+    box-shadow: ${props =>
+      props.theme === 'light'
+        ? '0px 1px 8px rgba(96, 134, 148, 0.9)'
+        : '0 1 8px rgb(255, 255, 255)'};
   }
+
   &:hover ${CategoryFolder} {
-    top: -29.5px;
+    top: -29.74px;
+    @media (max-width: 768px) {
+      top: -29.47px;
+    }
   }
 `

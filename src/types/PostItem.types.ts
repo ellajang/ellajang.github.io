@@ -38,3 +38,15 @@ export type PageDataProps = {
     }
   }
 }
+
+export type PostQueryResult = {
+  allMarkdownRemark: {
+    nodes: {
+      frontmatter: PostFrontmatterType
+      fields: {
+        slug: string
+      }
+      excerpt: string
+    }[]
+  }
+}

@@ -6,7 +6,10 @@
 
 /**
  * @type {import('gatsby').GatsbyConfig}
+ *
+ *
  */
+
 module.exports = {
   siteMetadata: {
     title: `프론트엔드 개발자의 개발 블로그`,
@@ -15,6 +18,25 @@ module.exports = {
     siteUrl: 'https://ellajang.github.io/',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: `프론트엔드 개발자의 개발 블로그`,
+        short_name: `프론트엔드 블로그`,
+        start_url: `/`,
+        background_color: `#ffffff`,
+        theme_color: `#ffffff`,
+        display: `minimal-ui`,
+        icon: `static/logoWeb96.png`,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-google-gtag',
+      options: {
+        trackingIds: ['G-E57T9PEGJC'],
+        head: true,
+      },
+    },
     {
       resolve: 'gatsby-plugin-typescript',
       options: {

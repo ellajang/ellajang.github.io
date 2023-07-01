@@ -1,39 +1,98 @@
-import React, { useContext } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import { styled, alpha } from '@mui/material/styles'
+import logo from '../../../static/logoWeb64.png'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
+import { Alert, Snackbar, SnackbarOrigin, Stack } from '@mui/material'
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
 import { ThemeContext } from 'hooks/useTheme'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
 
-const Header: React.FC = () => {
+interface HeaderProps {
+  hideSearch?: boolean
+}
+
+const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
+  const [, setSearchTerm] = useState('')
+  const [showEmptySearchAlert, setShowEmptySearchAlert] = useState(false)
+  const [open, setOpen] = useState(false)
+  const [snackbarPosition] = useState<SnackbarOrigin>({
+    vertical: 'top',
+    horizontal: 'center',
+  })
+  const searchInputRef = useRef<HTMLInputElement | null>(null)
+
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+
+    const searchTermValue = searchInputRef.current?.value || ''
+    setSearchTerm(searchTermValue)
+
+    if (!searchTermValue.trim()) {
+      setShowEmptySearchAlert(true)
+      setOpen(true)
+      return
+    }
+
+    navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
+  }
+
+  const handleClose = (
+    _event?: React.SyntheticEvent | Event,
+    reason?: string,
+  ) => {
+    if (reason === 'clickaway') {
+      return
+    }
+
+    setOpen(false)
+  }
+
   return (
     <>
       <AppBarStyle position="fixed">
-        <Toolbar>
+        {showEmptySearchAlert && (
+          <Snackbar
+            open={open}
+            autoHideDuration={1500}
+            onClose={handleClose}
+            anchorOrigin={snackbarPosition}
+          >
+            <Stack sx={{ width: '100' }} spacing={12}>
+              <Alert severity="warning">검색어를 입력해 주세요 :)</Alert>
+            </Stack>
+          </Snackbar>
+        )}
+        <Toolbar style={{ justifyContent: 'space-between' }}>
           <MenuList />
           <TypographyStyle
             variant="h6"
             noWrap
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
-            <LinkStyle to="/">프론트엔드 기술 블로그</LinkStyle>
+            <LinkStyle to="/">
+              <img src={logo} alt="Logo" />
+              &nbsp; 프론트엔드 : Ella의 개발 일지
+            </LinkStyle>
           </TypographyStyle>
 
           <DarkModeToggle />
-          <Search>
-            <SearchIconWrapper>
-              <SearchIcon />
-            </SearchIconWrapper>
-            <StyledInputBase
-              placeholder="검색어를 입력하세요."
-              inputProps={{ 'aria-label': 'search' }}
-            />
-          </Search>
+          {!hideSearch && (
+            <Search>
+              <StyledInputBase
+                placeholder="검색어를 입력하세요."
+                inputProps={{ 'aria-label': 'search' }}
+                inputRef={searchInputRef}
+              />
+              <SearchIconWrapper type="submit" onClick={handleSearchSubmit}>
+                <SearchIcon />
+              </SearchIconWrapper>
+            </Search>
+          )}
         </Toolbar>
       </AppBarStyle>
     </>
@@ -74,12 +133,17 @@ const Search = styled('div')(({ theme }) => ({
   },
 }))
 
-const SearchIconWrapper = styled('div')(({ theme }) => ({
+const SearchIconWrapper = styled('button')(({ theme }) => ({
   padding: theme.spacing(0, 2),
   height: '100%',
   position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
+  right: 0,
+  top: 0,
+  cursor: 'pointer',
+  border: 'none',
+  borderRadius: '10px',
+  background: '#7d64b1',
+  color: 'white',
   alignItems: 'center',
   justifyContent: 'center',
 }))
@@ -87,7 +151,7 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   '& .MuiInputBase-input': {
     padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
     transition: theme.transitions.create('width'),
     width: '100%',
     [theme.breakpoints.up('sm')]: {
