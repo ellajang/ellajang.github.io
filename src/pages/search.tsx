@@ -9,23 +9,19 @@ import Header from 'components/Common/Header'
 import CreateIcon from '@mui/icons-material/Create'
 import SearchList from 'components/Search/SearchList'
 import Search from 'components/Search/Seach'
-import Pagination from 'components/Common/Pagination'
+import { usePaginationFooter } from 'hooks/usePaginationFooter'
+import Footer from 'components/Common/Footer'
 
 const SearchResultsPage: React.FC = () => {
   const { search } = useLocation()
-  const { term = '' } = queryString.parse(search)
+  const { term = '', page = '1' } = queryString.parse(search)
   const [searchTerm, setSearchTerm] = useState(
     term !== null ? String(term) : '',
   )
-  const [currentPage, setCurrentPage] = useState(1)
-  const [totalPages, setTotalPages] = useState(1)
+  const [_currentPage, setCurrentPage] = useState(page)
 
   const posts = usePosts()
-  const itemsPerPage = 2
-  const handleSearch = () => {
-    setCurrentPage(1)
-    navigate(`/search?term=${encodeURIComponent(searchTerm)}`)
-  }
+  const itemsPerPage = 5
 
   const filteredPosts = posts.filter(
     post =>
@@ -34,16 +30,16 @@ const SearchResultsPage: React.FC = () => {
       post.slug?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()),
   )
-  const filteredPost = filteredPosts.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  )
-  const handlePageChange = (page: number) => {
+
+  const handleSearch = () => {
     setCurrentPage(page)
-    navigate(`/search/?term=${encodeURIComponent(searchTerm)}&page=${page}`, {
-      replace: true,
-    })
+    navigate(`/search?term=${encodeURIComponent(searchTerm)}&page=${page}`)
   }
+
+  const { currentItems, PaginationNFooter } = usePaginationFooter(
+    filteredPosts,
+    itemsPerPage,
+  )
 
   const { theme } = useContext(ThemeContext)
   return (
@@ -60,22 +56,18 @@ const SearchResultsPage: React.FC = () => {
       <Divider />
       {filteredPosts.length > 0 && searchTerm !== '' ? (
         <>
-          <SearchList posts={filteredPost} />
+          <SearchList posts={currentItems} />
           <PaginationWrapper>
-            <Pagination
-              count={Math.ceil(filteredPosts.length / itemsPerPage)}
-              defaultPage={currentPage}
-              onChange={handlePageChange}
-              showFirstButton
-              showLastButton
-              path={''}
-            />
+            <PaginationNFooter path="/search/" category="search results" />
           </PaginationWrapper>
         </>
       ) : (
         <NoDataMessage>
           <CreateIcon />
           &nbsp; No Posts Available
+          <FooterContainer>
+            <Footer />
+          </FooterContainer>
         </NoDataMessage>
       )}
     </div>
@@ -85,13 +77,20 @@ const SearchResultsPage: React.FC = () => {
 export default SearchResultsPage
 
 const NoDataMessage = styled.div`
-  margin: 20px;
+  margin: 100px;
   text-align: center;
   font-size: 25px;
   color: gray;
   @media (max-width: 768px) {
     font-size: 16px;
   }
+`
+
+const FooterContainer = styled.footer`
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  position: absolute;
 `
 
 const SeachResult = styled.div`
@@ -106,21 +105,18 @@ const SeachResult = styled.div`
 const Divider = styled.div`
   border-top: 0.1px solid #c3c7cc;
   width: calc(100% - 70px);
-  margin: 20px 0 12px 40px;
+  margin: 30px 0 12px 40px;
   @media (max-width: 768px) {
     width: calc(100% - 70px);
     margin: 20px 0px 0px 20px;
   }
 `
 const PaginationWrapper = styled.div`
-  display: grid;
-  place-items: center;
-  margin-top: auto;
-  padding: 15px 0;
   font-size: 15px;
-  text-align: center;
-  line-height: 1.5;
-
+  position: relative;
+  width: 100%;
+  bottom: 40px;
+  margin-top: -100px;
   @media (max-width: 768px) {
     font-size: 13px;
   }

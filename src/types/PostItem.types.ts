@@ -50,3 +50,18 @@ export type PostQueryResult = {
     }[]
   }
 }
+
+export type Post = {
+  title: string
+  date: string
+  slug: string
+  excerpt: string
+  categories: string[]
+  thumbnail: {
+    publicURL: string
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
+  }
+  summary: string
+}

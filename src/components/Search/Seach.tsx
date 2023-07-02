@@ -46,7 +46,7 @@ const SearchWrapper = styled.div`
     border: '1px solid #c9d2d7';
   }
   width: 40%;
-  margin: 120px auto;
+  margin: 130px auto;
   margin-bottom: 60px;
   @media (max-width: 768px) {
     width: 90%;

@@ -4,12 +4,9 @@ import Footer from 'components/Common/Footer'
 import Pagination from 'components/Common/Pagination'
 import { parse } from 'query-string'
 import React, { useState, useMemo, useEffect } from 'react'
-import { PostListItemType } from 'types/PostItem.types'
+import { Post } from 'types/PostItem.types'
 
-export const usePaginationFooter = (
-  items: PostListItemType[],
-  itemsPerPage: number,
-) => {
+export const usePaginationFooter = (items: Post[], itemsPerPage: number) => {
   const location = useLocation()
   const parsed: { [key: string]: string | string[] | null } = parse(
     location.search,
@@ -46,6 +43,7 @@ export const usePaginationFooter = (
           defaultPage={initialPage}
           path={path}
           category={category}
+          queryParams={{ page: String(currentPage) }}
         />
       </PaginationContainer>
       <FooterContainer numPosts={numPosts}>
@@ -78,5 +76,5 @@ const FooterContainer = styled.footer<{ numPosts: number }>`
 `
 
 const PaginationContainer = styled.div`
-  margin-top: 230px;
+  margin-top: 220px;
 `

@@ -34,29 +34,45 @@ const DarkModeToggle: React.FC = () => {
         {isTransitioning ? (
           <TransitionIcon>
             {showDarkModeIcon ? (
-              <DarkModeIcon
-                fontSize="large"
-                sx={{ color: theme === 'light' ? 'black' : 'white' }}
-              />
+              <IconWrapper theme={theme}>
+                <DarkModeIcon
+                  fontSize="large"
+                  sx={{
+                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                  }}
+                />
+              </IconWrapper>
             ) : (
-              <LightModeIcon
-                fontSize="large"
-                sx={{ color: theme === 'light' ? 'black' : 'white' }}
-              />
+              <IconWrapper theme={theme}>
+                <LightModeIcon
+                  fontSize="large"
+                  sx={{
+                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                  }}
+                />
+              </IconWrapper>
             )}
           </TransitionIcon>
         ) : (
           <InstantIcon>
             {theme === 'light' ? (
-              <DarkModeIcon
-                fontSize="large"
-                sx={{ color: theme === 'light' ? 'black' : 'white' }}
-              />
+              <IconWrapper theme={theme}>
+                <DarkModeIcon
+                  fontSize="large"
+                  sx={{
+                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                  }}
+                />
+              </IconWrapper>
             ) : (
-              <LightModeIcon
-                fontSize="large"
-                sx={{ color: theme === 'light' ? 'black' : 'white' }}
-              />
+              <IconWrapper theme={theme}>
+                <LightModeIcon
+                  fontSize="large"
+                  sx={{
+                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                  }}
+                />
+              </IconWrapper>
             )}
           </InstantIcon>
         )}
@@ -69,7 +85,6 @@ export default DarkModeToggle
 
 const ModeButton = styled.div`
   cursor: pointer;
-  margin: 10px 20px 5px 0px;
 `
 
 const TransitionIcon = styled.div`
@@ -79,3 +94,20 @@ const TransitionIcon = styled.div`
 const InstantIcon = styled.div`
   opacity: 2;
 `
+
+const IconWrapper = styled('div')(({ theme }) => ({
+  position: 'relative',
+  height: '40px',
+  width: '54px',
+  color: '#212121',
+  border: '1px solid #b0bec5',
+  borderRadius: '8px',
+  alignItems: 'center',
+  justifyContent: 'center',
+  display: 'flex',
+  backgroundColor: theme === 'light' ? '#F5F5F5' : '#3C474B',
+  '&:hover': {
+    backgroundColor: '#7D64B1',
+    border: '1px solid #AA9CE4',
+  },
+}))

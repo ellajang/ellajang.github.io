@@ -8,17 +8,19 @@ type PaginationProps = {
   count: number
   defaultPage?: number
   path: string
+  term?: string
   category?: string
   showFirstButton?: boolean
   showLastButton?: boolean
   onChange?: (page: number) => void
+  queryParams: { [key: string]: any }
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
   count,
   defaultPage = 1,
   path,
-  category = '',
+  queryParams,
 }) => {
   const [page, setPage] = useState(Math.max(1, Math.min(count, defaultPage)))
 
@@ -26,7 +28,12 @@ export const Pagination: React.FC<PaginationProps> = ({
     const validPage = Math.max(1, Math.min(count, value))
     setPage(validPage)
 
-    navigate(`${path}?page=${validPage}&category=${category}`, {
+    const searchParams = new URLSearchParams({
+      ...queryParams,
+      page: String(validPage),
+    })
+
+    navigate(`${path}?${searchParams.toString()}`, {
       replace: true,
     })
   }

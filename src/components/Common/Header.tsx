@@ -75,7 +75,7 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
             sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}
           >
             <LinkStyle to="/">
-              <img src={logo} alt="Logo" />
+              <LogoImage src={logo} alt="Logo" />
               &nbsp; 프론트엔드 : Ella의 개발 일지
             </LinkStyle>
           </TypographyStyle>
@@ -113,6 +113,11 @@ const TypographyStyle = styled(Typography)(() => {
   return {
     color: theme.theme === 'light' ? 'black' : 'white',
   }
+})
+
+const LogoImage = styled('img')({
+  width: '50px',
+  height: '50px',
 })
 
 const Search = styled('div')(({ theme }) => ({

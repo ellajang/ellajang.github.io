@@ -21,7 +21,6 @@ const Template: React.FC<TemplateProps> = ({
 }) => {
   return (
     <>
-      {' '}
       <Container>
         <Helmet>
           <title>{title}</title>

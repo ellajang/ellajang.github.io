@@ -14,7 +14,7 @@ const SearchList: React.FC<{ posts: SearchPostProps[] }> = ({ posts }) => {
   return (
     <ListContainer>
       {posts.map(post => (
-        <ListItem to={post.slug} theme={theme}>
+        <ListItem to={post.slug} theme={theme} key={post.slug}>
           <ItemWrapper>
             <Title>{post.title}</Title>
             <Summary>{post.summary}</Summary>
