@@ -4,9 +4,12 @@ import Footer from 'components/Common/Footer'
 import Pagination from 'components/Common/Pagination'
 import { parse } from 'query-string'
 import React, { useState, useMemo, useEffect } from 'react'
-import { Post } from 'types/PostItem.types'
+import { Post, PostListItemType } from 'types/PostItem.types'
 
-export const usePaginationFooter = (items: Post[], itemsPerPage: number) => {
+export const usePaginationFooter = (
+  items: PostListItemType[] | Post[],
+  itemsPerPage: number,
+) => {
   const location = useLocation()
   const parsed: { [key: string]: string | string[] | null } = parse(
     location.search,

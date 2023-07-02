@@ -7,7 +7,7 @@ import DetailList from 'components/CategoryPage/DetailList'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 import { BASIC_RESOURCE_CATEGORIES } from '../../constants/CategoryName'
 import { ThemeContextProvider } from 'hooks/useTheme'
-import { PageDataProps } from 'types/PostItem.types'
+import { PageDataProps, PostListItemType } from 'types/PostItem.types'
 import { POSTS_PER_PAGE } from '../../constants/PageEA'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { useLocation } from '@reach/router'
@@ -57,7 +57,7 @@ const OS: React.FC<PageDataProps> = ({
         />
         <DetailPostList
           selectedCategory={selectedCategory}
-          posts={paginatedPosts}
+          posts={paginatedPosts as PostListItemType[]}
         />
         <PaginationNFooter
           path={'/basicResource/OS'}

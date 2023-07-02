@@ -31,7 +31,7 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
 
     Object.keys(postsByCategory).forEach(category => {
       const filteredPosts = postsByCategory[category]
-        .filter(post => post.node.frontmatter.date)
+        .filter(edge => edge.node.frontmatter.date)
         .sort(
           (a, b) =>
             new Date(b.node.frontmatter.date).getTime() -

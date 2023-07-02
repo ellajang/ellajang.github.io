@@ -14,8 +14,23 @@ export type PostFrontmatterType = {
 }
 
 export type PostListItemType = {
+  id: string
+  title: string
+  date: string
+  categories: string[]
+  summary: string
+  slug: string
   node: {
     id: string
+    fields: {
+      slug: string
+    }
+  }
+  thumbnail: {
+    publicURL: string
+    childImageSharp: {
+      gatsbyImageData: IGatsbyImageData
+    }
     fields: {
       slug: string
     }
@@ -56,6 +71,7 @@ export type Post = {
   date: string
   slug: string
   excerpt: string
+  summary: string
   categories: string[]
   thumbnail: {
     publicURL: string
@@ -63,5 +79,4 @@ export type Post = {
       gatsbyImageData: IGatsbyImageData
     }
   }
-  summary: string
 }

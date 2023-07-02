@@ -5,7 +5,7 @@ import Header from 'components/Common/Header'
 import Title from 'components/CategoryPage/Title'
 import DetailList from 'components/CategoryPage/DetailList'
 import { ThemeContextProvider } from 'hooks/useTheme'
-import { PageDataProps } from 'types/PostItem.types'
+import { PageDataProps, PostListItemType } from 'types/PostItem.types'
 import { POSTS_PER_PAGE } from '../constants/PageEA'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 import { useLocation } from '@reach/router'
@@ -46,7 +46,7 @@ const debugging: React.FC<PageDataProps> = ({
         />
         <DetailPostList
           selectedCategory={selectedCategory}
-          posts={paginatedPosts}
+          posts={paginatedPosts as PostListItemType[]}
         />
         <PaginationNFooter path={'/debugging/'} category={selectedCategory} />
       </ThemeContextProvider>

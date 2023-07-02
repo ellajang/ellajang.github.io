@@ -11,6 +11,7 @@ import SearchList from 'components/Search/SearchList'
 import Search from 'components/Search/Seach'
 import { usePaginationFooter } from 'hooks/usePaginationFooter'
 import Footer from 'components/Common/Footer'
+import { Post, PostListItemType } from 'types/PostItem.types'
 
 const SearchResultsPage: React.FC = () => {
   const { search } = useLocation()
@@ -23,7 +24,7 @@ const SearchResultsPage: React.FC = () => {
   const posts = usePosts()
   const itemsPerPage = 5
 
-  const filteredPosts = posts.filter(
+  const filteredPosts: Post[] | PostListItemType[] = posts.filter(
     post =>
       post.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       post.date.includes(searchTerm) ||
