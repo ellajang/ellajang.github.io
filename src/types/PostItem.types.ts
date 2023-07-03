@@ -21,6 +21,7 @@ export type PostListItemType = {
   summary: string
   slug: string
   node: {
+    frontmatter: any
     id: string
     fields: {
       slug: string

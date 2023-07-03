@@ -10,6 +10,7 @@ import FirstPageIcon from '@mui/icons-material/FirstPage'
 import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
 import { Collapse, ListItemSecondaryAction } from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
+import HomeIcon from '@mui/icons-material/Home'
 import { ThemeContext } from 'hooks/useTheme'
 import { Link } from 'gatsby'
 
@@ -51,7 +52,13 @@ const MenuList: React.FC = () => {
         <MenuIcon />
       </IconButtonStyle>
       <DrawerStyle anchor="left" open={drawerOpen} onClose={handleDrawerClose}>
-        <FirstPageIconStyle fontSize="large" onClick={handleDrawerClose} />
+        <IconContainer>
+          <Link to="/">
+            <HomeIconStyle fontSize="large" />
+          </Link>
+          <FirstPageIconStyle fontSize="large" onClick={handleDrawerClose} />
+        </IconContainer>
+
         <List>
           <ListItem>
             <LinkStyle to="/basicResource">
@@ -267,9 +274,24 @@ const FirstPageIconStyle = styled(FirstPageIcon)(() => {
   const theme = useContext(ThemeContext)
   return {
     display: 'flex',
-    margin: '20px 0px 10px 330px',
+    margin: '25px 20px 20px 0px',
     float: 'right',
     cursor: 'pointer',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
   }
+})
+
+const HomeIconStyle = styled(HomeIcon)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    margin: '25px 0px 0px 20px',
+    float: 'left',
+    cursor: 'pointer',
+    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+  }
+})
+const IconContainer = styled('div')({
+  display: 'flex',
+  justifyContent: 'space-between',
 })

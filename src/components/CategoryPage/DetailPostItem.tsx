@@ -27,7 +27,9 @@ const DetailPostItem: FunctionComponent<DetailPostItemProps> = ({
         <Summary>{summary}</Summary>
         <Category>
           {categories.map(category => (
-            <CategoryItem key={category}>{category}</CategoryItem>
+            <CategoryItem key={category} theme={theme}>
+              {category}
+            </CategoryItem>
           ))}
         </Category>
         <Date>{date}</Date>
@@ -139,10 +141,10 @@ const CategoryItem = styled.div`
   margin: 2.5px 5px;
   padding: 3px 5px;
   border-radius: 3px;
-  background: ${props => (props.theme === 'light' ? 'black' : '#263238')};
   font-size: 14px;
   font-weight: 700;
-  color: ${props => (props.theme === 'light' ? 'white' : '#cfd8dc')};
+  background: ${props => (props.theme === 'light' ? '#FFEA75' : '#263238')};
+  color: ${props => (props.theme === 'light' ? '#7d64b1' : 'white')};
 `
 
 const Summary = styled.div`

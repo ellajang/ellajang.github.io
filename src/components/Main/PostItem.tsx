@@ -117,10 +117,10 @@ const CategoryItem = styled.div`
   margin: 2px 3px;
   padding: 2px 5px;
   border-radius: 3px;
-  background: ${props => (props.theme === 'light' ? 'black' : '#263238')};
   font-size: 10px;
   font-weight: 700;
-  color: ${props => (props.theme === 'light' ? 'white' : '#cfd8dc')};
+  background: ${props => (props.theme === 'light' ? '#FFEA75' : '#263238')};
+  color: ${props => (props.theme === 'light' ? '#7d64b1' : 'white')};
 `
 
 const Summary = styled.div`

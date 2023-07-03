@@ -1,10 +1,10 @@
-import React, { useContext, useState } from 'react'
+import React, { useState } from 'react'
 import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
 import queryString from 'query-string'
 import usePosts from 'hooks/usePosts'
 import styled from '@emotion/styled'
-import { ThemeContext } from 'hooks/useTheme'
+import { ThemeContextProvider } from 'hooks/useTheme'
 import Header from 'components/Common/Header'
 import CreateIcon from '@mui/icons-material/Create'
 import SearchList from 'components/Search/SearchList'
@@ -12,6 +12,7 @@ import Search from 'components/Search/Seach'
 import { usePaginationFooter } from 'hooks/usePaginationFooter'
 import Footer from 'components/Common/Footer'
 import { Post, PostListItemType } from 'types/PostItem.types'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 const SearchResultsPage: React.FC = () => {
   const { search } = useLocation()
@@ -42,10 +43,10 @@ const SearchResultsPage: React.FC = () => {
     itemsPerPage,
   )
 
-  const { theme } = useContext(ThemeContext)
   return (
-    <div>
+    <ThemeContextProvider>
       <Header hideSearch={true} />
+      <GlobalStyle />
       <Search setSearchTerm={setSearchTerm} handleSearch={handleSearch} />
       {searchTerm !== '' && (
         <SeachResult>
@@ -71,7 +72,7 @@ const SearchResultsPage: React.FC = () => {
           </FooterContainer>
         </NoDataMessage>
       )}
-    </div>
+    </ThemeContextProvider>
   )
 }
 
@@ -99,7 +100,7 @@ const SeachResult = styled.div`
   color: #6343a8;
   @media (max-width: 768px) {
     width: calc(100% - 70px);
-    margin: 20px 0px 0px 58px;
+    margin: 20px 0px 0px 40px;
     font-size: 13px;
   }
 `
@@ -108,8 +109,8 @@ const Divider = styled.div`
   width: calc(100% - 70px);
   margin: 30px 0 12px 40px;
   @media (max-width: 768px) {
-    width: calc(100% - 70px);
-    margin: 20px 0px 0px 20px;
+    width: calc(100% - 60px);
+    margin: 20px 0px 0px 30px;
   }
 `
 const PaginationWrapper = styled.div`
@@ -117,7 +118,7 @@ const PaginationWrapper = styled.div`
   position: relative;
   width: 100%;
   bottom: 40px;
-  margin-top: -100px;
+  margin-top: -160px;
   @media (max-width: 768px) {
     font-size: 13px;
   }

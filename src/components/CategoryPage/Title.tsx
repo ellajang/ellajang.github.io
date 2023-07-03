@@ -38,7 +38,7 @@ const Background = styled.div`
   margin-bottom: 150px;
   z-index: 2;
   background-color: ${props =>
-    props.theme === 'light' ? '#90a4ae' : '#0b1118'};
+    props.theme === 'light' ? '#7c64b1d9' : '#0b1118'};
   color: #ffffff;
 `
 

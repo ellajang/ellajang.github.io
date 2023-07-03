@@ -116,8 +116,9 @@ const TabStyle = styled(Link)<{ selected: boolean; theme: string }>`
     transform: translateX(-4%);
     height: 3px;
     width: 110%;
+
     background-color: ${props =>
-      props.theme === 'light' ? '#000' : '#f7fafc'};
+      props.theme === 'light' ? '#7d64b1' : '#f7fafc'};
   }
   @media (max-width: 768px) {
     font-size: 12px;

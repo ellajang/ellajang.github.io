@@ -1,6 +1,7 @@
 import styled from '@emotion/styled'
 import SearchIcon from '@mui/icons-material/Search'
-import { useState } from 'react'
+import { ThemeContext } from 'hooks/useTheme'
+import { useContext, useState } from 'react'
 
 type SearchProps = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
@@ -18,17 +19,20 @@ const Search: React.FC<SearchProps> = ({ setSearchTerm, handleSearch }) => {
     setSearchTerm(inputValue)
     handleSearch()
   }
-
+  const { theme } = useContext(ThemeContext)
   return (
-    <SearchWrapper>
-      <SearchInput
-        value={inputValue}
-        onChange={handleChange}
-        placeholder="검색어를 입력하세요."
-      />
-      <SearchButton onClick={handleClick}>
-        <SearchIcon />
-      </SearchButton>
+    <SearchWrapper theme={theme}>
+      <SearchContainer theme={theme}>
+        <SearchInput
+          theme={theme}
+          value={inputValue}
+          onChange={handleChange}
+          placeholder="검색어를 입력하세요."
+        />
+        <SearchButton onClick={handleClick}>
+          <SearchIcon />
+        </SearchButton>
+      </SearchContainer>
     </SearchWrapper>
   )
 }
@@ -40,10 +44,11 @@ const SearchWrapper = styled.div`
   color: #212121;
   border: '1px solid #b0bec5';
   border-radius: 10px;
-  background-color: #f4f2f2;
+  background-color: ${props =>
+    props.theme === 'light' ? '#f4f2f2' : '#3C474B'};
   &:hover {
-    background-color: #f4f2f2;
-    border: '1px solid #c9d2d7';
+    background-color: ${props =>
+      props.theme === 'light' ? '#f4f2f2' : '#3C474B'};
   }
   width: 40%;
   margin: 130px auto;
@@ -55,7 +60,7 @@ const SearchWrapper = styled.div`
 `
 
 const SearchInput = styled.input`
-  padding: 10px;
+  padding: 25px;
   border: none;
   border-radius: 10px;
   width: 93%;
@@ -65,20 +70,16 @@ const SearchInput = styled.input`
   color: #212121;
   background-color: transparent;
 
-  &:focus {
-    border: 2px solid #7d64b1;
-  }
-
   &::placeholder {
     color: #757575;
   }
   @media (max-width: 768px) {
-    height: 30px;
+    padding: 21px;
   }
 `
 
 const SearchButton = styled.button`
-  width: 9%;
+  width: 8%;
   height: 100%;
   position: absolute;
   right: 0;
@@ -91,6 +92,13 @@ const SearchButton = styled.button`
   align-items: center;
   justify-content: center;
   @media (max-width: 768px) {
-    width: 13%;
+    width: 10%;
+  }
+`
+const SearchContainer = styled.div`
+  border-radius: 10px;
+  &:focus-within {
+    box-shadow: 0 0 0 1px
+      ${props => (props.theme === 'dark' ? '#c9d2d7' : '#7d64b1')};
   }
 `

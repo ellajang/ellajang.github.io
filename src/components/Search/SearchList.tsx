@@ -18,14 +18,16 @@ const SearchList: React.FC<{ posts: SearchPostProps[] }> = ({ posts }) => {
           <ItemWrapper>
             <Title>{post.title}</Title>
             <Summary>{post.summary}</Summary>
-            <Category>
-              {post.categories.map(category => (
-                <CategoryItem key={category} theme={theme}>
-                  {category}
-                </CategoryItem>
-              ))}
-            </Category>
-            <Date>{post.date}</Date>
+            <CategoryDateWrapper>
+              <Category>
+                {post.categories.map(category => (
+                  <CategoryItem key={category} theme={theme}>
+                    {category}
+                  </CategoryItem>
+                ))}
+              </Category>
+              &nbsp; |&nbsp;&nbsp;<Date>{post.date}</Date>
+            </CategoryDateWrapper>
           </ItemWrapper>
           <ThumbnailImageContainer>
             {post.thumbnail?.childImageSharp?.gatsbyImageData && (
@@ -47,11 +49,11 @@ const ListContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: calc(100% - 200px);
-  margin: 30px 20px 30px 80px;
+  margin: 30px auto;
   justify-content: space-between;
   @media (max-width: 768px) {
-    width: calc(100% - 160px);
-    margin: 30px 20px 30px 60px;
+    width: calc(100% - 120px);
+    margin: 20px auto;
   }
 `
 
@@ -63,7 +65,8 @@ const ListItem = styled(Link)`
   padding: 20px;
   margin-bottom: 10px;
   width: 100%;
-  color: black;
+  color: ${props =>
+    props.theme === 'light' ? '0 0 4px rgba(0, 0, 0, 0.15)' : '#cfd8dc'};
   flex-grow: 1;
   position: relative;
   box-shadow: ${props =>
@@ -79,11 +82,14 @@ const ListItem = styled(Link)`
         ? '0 0 3px rgba(0, 0, 0, 0.3)'
         : '0 0 3px rgba(255, 255, 255, 0.3)'};
     text-decoration: underline;
+    color: ${props =>
+      props.theme === 'light' ? '0 0 4px rgba(0, 0, 0, 0.15)' : '#cfd8dc'};
   }
   @media (max-width: 768px) {
     margin-top: 10px;
     margin-bottom: 10px;
     height: 130px;
+    padding: 15px;
   }
 `
 const ItemWrapper = styled.div`
@@ -105,26 +111,38 @@ const Title = styled.div`
     font-weight: 700;
   }
 `
+const CategoryDateWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  position: absolute;
+  bottom: 20px;
+  margin: 35px 0 0 -5px;
+  @media (max-width: 768px) {
+    top: 65px;
+    flex-direction: column;
+  }
+`
 const Category = styled.span`
+  flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  margin: 40px 0 0 -5px;
-  position: absolute;
-  bottom: 60px;
-  order: 1;
   @media (max-width: 768px) {
-    top: 75px;
+    margin-top: -4px;
   }
 `
 const Date = styled.span`
   font-size: 14px;
   font-weight: 400;
   opacity: 0.7;
-  position: absolute;
-  bottom: 30px;
+  margin-right: -10px;
   order: 2;
   @media (max-width: 768px) {
-    top: 150px;
+    font-size: 13px;
   }
 `
 
@@ -132,10 +150,13 @@ const CategoryItem = styled.div`
   margin: 2.5px 5px;
   padding: 3px 5px;
   border-radius: 3px;
-  background: ${props => (props.theme === 'light' ? '#FFEA75' : 'black')};
+  background: ${props => (props.theme === 'light' ? '#FFEA75' : '#263238')};
   font-size: 14px;
   font-weight: 700;
   color: ${props => (props.theme === 'light' ? '#7d64b1' : 'white')};
+  @media (max-width: 768px) {
+    font-size: 10px;
+  }
 `
 
 const Summary = styled.div`
@@ -151,7 +172,7 @@ const Summary = styled.div`
   opacity: 0.8;
   order: 0;
   @media (max-width: 768px) {
-    font-size: 15px;
+    font-size: 13px;
     -webkit-line-clamp: 2;
   }
 `

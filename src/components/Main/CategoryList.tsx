@@ -51,24 +51,24 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
     navigate(`/${category}`)
   }
   const theme = useContext(ThemeContext)
-  return (
-    <CategoryWrapper>
-      <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
 
-      <CategoryContainer>
-        {Object.keys(recentPostsByCategory).map(category => (
-          <CategoryItemWrapper>
+  return (
+    <CategoryWrapper theme={theme}>
+      <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
+      <CategoryContainer theme={theme}>
+        {Object.keys(recentPostsByCategory).map((category, index) => (
+          <CategoryItemWrapper key={index} theme={theme}>
             <Category
               theme={theme}
               key={category}
               onClick={() => handleCategoryClick(category)}
             >
-              <CategoryFolder />
+              <CategoryFolder theme={theme} />
               <CategoryHeader theme={theme}>
                 🔎&nbsp;&nbsp;
                 {getCategoryName(category)}
               </CategoryHeader>
-              <CategoryContent>
+              <CategoryContent theme={theme}>
                 <NameWrapper theme={theme}>
                   <span>제목</span>
                   <span>작성일</span>
@@ -94,20 +94,15 @@ export default CategoryList
 const CategoryWrapper = styled.div`
   display: flex;
   align-items: center;
+  flex-direction: column;
+  position: relative;
 `
 
 const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 100px 0px 20px 190px;
-  @media (max-width: 1200px) {
-    margin: 90px 80px 30px 100px;
-  }
-
-  @media (max-width: 900px) {
-    margin: 90px 100px 0px 100px;
-  }
+  margin: 100px auto;
 
   @media (max-width: 768px) {
     margin: 60px 20px;
@@ -119,19 +114,16 @@ const Category = styled.div`
   margin: 20px 0px 0px 0px;
   padding: 15px;
   box-sizing: border-box;
-  background-color: #c7e2ece7;
-
+  background-color: #fafafa;
+  box-shadow: ${props =>
+    props.theme === 'light'
+      ? '0 0 1px rgba(0, 0, 0, 0.15)'
+      : '0 0 1px rgba(211, 204, 204, 0.973)'};
+  transition: 0.3s box-shadow;
   border-radius: 0px 25px 10px 10px;
   cursor: pointer;
   @media (max-width: 768px) {
     width: 100%;
-  }
-  &:hover {
-    margin: 20px 0px 0px 10px;
-    box-shadow: ${props =>
-      props.theme === 'light'
-        ? '0px 1px 8px rgba(96, 134, 148, 0.9)'
-        : '0 1 8px rgba(255, 255, 255, 0.3)'};
   }
 `
 const CategoryFolder = styled.div`
@@ -141,7 +133,8 @@ const CategoryFolder = styled.div`
   z-index: 0;
   width: 120px;
   height: 30px;
-  background-color: rgba(96, 134, 148, 0.9);
+  background-color: ${props =>
+    props.theme === 'light' ? '#7d64b1' : '#253237'};
   border-top-left-radius: 8px;
   display: flex;
   align-items: center;
@@ -180,30 +173,19 @@ const ContentWrapper = styled.li`
   }
 `
 
-const IconWrapper = styled.h3(() => {
-  return {
-    display: 'flex',
-    justifyContent: 'space-between',
-    position: 'absolute',
-    '@media (max-width: 770px)': {
-      margin: '0px 0px 1470px 40px',
-    },
-    '@media (min-width: 771px)': {
-      margin: '0px 0px 780px 120px',
-    },
+const IconWrapper = styled.h3`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  position: absolute;
+  margin: 40px auto;
+  left: 220px;
 
-    '@media (min-width: 900px)': {
-      margin: '0px 0px 780px 120px',
-    },
-    '@media (min-width: 1000px)': {
-      margin: '0px 0px 590px 120px',
-    },
-
-    '@media (min-width: 1200px)': {
-      margin: '40px 40px 620px 210px',
-    },
+  @media (max-width: 768px) {
+    margin: 30px auto;
+    left: 40px;
   }
-})
+`
 
 const CategoryItemWrapper = styled.div`
   position: relative;
@@ -212,10 +194,16 @@ const CategoryItemWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   box-sizing: border-box;
-  background-color: rgba(96, 134, 148, 0.9);
+  background-color: ${props =>
+    props.theme === 'light' ? '#7d64b1' : '#253237'};
   margin: 40px 10px 20px 20px;
   border-radius: 0px 15px 10px 10px;
   transition: border-radius 0.3s ease;
+  box-shadow: ${props =>
+    props.theme === 'light'
+      ? '0 0 8px rgba(0, 0, 0, 0.15)'
+      : '0 0 8px rgba(211, 204, 204, 0.973)'};
+  transition: 0.3s box-shadow;
   @media (max-width: 768px) {
     flex-basis: 132%;
   }
@@ -227,8 +215,8 @@ const CategoryItemWrapper = styled.div`
     margin: 20px 0px 0px 10px;
     box-shadow: ${props =>
       props.theme === 'light'
-        ? '0px 1px 8px rgba(96, 134, 148, 0.9)'
-        : '0 1 8px rgb(255, 255, 255)'};
+        ? '0 0 10px rgba(0, 0, 0, 0.907)'
+        : '0 0 10px rgba(255, 255, 255, 0.3)'};
   }
 
   &:hover ${CategoryFolder} {
