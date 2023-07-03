@@ -19,7 +19,14 @@ const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
           <LetterWrapper>
             <Title>
               <Line>안녕하세요 🙇‍♀️ </Line> 끊임없이 성장하려는{' '}
-              <Color>개발자 Ella</Color>의 개발 블로그 입니다.
+              <Color style={{ animationDelay: '0.1s' }}>개</Color>
+              <Color style={{ animationDelay: '0.2s' }}>발</Color>
+              <Color style={{ animationDelay: '0.3s' }}>자</Color>
+              <Color style={{ animationDelay: '0.4s' }}> E</Color>
+              <Color style={{ animationDelay: '0.5s' }}>l</Color>
+              <Color style={{ animationDelay: '0.6s' }}>l</Color>
+              <Color style={{ animationDelay: '0.7s' }}>a</Color>의 개발
+              블로그입니다.
             </Title>
             <br />
             <SubTitle>
@@ -48,9 +55,11 @@ const ProfileWrapper = styled.div`
   justify-content: center;
   align-items: center;
   margin: 10px auto;
+
   @media (max-width: 768px) {
     flex-direction: column;
     height: 90px;
+    margin: 10px 10px 10px 60px;
   }
 `
 
@@ -58,7 +67,24 @@ const Line = styled.div`
   margin-bottom: 7px;
 `
 const Color = styled.span`
+  position: relative;
+  display: inline-block;
   color: #733bea;
+  letter-spacing: -0.8px;
+  animation: txtup 1.5s infinite;
+
+  @keyframes txtup {
+    0%,
+    40%,
+    60%,
+    80%,
+    100% {
+      top: 0;
+    }
+    20% {
+      top: -0.3rem;
+    }
+  }
 `
 
 const Background = styled('div')(() => {

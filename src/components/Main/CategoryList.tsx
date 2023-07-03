@@ -109,23 +109,26 @@ const CategoryContainer = styled.div`
   }
 `
 
-const Category = styled.div`
-  width: 100%;
-  margin: 20px 0px 0px 0px;
-  padding: 15px;
-  box-sizing: border-box;
-  background-color: #fafafa;
-  box-shadow: ${props =>
-    props.theme === 'light'
-      ? '0 0 1px rgba(0, 0, 0, 0.15)'
-      : '0 0 1px rgba(211, 204, 204, 0.973)'};
-  transition: 0.3s box-shadow;
-  border-radius: 0px 25px 10px 10px;
-  cursor: pointer;
-  @media (max-width: 768px) {
-    width: 100%;
+const Category = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    width: '100%',
+    margin: '20px 0px 0px 0px',
+    padding: '15px',
+    boxSizing: 'border-box',
+    backgroundColor: theme.theme === 'light' ? '#fafafa' : '#272B2F',
+    cursor: 'pointer',
+    borderRadius: '0px 25px 10px 10px',
+    transition: ' 0.3s box-shadow',
+    boxShadow:
+      theme.theme === 'light'
+        ? '0 0 1px rgba(0, 0, 0, 0.15)'
+        : '0 0 1px rgba(211, 204, 204, 0.973)',
+    ' @media (max-width: 768px) ': {
+      width: '100%',
+    },
   }
-`
+})
 
 const CategoryFolder = styled('div')(() => {
   const theme = useContext(ThemeContext)
@@ -140,41 +143,46 @@ const CategoryFolder = styled('div')(() => {
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingLeft: '5px',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#253237',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#7d64b1',
     clipPath: 'polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%)',
     transition: 'clip-path 0.3s ease',
     borderTopLeftRadius: '8px',
   }
 })
 
-const CategoryHeader = styled.h3`
-  display: flex;
-  align-items: center;
-  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
-`
-
-const CategoryContent = styled.ul``
-
-const NameWrapper = styled.li`
-  list-style-type: none;
-  display: flex;
-  justify-content: space-between;
-  margin: 12px 35px 12px 0px;
-  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
-`
-
-const ContentWrapper = styled.li`
-  display: flex;
-  justify-content: space-between;
-  margin: 8px 0 0 0;
-  color: ${props => (props.theme === 'light' ? '#d9dee0' : 'black')};
-  span:first-of-type {
-    flex: 1;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+const CategoryHeader = styled('h3')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.theme === 'light' ? 'black' : '#d9dee0',
   }
+})
+
+const CategoryContent = styled.ul`
+  display: 'flex';
 `
+
+const NameWrapper = styled('li')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    listStyleType: 'none',
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '12px 35px 12px 0px',
+    color: theme.theme === 'light' ? 'black' : '#d9dee0',
+  }
+})
+
+const ContentWrapper = styled('li')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    justifyContent: 'space-between',
+    margin: '8px 0 0 0',
+    color: theme.theme === 'light' ? 'black' : '#d9dee0',
+  }
+})
 
 const IconWrapper = styled.h3`
   display: flex;
@@ -199,7 +207,7 @@ const CategoryItemWrapper = styled('div')(() => {
     display: 'flex',
     flexWrap: 'wrap',
     boxSizing: 'border-box',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#253237',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#7d64b1',
     margin: '40px 10px 20px 20px',
     borderRadius: '0px 15px 10px 10px',
     transition: 'borderRadius 0.3s ease',
