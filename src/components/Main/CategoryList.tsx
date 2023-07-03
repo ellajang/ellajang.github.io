@@ -50,12 +50,12 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
   const handleCategoryClick = (category: string) => {
     navigate(`/${category}`)
   }
-  const theme = useContext(ThemeContext)
 
+  const theme = useContext(ThemeContext)
   return (
-    <CategoryWrapper theme={theme}>
+    <CategoryWrapper>
       <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
-      <CategoryContainer theme={theme}>
+      <CategoryContainer>
         {Object.keys(recentPostsByCategory).map((category, index) => (
           <CategoryItemWrapper key={index} theme={theme}>
             <Category
@@ -126,23 +126,26 @@ const Category = styled.div`
     width: 100%;
   }
 `
-const CategoryFolder = styled.div`
-  position: absolute;
-  top: -30px;
-  left: 0;
-  z-index: 0;
-  width: 120px;
-  height: 30px;
-  background-color: ${props =>
-    props.theme === 'light' ? '#7d64b1' : '#253237'};
-  border-top-left-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  padding-left: 5px;
-  clip-path: polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%);
-  transition: clip-path 0.3s ease;
-`
+
+const CategoryFolder = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    position: 'absolute',
+    top: '-30px',
+    left: '0',
+    zIndex: '0',
+    width: '120px',
+    height: '30px',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingLeft: '5px',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#253237',
+    clipPath: 'polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%)',
+    transition: 'clip-path 0.3s ease',
+    borderTopLeftRadius: '8px',
+  }
+})
 
 const CategoryHeader = styled.h3`
   display: flex;
@@ -187,42 +190,41 @@ const IconWrapper = styled.h3`
   }
 `
 
-const CategoryItemWrapper = styled.div`
-  position: relative;
-  flex-basis: 30%;
-  flex-grow: 1;
-  display: flex;
-  flex-wrap: wrap;
-  box-sizing: border-box;
-  background-color: ${props =>
-    props.theme === 'light' ? '#7d64b1' : '#253237'};
-  margin: 40px 10px 20px 20px;
-  border-radius: 0px 15px 10px 10px;
-  transition: border-radius 0.3s ease;
-  box-shadow: ${props =>
-    props.theme === 'light'
-      ? '0 0 8px rgba(0, 0, 0, 0.15)'
-      : '0 0 8px rgba(211, 204, 204, 0.973)'};
-  transition: 0.3s box-shadow;
-  @media (max-width: 768px) {
-    flex-basis: 132%;
+const CategoryItemWrapper = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    position: 'relative',
+    flexBasis: '30%',
+    flexGrow: '1',
+    display: 'flex',
+    flexWrap: 'wrap',
+    boxSizing: 'border-box',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#253237',
+    margin: '40px 10px 20px 20px',
+    borderRadius: '0px 15px 10px 10px',
+    transition: 'borderRadius 0.3s ease',
+    boxShadow:
+      theme.theme === 'light'
+        ? '0 0 8px rgba(0, 0, 0, 0.15)'
+        : '0 0 3px rgba(211, 204, 204, 0.973)',
+    '@media (max-width: 768px)': {
+      flexBasis: '132%',
+    },
+    '&:hover': {
+      transform: 'scale(0.92)',
+      [`${Category}`]: {
+        margin: '20px 0px 0px 10px',
+        boxShadow:
+          theme.theme === 'light'
+            ? '0 0 10px rgba(7, 0, 0, 0.27)'
+            : '0 0 10px rgba(255, 255, 255, 0.3)',
+      },
+    },
+    [`${CategoryFolder}`]: {
+      top: '-29.74px',
+      '@media (max-width: 768px)': {
+        top: '-29.47px',
+      },
+    },
   }
-  &:hover {
-    transform: scale(0.92);
-  }
-
-  &:hover ${Category} {
-    margin: 20px 0px 0px 10px;
-    box-shadow: ${props =>
-      props.theme === 'light'
-        ? '0 0 10px rgba(0, 0, 0, 0.907)'
-        : '0 0 10px rgba(255, 255, 255, 0.3)'};
-  }
-
-  &:hover ${CategoryFolder} {
-    top: -29.74px;
-    @media (max-width: 768px) {
-      top: -29.47px;
-    }
-  }
-`
+})

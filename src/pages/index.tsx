@@ -12,6 +12,7 @@ import { ThemeContextProvider } from 'hooks/useTheme'
 import { useLocation } from '@reach/router'
 import styled from '@emotion/styled'
 import useCategoryPosts from 'hooks/useCategoryPost'
+import GlobalStyle from 'components/Common/GlobalStyle'
 
 type IndexPageProps = {
   location: {
@@ -64,6 +65,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
     <>
       <ThemeContextProvider>
         <Header />
+        <GlobalStyle />
         <Template
           title={title}
           description={description}
