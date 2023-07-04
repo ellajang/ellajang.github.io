@@ -43,9 +43,11 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
 
   return (
     <>
+      <IconWrapper>📌&nbsp;최근 게시물</IconWrapper>
       <PostListWrapper>
-        <IconWrapper>📌&nbsp;최근 게시물</IconWrapper>
-        <CustomSlider posts={swiperPosts} />
+        <CustomSliderWrapper>
+          <CustomSlider posts={swiperPosts} />
+        </CustomSliderWrapper>
       </PostListWrapper>
     </>
   )
@@ -54,28 +56,36 @@ const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
 export default PostList
 
 const PostListWrapper = styled.div`
-  @media (max-width: 768px) {
-    grid-template-columns: 1fr;
+  margin: auto 160px;
+  padding-right: 60px;
+  position: relative;
+  @media (max-width: 1300px) {
     width: 100%;
-    padding-right: 220px;
-    margin: 10px 0 50px 0px;
-  }
-  @media (min-width: 768px) {
-    grid-template-columns: 1fr;
-    width: 100%;
-    padding-right: 400px;
-    margin: 50px 0px 0px 0px;
+    margin: 10px auto;
+    padding-right: 120px;
   }
 `
+
+const CustomSliderWrapper = styled.div`
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0 10px 10px 10px;
+  }
+
+  @media (min-width: 1300px) {
+    width: 100%;
+  }
+`
+
 const IconWrapper = styled.h3(() => {
   const theme = useContext(ThemeContext)
   return {
-    margin: '0px 0px 0px 240px',
+    margin: '50px 0px 0px 220px',
     display: 'flex',
     alignItems: 'center',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
     '@media (max-width: 768px)': {
-      margin: '20px 0px 0px 120px',
+      margin: '30px 0px 0px 50px',
     },
   }
 })

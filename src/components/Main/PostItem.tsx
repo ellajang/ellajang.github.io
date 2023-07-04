@@ -41,14 +41,8 @@ const PostItem: React.FC<PostItemProps> = ({
 
 export default PostItem
 
-const PostItemContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  padding: 14px;
-  color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
-`
 const PostItemWrapper = styled(Link)`
-  width: 250px;
+  width: 270px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -69,7 +63,6 @@ const PostItemWrapper = styled(Link)`
       z-index: 10;
       position: absolute;
       top: -20;
-      right: -1;
       width: 10;
       height: 30;
       border-top: 40px solid transparent;
@@ -81,6 +74,22 @@ const PostItemWrapper = styled(Link)`
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
   }
+  @media (max-width: 968px) {
+    width: 200px;
+    height: 240px;
+  }
+
+  @media (max-width: 600px) {
+    width: 170px;
+    height: 240px;
+  }
+`
+
+const PostItemContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 14px;
+  color: ${props => (props.theme === 'light' ? 'black' : '#cfd8dc')};
 `
 
 const ThumbnailImage = styled(GatsbyImage)`

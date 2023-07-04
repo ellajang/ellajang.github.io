@@ -136,17 +136,21 @@ const CategoryFolder = styled('div')(() => {
     position: 'absolute',
     top: '-30px',
     left: '0',
-    zIndex: '0',
+    zIndex: '2',
     width: '120px',
     height: '30px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-start',
     paddingLeft: '5px',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#7d64b1',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#0f0e10',
     clipPath: 'polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%)',
     transition: 'clip-path 0.3s ease',
     borderTopLeftRadius: '8px',
+    boxShadow:
+      theme.theme === 'light'
+        ? '0 0 10px rgba(7, 0, 0, 0.27)'
+        : '0 0 12px rgba(255, 255, 255, 0.814)',
   }
 })
 
@@ -206,8 +210,9 @@ const CategoryItemWrapper = styled('div')(() => {
     flexGrow: '1',
     display: 'flex',
     flexWrap: 'wrap',
+    zIndex: '3',
     boxSizing: 'border-box',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#7d64b1',
+    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#0f0e10',
     margin: '40px 10px 20px 20px',
     borderRadius: '0px 15px 10px 10px',
     transition: 'borderRadius 0.3s ease',
@@ -230,6 +235,7 @@ const CategoryItemWrapper = styled('div')(() => {
     },
     [`${CategoryFolder}`]: {
       top: '-29.74px',
+
       '@media (max-width: 768px)': {
         top: '-29.47px',
       },

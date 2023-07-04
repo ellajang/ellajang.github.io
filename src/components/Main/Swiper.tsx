@@ -81,10 +81,16 @@ const CustomSwiper: React.FC<SwiperProps> = ({ posts }) => {
           touchEventsTarget="wrapper"
           onSwiper={swiper => (swiperRef.current = swiper)}
           breakpoints={{
-            680: {
+            320: {
+              slidesPerView: 1,
+            },
+            500: {
               slidesPerView: 2,
             },
-            1024: {
+            700: {
+              slidesPerView: 3,
+            },
+            1300: {
               slidesPerView: 4,
             },
           }}
@@ -111,23 +117,27 @@ export default CustomSwiper
 
 const SwiperContainer = styled.div`
   width: 100%;
-  margin: 10px 20px 0 40px;
+  margin: 30px 0 0 0px;
   overflow: visible;
   position: relative;
+  justify-content: center;
+  display: flex;
+  align-items: center;
+  transform: translateX(40px);
   @media (max-width: 768px) {
-    transform: translateX(80px);
-  }
-  @media (min-width: 768px) {
-    transform: translateX(195px);
+    transform: translateX(40px);
+    margin: 10px 0 0 0;
   }
 `
 
 const SwiperSlideStyled = styled(SwiperSlide)`
   width: 100%;
-  padding: 20px 0 50px 1px;
+  padding: 0 0 50px 0;
 `
 const SwiperOutline = styled.div`
   position: relative;
+  display: flex;
+  justify-content: center;
 `
 const PrevButton = styled.div`
   position: absolute;
@@ -148,7 +158,7 @@ const PrevButton = styled.div`
 const NextButton = styled.div`
   position: absolute;
   top: 50%;
-  right: -200px;
+  right: -100px;
   width: 35px;
   height: 35px;
   z-index: 10;
@@ -158,6 +168,6 @@ const NextButton = styled.div`
   background-size: 100% auto;
   background-position: center;
   @media (max-width: 768px) {
-    right: -130px;
+    right: 52px;
   }
 `
