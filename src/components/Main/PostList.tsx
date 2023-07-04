@@ -61,15 +61,20 @@ const PostListWrapper = styled.div`
   position: relative;
   @media (max-width: 1300px) {
     width: 100%;
-    margin: 10px auto;
-    padding-right: 120px;
+    margin: 0px 10px 10px 80px;
+    padding-right: 200px;
+  }
+  @media (max-width: 768px) {
+    width: 100%;
+    margin: 0px auto;
+    padding-right: 100px;
   }
 `
 
 const CustomSliderWrapper = styled.div`
   @media (max-width: 768px) {
     width: 100%;
-    margin: 0 10px 10px 10px;
+    margin: auto 25px;
   }
 
   @media (min-width: 1300px) {
@@ -85,7 +90,10 @@ const IconWrapper = styled.h3(() => {
     alignItems: 'center',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
     '@media (max-width: 768px)': {
-      margin: '30px 0px 0px 50px',
+      margin: '10px 0px 10px 50px',
+    },
+    '@media (max-width: 1300px)': {
+      margin: '20px 0px 10px 80px',
     },
   }
 })

@@ -96,10 +96,10 @@ const TabContainer = styled.div`
   color: ${props => (props.theme === 'light' ? '#0b1118' : '#f7fafc')};
   margin: 10px 0 0 0px;
   @media (max-width: 768px) {
+    margin: auto;
     width: 100%;
-    height: 250px;
+    height: 230px;
     font-size: 20px;
-    margin: 20px 0px 0px 0px;
   }
 `
 
@@ -121,7 +121,11 @@ const TabStyle = styled(Link)<{ selected: boolean; theme: string }>`
       props.theme === 'light' ? '#7d64b1' : '#f7fafc'};
   }
   @media (max-width: 768px) {
+    margin: -4px 60px 12px 43px;
     font-size: 12px;
+    &::after {
+      top: 17px;
+    }
   }
 `
 

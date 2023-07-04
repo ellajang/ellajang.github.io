@@ -79,5 +79,8 @@ const FooterContainer = styled.footer<{ numPosts: number }>`
 `
 
 const PaginationContainer = styled.div`
-  margin-top: 259px;
+  margin-top: 220px;
+  @media (max-width: 768px) {
+    margin-top: 279px;
+  }
 `

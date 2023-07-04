@@ -1,11 +1,16 @@
-import React, { useRef } from 'react'
+import React, { useContext, useRef } from 'react'
 import PostItem from './PostItem'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { Swiper, SwiperSlide } from 'swiper/react'
+import nextArrow from '../../types/nextArrow.png'
+import prevArrow from '../../types/prevArrow.png'
+import nextArrowDark from '../../types/rightDark.png'
+import prevArrowDark from '../../types/leftDark.png'
 import SwiperCore, { Autoplay, Navigation, Keyboard, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 import styled from '@emotion/styled'
 import { Global, css } from '@emotion/react'
+import { ThemeContext } from 'hooks/useTheme'
 
 SwiperCore.use([Autoplay, Navigation])
 
@@ -40,15 +45,18 @@ const CustomSwiper: React.FC<SwiperProps> = ({ posts }) => {
       swiperRef.current.slideNext()
     }
   }
+  const theme = useContext(ThemeContext)
   return (
     <SwiperOutline>
       <PrevButton
         className="swiper-button-prev"
         onClick={handlePrevButtonClick}
+        theme={theme}
       />
       <NextButton
         className="swiper-button-next"
         onClick={handleNextButtonClick}
+        theme={theme}
       />
       <SwiperContainer>
         {
@@ -117,16 +125,16 @@ export default CustomSwiper
 
 const SwiperContainer = styled.div`
   width: 100%;
-  margin: 30px 0 0 0px;
+  margin: 30px auto;
   overflow: visible;
   position: relative;
   justify-content: center;
   display: flex;
   align-items: center;
-  transform: translateX(40px);
+  transform: translateX(50px);
   @media (max-width: 768px) {
     transform: translateX(40px);
-    margin: 10px 0 0 0;
+    margin: 10px auto;
   }
 `
 
@@ -139,35 +147,56 @@ const SwiperOutline = styled.div`
   display: flex;
   justify-content: center;
 `
-const PrevButton = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 170px;
-  width: 38px;
-  height: 38px;
-  z-index: 6;
-  cursor: pointer;
-  background: url('prevArrow.png') no-repeat;
-  background-size: 90% auto;
-  background-position: center;
-  @media (max-width: 768px) {
-    left: 71px;
-  }
-`
 
-const NextButton = styled.div`
-  position: absolute;
-  top: 50%;
-  right: -100px;
-  width: 35px;
-  height: 35px;
-  z-index: 10;
-  cursor: pointer;
-  transform: translateX(90%);
-  background: url('nextArrow.png') no-repeat;
-  background-size: 100% auto;
-  background-position: center;
-  @media (max-width: 768px) {
-    right: 52px;
+const PrevButton = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    position: 'absolute',
+    top: '50%',
+    left: '-20px',
+    width: '38px',
+    height: '38px',
+    zIndex: '6',
+    cursor: 'pointer',
+    background:
+      theme.theme === 'light' ? `url(${prevArrow})` : `url(${prevArrowDark})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '90%',
+    backgroundPosition: 'center',
+    ' @media (max-width: 1300px)': {
+      left: '10px',
+    },
+    ' @media (max-width: 768px)': {
+      left: '11px',
+      width: '28px',
+      height: '28px',
+    },
   }
-`
+})
+
+const NextButton = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    position: 'absolute',
+    top: '50%',
+    right: '-40px',
+    width: '35px',
+    height: '35px',
+    zIndex: '10',
+    cursor: 'pointer',
+    transform: 'translateX(90%)',
+    background:
+      theme.theme === 'light' ? `url(${nextArrow})` : `url(${nextArrowDark})`,
+    backgroundRepeat: 'no-repeat',
+    backgroundSize: '100%',
+    backgroundPosition: 'center',
+    ' @media (max-width: 1300px)': {
+      right: '-70px',
+    },
+    ' @media (max-width: 768px)': {
+      right: '-33px',
+      width: '25px',
+      height: '25px',
+    },
+  }
+})
