@@ -179,7 +179,7 @@ const NextButton = styled('div')(() => {
   return {
     position: 'absolute',
     top: '50%',
-    right: '-40px',
+    right: '-25px',
     width: '35px',
     height: '35px',
     zIndex: '10',
@@ -191,6 +191,9 @@ const NextButton = styled('div')(() => {
     backgroundSize: '100%',
     backgroundPosition: 'center',
     ' @media (max-width: 1300px)': {
+      right: '-40px',
+    },
+    ' @media (max-width: 1600px)': {
       right: '-70px',
     },
     ' @media (max-width: 768px)': {

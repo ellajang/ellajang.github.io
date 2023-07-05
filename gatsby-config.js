@@ -12,7 +12,7 @@
 
 module.exports = {
   siteMetadata: {
-    title: `프론트엔드 개발자의 개발 블로그`,
+    title: `Ella의 개발 일지`,
     description: `더 나은 개발자가 되기 위해 노력하는 주니어 프론트엔드 개발자입니다. 개발 일지, CS지식, 알고리즘 공부 등을 정리하기 위한 용도로 만들었습니다.`,
     author: `Ella`,
     siteUrl: 'https://ellajang.github.io/',
@@ -21,7 +21,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `프론트엔드 개발자의 개발 블로그`,
+        name: `Ella의 개발 일지`,
         short_name: `프론트엔드 블로그`,
         start_url: `/`,
         background_color: `#ffffff`,

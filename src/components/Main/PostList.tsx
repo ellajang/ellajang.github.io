@@ -57,11 +57,10 @@ export default PostList
 
 const PostListWrapper = styled.div`
   margin: auto 160px;
-  padding-right: 60px;
   position: relative;
   @media (max-width: 1300px) {
     width: 100%;
-    margin: 0px 10px 10px 80px;
+    margin: 0px 10px 10px 90px;
     padding-right: 200px;
   }
   @media (max-width: 768px) {

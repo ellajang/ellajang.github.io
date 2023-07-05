@@ -74,7 +74,7 @@ const PostItemWrapper = styled(Link)`
       box-shadow: 0 5px 10px rgba(0, 0, 0, 0.3);
     }
   }
-  @media (max-width: 968px) {
+  @media (max-width: 1000px) {
     width: 200px;
     height: 240px;
   }
