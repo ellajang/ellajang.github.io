@@ -144,3 +144,16 @@ const Summary = styled.div`
   font-size: 12px;
   opacity: 0.8;
 `
+
+const Summarys = styled.div`
+  display: -webkit-box;
+  overflow: hidden;
+  margin-top: auto;
+  text-overflow: ellipsis;
+  white-space: normal;
+  overflow-wrap: break-word;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-size: 12px;
+  opacity: 0.8;
+`
