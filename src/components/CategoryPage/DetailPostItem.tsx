@@ -82,9 +82,8 @@ const ThumbnailImageContainer = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 200px;
+  width: 310px;
   height: 200px;
-  border-radius: 30px;
   margin: 15px;
   overflow: hidden;
   @media (max-width: 768px) {
@@ -93,8 +92,9 @@ const ThumbnailImageContainer = styled.div`
 `
 
 const ThumbnailImage = styled(GatsbyImage)`
-  width: 100%;
-  height: 100%;
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
   object-fit: cover;
 `
 

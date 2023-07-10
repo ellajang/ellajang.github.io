@@ -1,9 +1,9 @@
 ---
-date: '2023-05-14'
-title: 'algorithm'
+date: '2023-07-10'
+title: '백준-입출력과 사칙연산'
 categories: ['algorithm']
-summary: '홈페이지를 운영하는 많은 사람들 또는 기업들이 검색 페이지 최상단에 보여지게 하기 위해 어떤 최적화 작업을 하는지 알아보자.'
-thumbnail: '../test.png'
+summary: '이 게시글은 백준 입출력과 사칙연산 단계에 해당하는 1번부터 13번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이했습니다. '
+thumbnail: '../baekjoon.jpeg'
 ---
 
 ### 1. Help Google Bot to Find My Contents
@@ -20,8 +20,8 @@ Robots.txt 파일은 검색 엔진에 어떤 페이지를 크롤링해도 되는
 
 ---
 
-## Source
+##
 
-- SEO 기본 가이드
+- 백준코딩 단계 별 풀어보기 Step1 입출력과 사칙연산 링크
 
-  [<https://support.google.com/webmasters/answer/7451184?hl=ko&ref_topic=9460495>](https://support.google.com/webmasters/answer/7451184?hl=ko&ref_topic=9460495)
+  [<https://www.acmicpc.net/step/1>](https://www.acmicpc.net/step/1)
