@@ -19,6 +19,7 @@ export const lightMode = css`
     color: inherit;
     text-decoration: none;
   }
+
   .footer {
     position: absolute;
     bottom: 0;
@@ -49,6 +50,8 @@ export const darkMode = css`
   h3,
   p,
   h2,
+  h3,
+  h4,
   ul {
     color: #c3c7cc;
   }

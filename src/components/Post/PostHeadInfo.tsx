@@ -69,8 +69,8 @@ const ArrowCircleLeftIconDisplay = styled.div`
   padding: 120px 0px 0px 470px;
   @media (max-width: 1168px) {
     font-size: 30px;
-    margin-top: 50px;
-    padding: 0px 0px 20px 0px;
+    margin-top: 80px;
+    padding: 0px 0px 0px 0px;
   }
 `
 const AllGrid = styled.div`
