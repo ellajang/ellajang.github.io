@@ -35,6 +35,12 @@ type IndexPageProps = {
       }
       publicURL: string
     }
+    darkModeImage: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+      publicURL: string
+    }
   }
 }
 
@@ -47,6 +53,9 @@ const IndexPage: React.FC<IndexPageProps> = ({
     file: {
       childImageSharp: { gatsbyImageData },
       publicURL,
+    },
+    darkModeImage: {
+      childImageSharp: { gatsbyImageData: darkModeImageData },
     },
   },
 }) => {
@@ -72,7 +81,10 @@ const IndexPage: React.FC<IndexPageProps> = ({
           url={siteUrl}
           image={publicURL}
         >
-          <Introduction profileImage={gatsbyImageData} />
+          <Introduction
+            profileImage={gatsbyImageData}
+            darkModeImage={darkModeImageData}
+          />
           <PostList posts={edges} selectedCategory={selectedCategory} />
           <Divider />
           <CategoryList postsByCategory={postsByCategory} />
@@ -118,7 +130,13 @@ export const getPostList = graphql`
     }
     file(name: { eq: "profile-image" }) {
       childImageSharp {
-        gatsbyImageData(width: 120, height: 120)
+        gatsbyImageData(width: 1960, height: 1860)
+      }
+      publicURL
+    }
+    darkModeImage: file(name: { eq: "profile-image-dark" }) {
+      childImageSharp {
+        gatsbyImageData(width: 1960, height: 1760)
       }
       publicURL
     }

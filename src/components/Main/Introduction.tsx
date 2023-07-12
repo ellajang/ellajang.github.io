@@ -6,15 +6,22 @@ import { ThemeContext } from 'hooks/useTheme'
 
 type IntroductionProps = {
   profileImage: IGatsbyImageData
+  darkModeImage: IGatsbyImageData
 }
 
-const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
+const Introduction: React.FC<IntroductionProps> = ({
+  profileImage,
+  darkModeImage,
+}) => {
   return (
     <>
       <Background>
         <Wrapper>
           <ProfileWrapper>
-            <ProfileImage profileImage={profileImage} />
+            <ProfileImage
+              profileImage={profileImage}
+              darkModeImage={darkModeImage}
+            />
           </ProfileWrapper>
           <LetterWrapper>
             <Title>
@@ -33,13 +40,11 @@ const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
             <SubTitle>
               <Line>새로운 기술과 빠르게 변하는 웹개발 트랜드 속에서, </Line>
               <Line>
-                새로운 기술과 트렌드를 익혀 사용자 중심의 웹을 만들고,이 공간을
-                통해 그 과정을 공유합니다.
+                새로운 기술과 트렌드를 익혀 사용자 중심의 웹을 만들고,
               </Line>
-              <Line>
-                함께 배우고 성장하는 개발자분들과의 소통의 장이 되었으면
-                좋겠습니다!
-              </Line>
+              <Line>이 공간을 통해 그 과정을 공유합니다.</Line>
+              <Line>함께 배우고 성장하는 개발자분들과의 </Line>
+              <Line>소통의 장이 되었으면 좋겠습니다!</Line>
             </SubTitle>
           </LetterWrapper>
         </Wrapper>
@@ -51,21 +56,22 @@ const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
 
 export default Introduction
 
-const ProfileWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 100px auto;
-
-  @media (max-width: 768px) {
-    flex-direction: column;
-    height: 90px;
-    margin: 10px 10px 10px 60px;
+const ProfileWrapper = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    margin: theme.theme === 'light' ? '0px auto' : '222px auto',
+    '@media (max-width: 768px)': {
+      height: '400px',
+      margin: theme.theme === 'light' ? '0 0 85px 60px' : '0px 10px 40px 60px',
+    },
   }
-`
+})
 
 const Line = styled.div`
-  margin-bottom: 7px;
+  margin-bottom: 3px;
 `
 const Color = styled.span`
   position: relative;
@@ -101,6 +107,7 @@ const Background = styled('div')(() => {
 })
 
 const Wrapper = styled.div`
+  position: relative;
   display: flex;
   flex-direction: row;
   width: 1068px;
@@ -119,34 +126,18 @@ const LetterWrapper = styled('div')(() => {
   const theme = useContext(ThemeContext)
   return {
     display: 'inline-block',
-    position: 'relative',
+    position: 'absolute',
+    top: 0,
+    left: 0,
     padding: '15px',
-    marginLeft: '100px',
-    marginBottom: '60px',
+    marginLeft: '316px',
+    marginTop: '60px',
     borderRadius: '10px',
-    backgroundColor:
-      theme.theme === 'light' ? '#f4f0f8' : 'rgba(255, 255, 255, 0.1)',
     color: theme.theme === 'light' ? 'black' : 'white',
     '@media (max-width: 768px)': {
-      marginLeft: '0px',
-    },
-    '::after': {
-      content: "''",
-      position: 'absolute',
-      left: '-40px',
-      top: '60%',
-      borderWidth: '20px',
-      borderStyle: 'solid',
-      borderColor: `transparent ${
-        theme.theme === 'light' ? '#f4f0f8' : 'rgba(255, 255, 255, 0.1)'
-      } transparent transparent`,
-      '@media (max-width: 768px)': {
-        left: '30%',
-        top: '100%',
-        borderColor: ` ${
-          theme.theme === 'light' ? '#f4f0f8' : 'rgba(255, 255, 255, 0.1)'
-        } transparent transparent transparent`,
-      },
+      marginLeft: '134px',
+      padding: '5px',
+      marginTop: '10px',
     },
   }
 })
@@ -155,25 +146,29 @@ const SubTitle = styled.div`
   font-size: 15px;
   font-weight: 500;
   @media (max-width: 768px) {
-    font-size: 13px;
+    font-size: 8px;
+    font-weight: 600;
+    margin-top: -10px;
   }
 `
 
 const Title = styled.div`
-  font-size: 25px;
-  font-weight: 600;
-  margin-top: 20px;
+  font-size: 17px;
+  font-weight: 700;
+  margin-top: 19px;
   @media (max-width: 768px) {
-    font-size: 17px;
+    font-size: 10px;
+    font-weight: 800;
+    margin-top: 5px;
   }
 `
 
 const Divider = styled.div`
   border-top: 0.1px solid #c3c7cc;
   width: calc(100% - 240px);
-  margin: 27px 0 -12px 120px;
+  margin: 100px 0 -12px 120px;
   @media (max-width: 768px) {
     width: calc(100% - 75px);
-    margin: -27px 0px 0px 40px;
+    margin: -127px 0px 0px 40px;
   }
 `

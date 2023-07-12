@@ -6,14 +6,22 @@ import React, { useContext } from 'react'
 
 type ProfileImageProps = {
   profileImage: IGatsbyImageData
+  darkModeImage: IGatsbyImageData
 }
 
-const ProfileImage: React.FC<ProfileImageProps> = ({ profileImage }) => {
+const ProfileImage: React.FC<ProfileImageProps> = ({
+  profileImage,
+  darkModeImage,
+}) => {
+  const theme = useContext(ThemeContext)
   return (
     <>
       <ProfileWrapper>
         <GlobalStyle />
-        <ProfileImageWrapper image={profileImage} alt="Profile Image" />
+        <ProfileImageWrapper
+          image={theme.theme === 'light' ? profileImage : darkModeImage}
+          alt="Profile Image"
+        />
       </ProfileWrapper>
     </>
   )
@@ -26,21 +34,23 @@ const ProfileWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 310px;
-  height: 400px;
+  width: 1000px;
+  height: 600px;
+  object-fit: contain;
   margin-right: 50px;
-  /* @media (max-width: 768px) {
-    width: 120px;
-    height: 120px;
-  } */
+  @media (max-width: 768px) {
+    width: 600px;
+    height: 360px;
+  }
 `
 
 const ProfileImageWrapper = styled(GatsbyImage)`
   position: relative;
-  width: 200px;
-  height: 310px;
+  width: 1000px;
+  height: 600px;
+  object-fit: cover;
   @media (max-width: 768px) {
-    width: 100px;
-    height: 90px;
+    width: 600px;
+    height: 360px;
   }
 `
