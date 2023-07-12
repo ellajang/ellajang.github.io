@@ -43,6 +43,12 @@ const MarkdownRenderer = styled.div(() => {
     ol: {
       margin: '0px 0px -20px 0px',
     },
+    'abbr[title]': {
+      cursor: 'pointer',
+      '&:hover::after': {
+        fontSize: '40px',
+      },
+    },
 
     // Adjust Heading Element Style
     'h1,h2,h3': {
