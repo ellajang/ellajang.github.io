@@ -28,6 +28,7 @@ const Introduction: React.FC<IntroductionProps> = ({ profileImage }) => {
               <Color style={{ animationDelay: '0.7s' }}>a</Color>의 개발
               블로그입니다.
             </Title>
+
             <br />
             <SubTitle>
               <Line>새로운 기술과 빠르게 변하는 웹개발 트랜드 속에서, </Line>
@@ -54,7 +55,7 @@ const ProfileWrapper = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px auto;
+  margin: 100px auto;
 
   @media (max-width: 768px) {
     flex-direction: column;
