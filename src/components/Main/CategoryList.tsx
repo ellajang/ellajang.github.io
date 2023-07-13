@@ -1,13 +1,19 @@
 import React, { useContext, useMemo } from 'react'
+import styled from '@emotion/styled'
 import { navigate } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
-import styled from '@emotion/styled'
+import FolderImg from './FolderImg'
 import { ThemeContext } from 'hooks/useTheme'
+import { IGatsbyImageData } from 'gatsby-plugin-image'
 
 type CategoryListProps = {
   postsByCategory: {
     [category: string]: PostListItemType[]
   }
+  folderClose: IGatsbyImageData
+  folderCloseDark: IGatsbyImageData
+  folderOpen: IGatsbyImageData
+  folderOpenDark: IGatsbyImageData
 }
 
 type CategoryNamesType = {
@@ -23,7 +29,13 @@ const categoryNames: CategoryNamesType = {
   memoir: '회고록',
 }
 
-const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
+const CategoryList: React.FC<CategoryListProps> = ({
+  postsByCategory,
+  folderClose,
+  folderOpen,
+  folderCloseDark,
+  folderOpenDark,
+}) => {
   const recentPostsByCategory = useMemo(() => {
     const recentPostsByCategory: {
       [category: string]: PostListItemType[]
@@ -57,13 +69,17 @@ const CategoryList: React.FC<CategoryListProps> = ({ postsByCategory }) => {
       <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
       <CategoryContainer>
         {Object.keys(recentPostsByCategory).map((category, index) => (
-          <CategoryItemWrapper key={index} theme={theme}>
-            <Category
-              theme={theme}
-              key={category}
-              onClick={() => handleCategoryClick(category)}
-            >
-              <CategoryFolder theme={theme} />
+          <CategoryItemWrapper
+            key={index}
+            onClick={() => handleCategoryClick(category)}
+          >
+            <FolderImg
+              folderOpen={folderOpen}
+              folderClose={folderClose}
+              folderOpenDark={folderOpenDark}
+              folderCloseDark={folderCloseDark}
+            />
+            <Category theme={theme} key={category}>
               <CategoryHeader theme={theme}>
                 🔎&nbsp;&nbsp;
                 {getCategoryName(category)}
@@ -103,63 +119,22 @@ const CategoryContainer = styled.div`
   flex-wrap: wrap;
   justify-content: space-between;
   margin: 100px auto;
-
   @media (max-width: 768px) {
-    margin: 60px 20px;
+    margin: 60px auto;
   }
 `
-
-const Category = styled('div')(() => {
-  const theme = useContext(ThemeContext)
-  return {
-    width: '100%',
-    margin: '20px 0px 0px 0px',
-    padding: '15px',
-    boxSizing: 'border-box',
-    backgroundColor: theme.theme === 'light' ? '#fafafa' : '#272B2F',
-    cursor: 'pointer',
-    borderRadius: '0px 25px 10px 10px',
-    transition: ' 0.3s box-shadow',
-    boxShadow:
-      theme.theme === 'light'
-        ? '0 0 1px rgba(0, 0, 0, 0.15)'
-        : '0 0 1px rgba(211, 204, 204, 0.973)',
-    ' @media (max-width: 768px) ': {
-      width: '100%',
-    },
-  }
-})
-
-const CategoryFolder = styled('div')(() => {
-  const theme = useContext(ThemeContext)
-  return {
-    position: 'absolute',
-    top: '-30px',
-    left: '0',
-    zIndex: '2',
-    width: '120px',
-    height: '30px',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'flex-start',
-    paddingLeft: '5px',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#0f0e10',
-    clipPath: 'polygon(0% 0%, 75% 0%, 100% 100%, 0% 100%)',
-    transition: 'clip-path 0.3s ease',
-    borderTopLeftRadius: '8px',
-    boxShadow:
-      theme.theme === 'light'
-        ? '0 0 10px rgba(7, 0, 0, 0.27)'
-        : '0 0 12px rgba(255, 255, 255, 0.814)',
-  }
-})
 
 const CategoryHeader = styled('h3')(() => {
   const theme = useContext(ThemeContext)
   return {
     display: 'flex',
     alignItems: 'center',
+    margin: '15px auto',
+    pointerEvents: 'auto',
     color: theme.theme === 'light' ? 'black' : '#d9dee0',
+    ' @media (max-width: 768px) ': {
+      fontSize: '16px',
+    },
   }
 })
 
@@ -173,8 +148,11 @@ const NameWrapper = styled('li')(() => {
     listStyleType: 'none',
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '12px 35px 12px 0px',
+    margin: '12px 35px 7px 0px',
     color: theme.theme === 'light' ? 'black' : '#d9dee0',
+    ' @media (max-width: 768px) ': {
+      fontSize: '14px',
+    },
   }
 })
 
@@ -183,8 +161,12 @@ const ContentWrapper = styled('li')(() => {
   return {
     display: 'flex',
     justifyContent: 'space-between',
-    margin: '8px 0 0 0',
+    margin: '8px 0 0 0px',
     color: theme.theme === 'light' ? 'black' : '#d9dee0',
+    ' @media (max-width: 768px) ': {
+      margin: '8px 0 0 0px',
+      fontSize: '14px',
+    },
   }
 })
 
@@ -195,50 +177,42 @@ const IconWrapper = styled.h3`
   position: absolute;
   margin: 40px auto;
   left: 220px;
-
   @media (max-width: 768px) {
     margin: 30px auto;
     left: 40px;
   }
 `
+const Category = styled('div')(() => {
+  return {
+    width: '85%',
+    margin: '20px auto',
+    padding: '18px',
+    boxSizing: 'border-box',
+    cursor: 'pointer',
+    position: 'relative',
+    transition: ' 0.3s box-shadow',
+    ' @media (max-width: 768px) ': {
+      width: '70%',
+      right: '31px',
+      marginTop: '35px',
+      minHeight: '200px',
+    },
+    pointerEvents: 'none',
+  }
+})
 
 const CategoryItemWrapper = styled('div')(() => {
-  const theme = useContext(ThemeContext)
   return {
     position: 'relative',
     flexBasis: '30%',
     flexGrow: '1',
-    display: 'flex',
     flexWrap: 'wrap',
     zIndex: '3',
     boxSizing: 'border-box',
-    backgroundColor: theme.theme === 'light' ? '#7d64b1' : '#0f0e10',
-    margin: '40px 10px 20px 20px',
-    borderRadius: '0px 15px 10px 10px',
-    transition: 'borderRadius 0.3s ease',
-    boxShadow:
-      theme.theme === 'light'
-        ? '0 0 8px rgba(0, 0, 0, 0.15)'
-        : '0 0 3px rgba(211, 204, 204, 0.973)',
+    margin: '20px 0px 0px 20px',
     '@media (max-width: 768px)': {
-      flexBasis: '132%',
-    },
-    '&:hover': {
-      transform: 'scale(0.92)',
-      [`${Category}`]: {
-        margin: '20px 0px 0px 10px',
-        boxShadow:
-          theme.theme === 'light'
-            ? '0 0 10px rgba(7, 0, 0, 0.27)'
-            : '0 0 10px rgba(255, 255, 255, 0.3)',
-      },
-    },
-    [`${CategoryFolder}`]: {
-      top: '-29.74px',
-
-      '@media (max-width: 768px)': {
-        top: '-29.47px',
-      },
+      flexBasis: '100%',
+      marginTop: '0px',
     },
   }
 })

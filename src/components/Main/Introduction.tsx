@@ -135,6 +135,7 @@ const Background = styled('div')(() => {
   return {
     boxSizing: 'border-box',
     width: '100%',
+
     backgroundImage:
       theme.theme === 'light'
         ? 'white'

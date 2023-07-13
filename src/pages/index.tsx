@@ -41,6 +41,30 @@ type IndexPageProps = {
       }
       publicURL: string
     }
+    folderClose: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+      publicURL: string
+    }
+    folderCloseDark: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+      publicURL: string
+    }
+    folderOpen: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+      publicURL: string
+    }
+    folderOpenDark: {
+      childImageSharp: {
+        gatsbyImageData: IGatsbyImageData
+      }
+      publicURL: string
+    }
   }
 }
 
@@ -56,6 +80,18 @@ const IndexPage: React.FC<IndexPageProps> = ({
     },
     darkModeImage: {
       childImageSharp: { gatsbyImageData: darkModeImageData },
+    },
+    folderClose: {
+      childImageSharp: { gatsbyImageData: folderCloseData },
+    },
+    folderCloseDark: {
+      childImageSharp: { gatsbyImageData: folderCloseDarkData },
+    },
+    folderOpen: {
+      childImageSharp: { gatsbyImageData: folderOpenData },
+    },
+    folderOpenDark: {
+      childImageSharp: { gatsbyImageData: folderOpenDarkData },
     },
   },
 }) => {
@@ -87,7 +123,13 @@ const IndexPage: React.FC<IndexPageProps> = ({
           />
           <PostList posts={edges} selectedCategory={selectedCategory} />
           <Divider />
-          <CategoryList postsByCategory={postsByCategory} />
+          <CategoryList
+            postsByCategory={postsByCategory}
+            folderClose={folderCloseData}
+            folderCloseDark={folderCloseDarkData}
+            folderOpen={folderOpenData}
+            folderOpenDark={folderOpenDarkData}
+          />
         </Template>
       </ThemeContextProvider>
     </>
@@ -137,6 +179,30 @@ export const getPostList = graphql`
     darkModeImage: file(name: { eq: "profile-image-dark" }) {
       childImageSharp {
         gatsbyImageData(width: 1960, height: 1760)
+      }
+      publicURL
+    }
+    folderClose: file(name: { eq: "folderClose" }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+      publicURL
+    }
+    folderCloseDark: file(name: { eq: "folderCloseDark" }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+      publicURL
+    }
+    folderOpen: file(name: { eq: "folderOpen" }) {
+      childImageSharp {
+        gatsbyImageData
+      }
+      publicURL
+    }
+    folderOpenDark: file(name: { eq: "folderOpenDark" }) {
+      childImageSharp {
+        gatsbyImageData
       }
       publicURL
     }
