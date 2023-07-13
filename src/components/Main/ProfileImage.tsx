@@ -30,27 +30,19 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 export default ProfileImage
 
 const ProfileWrapper = styled.div`
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 1000px;
   height: 600px;
-  object-fit: contain;
-  margin-right: 50px;
   @media (max-width: 768px) {
-    width: 600px;
+    width: 700px;
     height: 360px;
   }
 `
 
 const ProfileImageWrapper = styled(GatsbyImage)`
-  position: relative;
   width: 1000px;
   height: 600px;
-  object-fit: cover;
   @media (max-width: 768px) {
-    width: 600px;
+    width: 570px;
     height: 360px;
   }
 `

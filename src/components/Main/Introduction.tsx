@@ -39,12 +39,12 @@ const Introduction: React.FC<IntroductionProps> = ({
             <br />
             <SubTitle>
               <Line>새로운 기술과 빠르게 변하는 웹개발 트랜드 속에서, </Line>
+              새로운 기술과 트렌드를 익혀 사용자 중심의 웹을 만들고, 이 공간을
+              통해 그 과정을 공유합니다.
               <Line>
-                새로운 기술과 트렌드를 익혀 사용자 중심의 웹을 만들고,
+                함께 배우고 성장하는 개발자분들과의 소통의 장이 되었으면
+                좋겠습니다!
               </Line>
-              <Line>이 공간을 통해 그 과정을 공유합니다.</Line>
-              <Line>함께 배우고 성장하는 개발자분들과의 </Line>
-              <Line>소통의 장이 되었으면 좋겠습니다!</Line>
             </SubTitle>
           </LetterWrapper>
         </Wrapper>
@@ -62,16 +62,52 @@ const ProfileWrapper = styled('div')(() => {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    margin: theme.theme === 'light' ? '0px auto' : '222px auto',
+    marginTop: theme.theme === 'light' ? '0px' : '150px',
     '@media (max-width: 768px)': {
       height: '400px',
-      margin: theme.theme === 'light' ? '0 0 85px 60px' : '0px 10px 40px 60px',
+      marginBottom: theme.theme === 'light' ? '85px' : '40px',
+    },
+  }
+})
+
+const Wrapper = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  width: 1068px;
+  height: 290px;
+  margin: 140px auto;
+  margin-bottom: 10px;
+  @media (max-width: 768px) {
+    width: 100%;
+    height: 330px;
+    flex-direction: column-reverse;
+  }
+`
+
+const LetterWrapper = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    display: 'inline-block',
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    padding: '15px',
+    marginLeft: '306px',
+    marginTop: '60px',
+    color: theme.theme === 'light' ? 'black' : 'white',
+    width: '400px',
+    height: '100px',
+    '@media (max-width: 768px)': {
+      marginLeft: '27vw',
+      padding: '5px',
+      marginTop: '10px',
     },
   }
 })
 
 const Line = styled.div`
-  margin-bottom: 3px;
+  margin-bottom: 0px;
 `
 const Color = styled.span`
   position: relative;
@@ -106,46 +142,14 @@ const Background = styled('div')(() => {
   }
 })
 
-const Wrapper = styled.div`
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  width: 1068px;
-  height: 290px;
-  margin: 140px auto;
-  margin-bottom: 10px;
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 330px;
-    padding: 0 20px;
-    flex-direction: column-reverse;
-  }
-`
-
-const LetterWrapper = styled('div')(() => {
-  const theme = useContext(ThemeContext)
-  return {
-    display: 'inline-block',
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    padding: '15px',
-    marginLeft: '316px',
-    marginTop: '60px',
-    borderRadius: '10px',
-    color: theme.theme === 'light' ? 'black' : 'white',
-    '@media (max-width: 768px)': {
-      marginLeft: '134px',
-      padding: '5px',
-      marginTop: '10px',
-    },
-  }
-})
-
-const SubTitle = styled.div`
+const SubTitle = styled.p`
   font-size: 15px;
   font-weight: 500;
+  overflow-wrap: break-word;
+  width: 330px;
+  line-height: 1.5;
   @media (max-width: 768px) {
+    width: 200px;
     font-size: 8px;
     font-weight: 600;
     margin-top: -10px;
@@ -155,7 +159,7 @@ const SubTitle = styled.div`
 const Title = styled.div`
   font-size: 17px;
   font-weight: 700;
-  margin-top: 19px;
+  margin-top: 10px;
   @media (max-width: 768px) {
     font-size: 10px;
     font-weight: 800;
