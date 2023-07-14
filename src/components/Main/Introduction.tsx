@@ -57,15 +57,14 @@ const Introduction: React.FC<IntroductionProps> = ({
 export default Introduction
 
 const ProfileWrapper = styled('div')(() => {
-  const theme = useContext(ThemeContext)
   return {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    marginTop: theme.theme === 'light' ? '0px' : '150px',
+    marginTop: '45px',
     '@media (max-width: 768px)': {
-      height: '400px',
-      marginBottom: theme.theme === 'light' ? '85px' : '40px',
+      marginTop: '0px',
+      marginBottom: '150px',
     },
   }
 })
@@ -73,14 +72,13 @@ const ProfileWrapper = styled('div')(() => {
 const Wrapper = styled.div`
   position: relative;
   display: flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: row;
-  width: 1068px;
-  height: 290px;
-  margin: 140px auto;
-  margin-bottom: 10px;
+  height: 350px;
+  margin-top: 100px;
   @media (max-width: 768px) {
-    width: 100%;
-    height: 330px;
+    height: 370px;
     flex-direction: column-reverse;
   }
 `
@@ -90,18 +88,15 @@ const LetterWrapper = styled('div')(() => {
   return {
     display: 'inline-block',
     position: 'absolute',
-    top: 0,
-    left: 0,
     padding: '15px',
-    marginLeft: '306px',
-    marginTop: '60px',
+    marginLeft: '2.5vw',
     color: theme.theme === 'light' ? 'black' : 'white',
     width: '400px',
     height: '100px',
     '@media (max-width: 768px)': {
-      marginLeft: '27vw',
+      marginBottom: '160px',
+      width: '220px',
       padding: '5px',
-      marginTop: '10px',
     },
   }
 })
@@ -131,15 +126,9 @@ const Color = styled.span`
 `
 
 const Background = styled('div')(() => {
-  const theme = useContext(ThemeContext)
   return {
     boxSizing: 'border-box',
     width: '100%',
-
-    backgroundImage:
-      theme.theme === 'light'
-        ? 'white'
-        : 'linear-gradient(30deg, #11151990 100%, #12171b 120%)',
   }
 })
 

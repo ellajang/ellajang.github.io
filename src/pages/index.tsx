@@ -172,13 +172,13 @@ export const getPostList = graphql`
     }
     file(name: { eq: "profile-image" }) {
       childImageSharp {
-        gatsbyImageData(width: 1960, height: 1860)
+        gatsbyImageData
       }
       publicURL
     }
     darkModeImage: file(name: { eq: "profile-image-dark" }) {
       childImageSharp {
-        gatsbyImageData(width: 1960, height: 1760)
+        gatsbyImageData
       }
       publicURL
     }

@@ -84,7 +84,7 @@ const CustomSliderWrapper = styled.div`
 const IconWrapper = styled.h3(() => {
   const theme = useContext(ThemeContext)
   return {
-    margin: '50px 0px 0px 220px',
+    margin: '50px 0px 0px 195px',
     display: 'flex',
     alignItems: 'center',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',

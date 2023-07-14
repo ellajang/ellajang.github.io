@@ -40,11 +40,10 @@ const FolderImg: React.FC<FolderImgProps> = ({
 export default FolderImg
 
 const FolderWrapper = styled.div`
-  width: 90px;
+  width: 100px;
   height: 40px;
   position: relative;
   cursor: pointer;
-
   @media (max-width: 768px) {
     width: 80px;
     height: 30px;
@@ -60,22 +59,15 @@ const FolderWrapper = styled.div`
 `
 
 const FolderImgWrapper = styled(GatsbyImage)`
-  width: 650px;
-  height: 500px;
+  width: 421px;
+  height: 300px;
   position: absolute;
-  top: 0;
-  left: 0;
   cursor: pointer;
   &.open {
     display: none;
   }
-
   @media (max-width: 768px) {
-    width: 600px;
-    height: 500px;
+    width: 350px;
+    height: 245px;
   }
 `
-/* boxShadow:
-theme.theme === 'light'
-  ? '0 0 8px rgba(0, 0, 0, 0.15)'
-  : '0 0 3px rgba(211, 204, 204, 0.973)', */

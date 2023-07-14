@@ -30,19 +30,19 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 export default ProfileImage
 
 const ProfileWrapper = styled.div`
-  width: 1000px;
-  height: 600px;
+  width: 730px;
+  height: 380px;
   @media (max-width: 768px) {
-    width: 700px;
-    height: 360px;
+    width: 440px;
+    height: 250px;
   }
 `
 
 const ProfileImageWrapper = styled(GatsbyImage)`
-  width: 1000px;
-  height: 600px;
+  width: 760px;
+  height: 440px;
   @media (max-width: 768px) {
-    width: 570px;
-    height: 360px;
+    width: 450px;
+    height: 250px;
   }
 `

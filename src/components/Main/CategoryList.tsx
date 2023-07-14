@@ -118,9 +118,11 @@ const CategoryContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 100px auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
   @media (max-width: 768px) {
-    margin: 60px auto;
+    margin-top: 30px;
+    margin-bottom: 40px;
   }
 `
 
@@ -129,17 +131,18 @@ const CategoryHeader = styled('h3')(() => {
   return {
     display: 'flex',
     alignItems: 'center',
-    margin: '15px auto',
+    margin: '10px auto',
     pointerEvents: 'auto',
     color: theme.theme === 'light' ? 'black' : '#d9dee0',
     ' @media (max-width: 768px) ': {
       fontSize: '16px',
+      margin: '5px auto',
     },
   }
 })
 
 const CategoryContent = styled.ul`
-  display: 'flex';
+  justify-content: space-between;
 `
 
 const NameWrapper = styled('li')(() => {
@@ -170,32 +173,34 @@ const ContentWrapper = styled('li')(() => {
   }
 })
 
-const IconWrapper = styled.h3`
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  position: absolute;
-  margin: 40px auto;
-  left: 220px;
-  @media (max-width: 768px) {
-    margin: 30px auto;
-    left: 40px;
+const IconWrapper = styled.h3(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    margin: '50px 1170px 0px 0px',
+    display: 'flex',
+    alignItems: 'center',
+    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
+    '@media (max-width: 1300px)': {
+      margin: '20px 220px 10px 0px',
+    },
   }
-`
+})
 const Category = styled('div')(() => {
   return {
     width: '85%',
     margin: '20px auto',
-    padding: '18px',
+    padding: '17px',
     boxSizing: 'border-box',
     cursor: 'pointer',
     position: 'relative',
+    marginLeft: '10px',
     transition: ' 0.3s box-shadow',
     ' @media (max-width: 768px) ': {
-      width: '70%',
-      right: '31px',
-      marginTop: '35px',
-      minHeight: '200px',
+      width: '76%',
+      minHeight: '190px',
+      marginLeft: '19px',
+      maxWidth: '310px',
+      overflow: 'auto',
     },
     pointerEvents: 'none',
   }
@@ -209,10 +214,10 @@ const CategoryItemWrapper = styled('div')(() => {
     flexWrap: 'wrap',
     zIndex: '3',
     boxSizing: 'border-box',
-    margin: '20px 0px 0px 20px',
+    margin: '0px 0px 20px 20px',
     '@media (max-width: 768px)': {
-      flexBasis: '100%',
-      marginTop: '0px',
+      flexBasis: '60%',
+      margin: '0px 0px 0px 70px',
     },
   }
 })
