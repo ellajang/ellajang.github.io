@@ -1,18 +1,20 @@
 import React from 'react'
+
+import { graphql } from 'gatsby'
+import styled from '@emotion/styled'
 import Introduction from 'components/Main/Introduction'
 import Template from 'components/Common/Template'
 import CategoryList from 'components/Main/CategoryList'
 import PostList from 'components/Main/PostList'
-import { graphql } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
-import { parse } from 'query-string'
 import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { useLocation } from '@reach/router'
-import styled from '@emotion/styled'
 import useCategoryPosts from 'hooks/useCategoryPost'
 import GlobalStyle from 'components/Common/GlobalStyle'
+import LogoImg from 'components/Common/LogoImg'
+import { parse } from 'query-string'
 
 type IndexPageProps = {
   location: {
@@ -108,6 +110,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
 
   return (
     <>
+      <LogoImg />
       <ThemeContextProvider>
         <Header />
         <GlobalStyle />

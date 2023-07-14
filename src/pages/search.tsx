@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+
 import { navigate } from 'gatsby'
 import { useLocation } from '@reach/router'
 import queryString from 'query-string'
@@ -20,7 +21,7 @@ const SearchResultsPage: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState(
     term !== null ? String(term) : '',
   )
-  const [_currentPage, setCurrentPage] = useState(page)
+  const [, setCurrentPage] = useState(page)
 
   const posts = usePosts()
   const itemsPerPage = 5
@@ -35,7 +36,7 @@ const SearchResultsPage: React.FC = () => {
 
   const handleSearch = () => {
     setCurrentPage(page)
-    navigate(`/search?term=${encodeURIComponent(searchTerm)}&page=${page}`)
+    void navigate(`/search?term=${encodeURIComponent(searchTerm)}&page=${page}`)
   }
 
   const { currentItems, PaginationNFooter } = usePaginationFooter(

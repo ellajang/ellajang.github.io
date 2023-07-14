@@ -1,8 +1,10 @@
-import styled from '@emotion/styled'
 import React, { ReactNode } from 'react'
+
+import styled from '@emotion/styled'
+import { Helmet } from 'react-helmet'
+
 import GlobalStyle from './GlobalStyle'
 import Footer from './Footer'
-import { Helmet } from 'react-helmet'
 
 type TemplateProps = {
   title: string

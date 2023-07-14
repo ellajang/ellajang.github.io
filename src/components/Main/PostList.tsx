@@ -1,8 +1,10 @@
 import React, { useContext, useMemo } from 'react'
+
 import styled from '@emotion/styled'
 import { PostListItemType, PostListProps } from 'types/PostItem.types'
-import CustomSlider from './Swiper'
 import { ThemeContext } from 'hooks/useTheme'
+
+import CustomSlider from './Swiper'
 
 const PostList: React.FC<PostListProps> = ({ selectedCategory, posts }) => {
   const postListData = useMemo(

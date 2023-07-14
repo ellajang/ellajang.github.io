@@ -1,16 +1,18 @@
 import React, { useContext, useRef, useState } from 'react'
+
 import { styled, alpha } from '@mui/material/styles'
-import logo from '../../../static/logoWeb64.png'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
 import InputBase from '@mui/material/InputBase'
 import SearchIcon from '@mui/icons-material/Search'
 import { Alert, Snackbar, SnackbarOrigin, Stack } from '@mui/material'
-import MenuList from './Drawer'
-import DarkModeToggle from './DarkModeToggle'
 import { ThemeContext } from 'hooks/useTheme'
 import { Link, navigate } from 'gatsby'
+
+import MenuList from './Drawer'
+import DarkModeToggle from './DarkModeToggle'
+import logo from '../../../static/logoWeb64.png'
 
 interface HeaderProps {
   hideSearch?: boolean
@@ -29,7 +31,7 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
   const handleSearchSubmit = (event: React.FormEvent) => {
     event.preventDefault()
 
-    const searchTermValue = searchInputRef.current?.value || ''
+    const searchTermValue: string = searchInputRef.current?.value || ''
     setSearchTerm(searchTermValue)
 
     if (!searchTermValue.trim()) {
@@ -38,7 +40,7 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
       return
     }
 
-    navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
+    void navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
   }
 
   const handleClose = (
@@ -86,7 +88,7 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
               <StyledInputBase
                 placeholder="검색어를 입력하세요."
                 inputProps={{ 'aria-label': 'search' }}
-                inputRef={searchInputRef}
+                ref={searchInputRef}
               />
               <SearchIconWrapper type="submit" onClick={handleSearchSubmit}>
                 <SearchIcon />

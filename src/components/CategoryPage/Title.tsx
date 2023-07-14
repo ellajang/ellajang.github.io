@@ -1,6 +1,7 @@
+import { useContext } from 'react'
+
 import styled from '@emotion/styled'
 import { ThemeContext } from 'hooks/useTheme'
-import { useContext } from 'react'
 
 type TitleProps = {
   titleText: string

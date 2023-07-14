@@ -1,7 +1,8 @@
+import React from 'react'
+
 import PostHead from 'components/Post/PostHead'
 import Template from 'components/Common/Template'
 import { graphql } from 'gatsby'
-import React from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 import PostContent from 'components/Post/PostContent'
 import CommentWidget from 'components/Post/CommentWidget'

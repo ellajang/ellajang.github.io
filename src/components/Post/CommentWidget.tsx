@@ -1,6 +1,7 @@
+import React, { createRef, useContext, useEffect } from 'react'
+
 import styled from '@emotion/styled'
 import { ThemeContext } from 'hooks/useTheme'
-import React, { createRef, useContext, useEffect } from 'react'
 
 const src = 'https://utteranc.es/client.js'
 const repo = 'ellajang/ellajang.github.io'

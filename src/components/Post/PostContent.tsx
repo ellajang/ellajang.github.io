@@ -1,4 +1,5 @@
 import React, { useContext } from 'react'
+
 import styled from '@emotion/styled'
 import { ThemeContext } from 'hooks/useTheme'
 
@@ -30,7 +31,7 @@ const MarkdownRenderer = styled.div(() => {
     margin: '0 auto',
     padding: '100px 0',
     wordBreak: 'break-all',
-
+    color: theme.theme === 'dark' ? '#f4f4f4' : '#303134',
     // Markdown Style
     lineHeight: 1.8,
     fontSize: '16px',

@@ -1,18 +1,20 @@
 import React from 'react'
+
 import { graphql } from 'gatsby'
-import { parse } from 'query-string'
 import Header from 'components/Common/Header'
 import Title from 'components/CategoryPage/Title'
 import DetailList from 'components/CategoryPage/DetailList'
-import { FRONTEND_CORE_TECH } from '../../constants/CategoryName'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps, PostListItemType } from 'types/PostItem.types'
-import { POSTS_PER_PAGE } from '../../constants/PageEA'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { usePaginationFooter } from 'hooks/usePaginationFooter'
 import { useLocation } from '@reach/router'
+import { parse } from 'query-string'
+
+import { POSTS_PER_PAGE } from '../../constants/PageEA'
+import { FRONTEND_CORE_TECH } from '../../constants/CategoryName'
 
 const JAVASCRIPT: React.FC<PageDataProps> = ({
   data: {

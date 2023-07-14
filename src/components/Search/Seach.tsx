@@ -1,7 +1,8 @@
+import { useContext, useState } from 'react'
+
 import styled from '@emotion/styled'
 import SearchIcon from '@mui/icons-material/Search'
 import { ThemeContext } from 'hooks/useTheme'
-import { useContext, useState } from 'react'
 
 type SearchProps = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>

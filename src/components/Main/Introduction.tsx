@@ -1,8 +1,10 @@
-import styled from '@emotion/styled'
 import React, { useContext } from 'react'
-import ProfileImage from './ProfileImage'
+
+import styled from '@emotion/styled'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { ThemeContext } from 'hooks/useTheme'
+
+import ProfileImage from './ProfileImage'
 
 type IntroductionProps = {
   profileImage: IGatsbyImageData

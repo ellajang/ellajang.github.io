@@ -1,8 +1,9 @@
+import React, { useContext } from 'react'
+
 import styled from '@emotion/styled'
 import { Link } from 'gatsby'
 import { GatsbyImage } from 'gatsby-plugin-image'
 import { ThemeContext } from 'hooks/useTheme'
-import React, { useContext } from 'react'
 import { PostFrontmatterType } from 'types/PostItem.types'
 
 type PostItemProps = PostFrontmatterType & { link: string }

@@ -1,6 +1,6 @@
 import React from 'react'
+
 import { graphql } from 'gatsby'
-import { parse } from 'query-string'
 import DetailList from 'components/CategoryPage/DetailList'
 import DetailPostList from 'components/CategoryPage/DetailPostList'
 import Title from 'components/CategoryPage/Title'
@@ -8,11 +8,13 @@ import Header from 'components/Common/Header'
 import { ThemeContextProvider } from 'hooks/useTheme'
 import { PageDataProps, PostListItemType } from 'types/PostItem.types'
 import useDetailCategoryList from 'hooks/useDetailCategoryList'
-import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
-import { POSTS_PER_PAGE } from '../constants/PageEA'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { useLocation } from '@reach/router'
 import { usePaginationFooter } from 'hooks/usePaginationFooter'
+import { parse } from 'query-string'
+
+import { POSTS_PER_PAGE } from '../constants/PageEA'
+import { BASIC_RESOURCE_CATEGORIES } from '../constants/CategoryName'
 
 const basicResource: React.FC<PageDataProps> = ({
   data: {

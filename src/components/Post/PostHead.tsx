@@ -1,8 +1,10 @@
 import React from 'react'
+
 import styled from '@emotion/styled'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
-import PostHeadInfo from './PostHeadInfo'
 import Header from 'components/Common/Header'
+
+import PostHeadInfo from './PostHeadInfo'
 
 type GatsbyImgProps = {
   image: IGatsbyImageData

@@ -1,8 +1,10 @@
-import styled from '@emotion/styled'
 import { FunctionComponent, useEffect, useMemo } from 'react'
-import DetailPostItem from './DetailPostItem'
+
+import styled from '@emotion/styled'
 import CreateIcon from '@mui/icons-material/Create'
 import { PostListItemType, PostListProps } from 'types/PostItem.types'
+
+import DetailPostItem from './DetailPostItem'
 
 const DetailPostList: FunctionComponent<PostListProps> = ({
   posts,

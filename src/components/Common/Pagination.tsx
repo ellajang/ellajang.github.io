@@ -1,8 +1,9 @@
+import React, { ChangeEvent, useContext, useState } from 'react'
+
 import styled from '@emotion/styled'
 import { Pagination as MUIPagination } from '@mui/material'
 import { navigate } from 'gatsby'
 import { ThemeContext } from 'hooks/useTheme'
-import React, { ChangeEvent, useContext, useState } from 'react'
 
 type PaginationProps = {
   count: number
@@ -13,7 +14,7 @@ type PaginationProps = {
   showFirstButton?: boolean
   showLastButton?: boolean
   onChange?: (page: number) => void
-  queryParams: { [key: string]: any }
+  queryParams: { [key: string]: number | string }
 }
 
 export const Pagination: React.FC<PaginationProps> = ({
@@ -33,7 +34,7 @@ export const Pagination: React.FC<PaginationProps> = ({
       page: String(validPage),
     })
 
-    navigate(`${path}?${searchParams.toString()}`, {
+    void navigate(`${path}?${searchParams.toString()}`, {
       replace: true,
     })
   }

@@ -1,5 +1,6 @@
-import usePosts from 'hooks/usePosts'
 import React, { useState } from 'react'
+
+import usePosts from 'hooks/usePosts'
 
 const SearchPosts = () => {
   const posts = usePosts()

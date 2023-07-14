@@ -1,8 +1,9 @@
+import React, { useContext } from 'react'
+
 import styled from '@emotion/styled'
 import GlobalStyle from 'components/Common/GlobalStyle'
 import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { ThemeContext } from 'hooks/useTheme'
-import React, { useContext } from 'react'
 
 type FolderImgProps = {
   folderClose: IGatsbyImageData

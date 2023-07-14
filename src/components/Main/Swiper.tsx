@@ -1,16 +1,18 @@
 import React, { useContext, useRef } from 'react'
-import PostItem from './PostItem'
+
 import { IGatsbyImageData } from 'gatsby-plugin-image'
 import { Swiper, SwiperSlide } from 'swiper/react'
-import nextArrow from '../../types/nextArrow.png'
-import prevArrow from '../../types/prevArrow.png'
-import nextArrowDark from '../../types/rightDark.png'
-import prevArrowDark from '../../types/leftDark.png'
 import SwiperCore, { Autoplay, Navigation, Keyboard, Pagination } from 'swiper'
 import 'swiper/swiper-bundle.css'
 import styled from '@emotion/styled'
 import { Global, css } from '@emotion/react'
 import { ThemeContext } from 'hooks/useTheme'
+
+import PostItem from './PostItem'
+import prevArrow from '../../types/prevArrow.png'
+import nextArrow from '../../types/nextArrow.png'
+import nextArrowDark from '../../types/rightDark.png'
+import prevArrowDark from '../../types/leftDark.png'
 
 SwiperCore.use([Autoplay, Navigation])
 

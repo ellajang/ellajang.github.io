@@ -1,10 +1,12 @@
 import React, { useContext, useMemo } from 'react'
+
 import styled from '@emotion/styled'
 import { navigate } from 'gatsby'
 import { PostListItemType } from 'types/PostItem.types'
-import FolderImg from './FolderImg'
 import { ThemeContext } from 'hooks/useTheme'
 import { IGatsbyImageData } from 'gatsby-plugin-image'
+
+import FolderImg from './FolderImg'
 
 type CategoryListProps = {
   postsByCategory: {
@@ -60,7 +62,11 @@ const CategoryList: React.FC<CategoryListProps> = ({
     return categoryNames[category]
   }
   const handleCategoryClick = (category: string) => {
-    navigate(`/${category}`)
+    void navigate(`/${category}`)
+      .then(() => {})
+      .catch(() => {
+        void navigate('/404.tsx')
+      })
   }
 
   const theme = useContext(ThemeContext)

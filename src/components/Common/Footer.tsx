@@ -1,7 +1,8 @@
+import { useContext } from 'react'
+
 import styled from '@emotion/styled'
 import GitHubIcon from '@mui/icons-material/GitHub'
 import { ThemeContext } from 'hooks/useTheme'
-import { useContext } from 'react'
 
 const Footer: React.FC = () => {
   const { theme } = useContext(ThemeContext)
