@@ -41,9 +41,11 @@ const MarkdownRenderer = styled.div(() => {
     p: {
       padding: '3px 0',
     },
+
     ol: {
       margin: '0px 0px -20px 0px',
     },
+
     'abbr[title]': {
       cursor: 'pointer',
       '&:hover::after': {
@@ -96,6 +98,9 @@ const MarkdownRenderer = styled.div(() => {
     'ol,ul': {
       marginLeft: '20px',
       padding: '30px 0',
+    },
+    li: {
+      marginTop: '1px',
     },
 
     // Adjust Horizontal Rule style
