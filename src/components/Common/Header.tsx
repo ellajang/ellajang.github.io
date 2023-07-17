@@ -12,6 +12,7 @@ import { Link, navigate } from 'gatsby'
 
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 import logo from '../../../static/logoWeb64.png'
 
 interface HeaderProps {

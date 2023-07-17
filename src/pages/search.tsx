@@ -36,6 +36,7 @@ const SearchResultsPage: React.FC = () => {
 
   const handleSearch = () => {
     setCurrentPage(page)
+    // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
     void navigate(`/search?term=${encodeURIComponent(searchTerm)}&page=${page}`)
   }
 
