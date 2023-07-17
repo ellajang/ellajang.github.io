@@ -199,7 +199,7 @@ const Category = styled('div')(() => {
     boxSizing: 'border-box',
     cursor: 'pointer',
     position: 'relative',
-    marginLeft: '10px',
+    marginLeft: '6px',
     transition: ' 0.3s box-shadow',
     ' @media (max-width: 768px) ': {
       width: '76%',

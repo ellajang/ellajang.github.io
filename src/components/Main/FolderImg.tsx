@@ -60,8 +60,8 @@ const FolderWrapper = styled.div`
 `
 
 const FolderImgWrapper = styled(GatsbyImage)`
-  width: 421px;
-  height: 300px;
+  width: 390px;
+  height: 270px;
   position: absolute;
   cursor: pointer;
   &.open {

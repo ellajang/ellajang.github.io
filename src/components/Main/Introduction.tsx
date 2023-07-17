@@ -90,14 +90,15 @@ const LetterWrapper = styled('div')(() => {
   return {
     display: 'inline-block',
     position: 'absolute',
-    padding: '15px',
+    padding: '16px',
     marginLeft: '2.5vw',
     color: theme.theme === 'light' ? 'black' : 'white',
     width: '400px',
-    height: '100px',
+    height: '25%',
     '@media (max-width: 768px)': {
       marginBottom: '160px',
       width: '220px',
+      height: '100px',
       padding: '5px',
     },
   }
