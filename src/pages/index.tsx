@@ -126,6 +126,7 @@ const IndexPage: React.FC<IndexPageProps> = ({
           />
           <PostList posts={edges} selectedCategory={selectedCategory} />
           <Divider />
+          <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
           <CategoryList
             postsByCategory={postsByCategory}
             folderClose={folderCloseData}
@@ -218,5 +219,13 @@ const Divider = styled.div`
   @media (max-width: 768px) {
     width: calc(100% - 75px);
     margin: 10px 0px 0px 40px;
+  }
+`
+const IconWrapper = styled.h3`
+  margin: 60px 0px 0px 180px;
+  display: flex;
+  align-items: center;
+  @media (max-width: 1300px) {
+    margin: 30px 0px 0px 70px;
   }
 `

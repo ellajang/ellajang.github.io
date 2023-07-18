@@ -63,16 +63,11 @@ const CategoryList: React.FC<CategoryListProps> = ({
   }
   const handleCategoryClick = (category: string) => {
     void navigate(`/${category}`)
-      .then(() => {})
-      .catch(() => {
-        void navigate('/404.tsx')
-      })
   }
 
   const theme = useContext(ThemeContext)
   return (
     <CategoryWrapper>
-      <IconWrapper>🗂&nbsp;카테고리 별 게시물</IconWrapper>
       <CategoryContainer>
         {Object.keys(recentPostsByCategory).map((category, index) => (
           <CategoryItemWrapper
@@ -179,18 +174,6 @@ const ContentWrapper = styled('li')(() => {
   }
 })
 
-const IconWrapper = styled.h3(() => {
-  const theme = useContext(ThemeContext)
-  return {
-    margin: '50px 1170px 0px 0px',
-    display: 'flex',
-    alignItems: 'center',
-    color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
-    '@media (max-width: 1300px)': {
-      margin: '20px 220px 10px 0px',
-    },
-  }
-})
 const Category = styled('div')(() => {
   return {
     width: '85%',
@@ -201,6 +184,13 @@ const Category = styled('div')(() => {
     position: 'relative',
     marginLeft: '6px',
     transition: ' 0.3s box-shadow',
+    '@media (max-width: 1250px)': {
+      width: '76%',
+      minHeight: '220px',
+      marginLeft: '20px',
+      maxWidth: '350px',
+      overflow: 'auto',
+    },
     ' @media (max-width: 768px) ': {
       width: '76%',
       minHeight: '190px',
@@ -218,9 +208,12 @@ const CategoryItemWrapper = styled('div')(() => {
     flexBasis: '30%',
     flexGrow: '1',
     flexWrap: 'wrap',
-    zIndex: '3',
     boxSizing: 'border-box',
     margin: '0px 0px 20px 20px',
+    '@media (max-width: 1250px)': {
+      flexBasis: '45%',
+      margin: '3px 0px 0px 20px',
+    },
     '@media (max-width: 768px)': {
       flexBasis: '60%',
       margin: '0px 0px 0px 70px',

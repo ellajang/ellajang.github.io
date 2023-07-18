@@ -71,4 +71,9 @@ const FolderImgWrapper = styled(GatsbyImage)`
     width: 350px;
     height: 245px;
   }
+
+  @media (max-width: 414px) {
+    width: 250px;
+    height: 145px;
+  }
 `
