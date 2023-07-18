@@ -41,7 +41,7 @@ export default PostHead
 const PostHeadWrapper = styled.div`
   position: relative;
   width: 100%;
-  height: 420px;
+  height: 430px;
   margin: 0;
   padding: 0;
   @media (max-width: 768px) {
@@ -55,7 +55,6 @@ const BackgroundImage = styled((props: GatsbyImgProps) => (
   z-index: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
   filter: brightness(0.25);
   @media (max-width: 768px) {
     height: 300px;
