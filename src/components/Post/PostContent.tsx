@@ -137,6 +137,11 @@ const MarkdownRenderer = styled.div(() => {
       color: 'white',
       fontSize: '15px',
     },
+    "code[class*='language-text'].other-color": {
+      background: 'red',
+      color: 'white',
+      fontSize: '15px',
+    },
 
     // Markdown Responsive Design
     '@media (max-width: 768px)': {

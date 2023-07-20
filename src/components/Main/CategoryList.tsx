@@ -176,8 +176,8 @@ const ContentWrapper = styled('li')(() => {
 
 const Category = styled('div')(() => {
   return {
-    width: '85%',
-    margin: '20px auto',
+    width: '81%',
+    margin: '19px auto',
     padding: '17px',
     boxSizing: 'border-box',
     cursor: 'pointer',
