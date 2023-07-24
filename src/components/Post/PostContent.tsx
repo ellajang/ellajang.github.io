@@ -85,6 +85,9 @@ const MarkdownRenderer = styled.div(() => {
     'strong em': {
       color: '#7d64b1',
     },
+    'strong ': {
+      color: '#7d64b1',
+    },
 
     // Adjust Quotation Element Style
     blockquote: {

@@ -50,12 +50,13 @@ const Title = styled.div`
   overflow: hidden;
   overflow-wrap: break-word;
   margin-top: 120px;
+  max-width: 1180px;
   padding: 0px 0px 20px 470px;
   text-overflow: ellipsis;
   white-space: normal;
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
-  font-size: 45px;
+  font-size: 39px;
   font-weight: 800;
   color: white;
   @media (max-width: 1168px) {
