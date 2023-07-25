@@ -3,13 +3,13 @@ import { useContext, useState } from 'react'
 import styled from '@emotion/styled'
 import SearchIcon from '@mui/icons-material/Search'
 import { ThemeContext } from 'hooks/useTheme'
+import { navigate } from 'gatsby'
 
 type SearchProps = {
   setSearchTerm: React.Dispatch<React.SetStateAction<string>>
-  handleSearch: () => void
 }
 
-const Search: React.FC<SearchProps> = ({ setSearchTerm, handleSearch }) => {
+const Search: React.FC<SearchProps> = ({ setSearchTerm }) => {
   const [inputValue, setInputValue] = useState('')
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -18,7 +18,7 @@ const Search: React.FC<SearchProps> = ({ setSearchTerm, handleSearch }) => {
 
   const handleClick = () => {
     setSearchTerm(inputValue)
-    handleSearch()
+    void navigate(`/search?term=${encodeURIComponent(inputValue)}`)
   }
   const { theme } = useContext(ThemeContext)
   return (
