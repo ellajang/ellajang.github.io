@@ -8,6 +8,7 @@ const SearchPosts = () => {
 
   const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchTerm(event.target.value)
+    console.log(setSearchTerm)
   }
 
   const filteredPosts = posts.filter(

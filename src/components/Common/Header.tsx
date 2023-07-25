@@ -40,7 +40,6 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
       setOpen(true)
       return
     }
-
     void navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
   }
 
@@ -84,12 +83,12 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
           </TypographyStyle>
 
           <DarkModeToggle />
+
           {!hideSearch && (
             <Search>
               <StyledInputBase
                 placeholder="검색어를 입력하세요."
-                inputProps={{ 'aria-label': 'search' }}
-                ref={searchInputRef}
+                inputProps={{ 'aria-label': 'search', ref: searchInputRef }}
               />
               <SearchIconWrapper type="submit" onClick={handleSearchSubmit}>
                 <SearchIcon />
