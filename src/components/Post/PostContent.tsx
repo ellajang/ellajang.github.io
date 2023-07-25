@@ -100,7 +100,7 @@ const MarkdownRenderer = styled.div(() => {
     // Adjust List Element Style
     'ol,ul': {
       marginLeft: '20px',
-      padding: '30px 0',
+      padding: '10px 0',
     },
     li: {
       marginTop: '1px',

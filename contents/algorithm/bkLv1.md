@@ -6,7 +6,7 @@ summary: '이 게시글은 백준 입출력과 사칙연산 단계 중 1번부�
 thumbnail: '../baekjoon.jpeg'
 ---
 
-> 백준 입출력과 사칙연산 단계 중 1번부터 13번에 해당하는 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
+> 백준 입출력과 사칙연산 단계 중 1번부터 13번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
 
 > > 초기 Setting : 저는 VScode로 문제를 풀었습니다. 파일명.js으로 파일을 생성 후 test.txt파일을 생성 한 후 입력 값들을 입력하여 RunCode를 실행하여 답을 출력시켰습니다. 단계2 문제에서 설명한 것 처럼 readFileSync 함수에 'test.txt' 를 입력해서 입력값을 불러오면 됩니다.
 

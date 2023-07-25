@@ -93,7 +93,7 @@ const CategoryList: React.FC<CategoryListProps> = ({
                 <hr />
                 {recentPostsByCategory[category].map(({ node }, index) => (
                   <ContentWrapper key={index} theme={theme}>
-                    <span>{node.frontmatter.title}</span>
+                    <Title>{node.frontmatter.title}</Title>
                     <span>{node.frontmatter.date}</span>
                   </ContentWrapper>
                 ))}
@@ -121,9 +121,11 @@ const CategoryContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
+  margin-left: 80px;
   @media (max-width: 768px) {
     margin-top: 30px;
     margin-bottom: 40px;
+    margin-left: 0px;
   }
 `
 
@@ -171,6 +173,14 @@ const ContentWrapper = styled('li')(() => {
       margin: '8px 0 0 0px',
       fontSize: '14px',
     },
+  }
+})
+const Title = styled('span')(() => {
+  return {
+    overflow: 'hidden',
+    textOverflow: 'ellipsis',
+    whiteSpace: 'nowrap',
+    maxWidth: '240px',
   }
 })
 
