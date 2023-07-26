@@ -48,44 +48,49 @@ const Header: React.FC<HeaderProps> = () => {
               &nbsp; 프론트엔드 : Ella의 개발 일지
             </LinkStyle>
           </TypographyStyle>
-          <DarkModeToggle />
+          <Toolbar style={{ justifyContent: 'space-between' }}>
+            <DarkModeToggle />
 
-          <Portfolio onClick={handleClick}>
-            <PersonPinIcon fontSize="large" />
-          </Portfolio>
-          <StyledPopover
-            id={id}
-            open={open}
-            anchorEl={anchorEl}
-            onClose={handleClose}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-            }}
-          >
-            <List>
-              <ListItem
-                button
-                onClick={() =>
-                  window.open('https://ellajang.github.io/ellajang/', '_blank')
-                }
-              >
-                <ListItemText primary="Portfolio" />
-              </ListItem>
-              <ListItem
-                button
-                onClick={() =>
-                  window.open('https://github.com/ellajang', '_blank')
-                }
-              >
-                <ListItemText primary="Github" />
-              </ListItem>
-            </List>
-          </StyledPopover>
+            <Portfolio onClick={handleClick}>
+              <PersonPinIcon fontSize="large" />
+            </Portfolio>
+            <StyledPopover
+              id={id}
+              open={open}
+              anchorEl={anchorEl}
+              onClose={handleClose}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'center',
+              }}
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'center',
+              }}
+            >
+              <List>
+                <ListItem
+                  button
+                  onClick={() =>
+                    window.open(
+                      'https://ellajang.github.io/ellajang/',
+                      '_blank',
+                    )
+                  }
+                >
+                  <ListItemText primary="Portfolio" />
+                </ListItem>
+                <ListItem
+                  button
+                  onClick={() =>
+                    window.open('https://github.com/ellajang', '_blank')
+                  }
+                >
+                  <ListItemText primary="Github" />
+                </ListItem>
+              </List>
+            </StyledPopover>
+          </Toolbar>
         </Toolbar>
       </AppBarStyle>
     </>
@@ -124,6 +129,7 @@ const Portfolio = styled('button')(() => {
     width: '54px',
     position: 'relative',
     cursor: 'pointer',
+    left: '15px',
     color: theme.theme === 'light' ? 'black' : '#CFD8DB',
     backgroundColor: theme.theme === 'light' ? '#FFFFFF' : '#253237',
     '&:hover': {
