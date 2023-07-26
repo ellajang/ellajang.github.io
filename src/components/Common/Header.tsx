@@ -1,14 +1,13 @@
-import React, { useContext, useRef, useState } from 'react'
+import React, { useContext, useState } from 'react'
 
-import { styled, alpha } from '@mui/material/styles'
+import { styled } from '@mui/material/styles'
 import AppBar from '@mui/material/AppBar'
 import Toolbar from '@mui/material/Toolbar'
 import Typography from '@mui/material/Typography'
-import InputBase from '@mui/material/InputBase'
-import SearchIcon from '@mui/icons-material/Search'
-import { Alert, Snackbar, SnackbarOrigin, Stack } from '@mui/material'
 import { ThemeContext } from 'hooks/useTheme'
-import { Link, navigate } from 'gatsby'
+import { Link } from 'gatsby'
+import PersonPinIcon from '@mui/icons-material/PersonPin'
+import { List, ListItem, ListItemText, Popover } from '@mui/material'
 
 import MenuList from './Drawer'
 import DarkModeToggle from './DarkModeToggle'
@@ -19,58 +18,26 @@ interface HeaderProps {
   hideSearch?: boolean
 }
 
-const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
-  const [, setSearchTerm] = useState('')
-  const [showEmptySearchAlert, setShowEmptySearchAlert] = useState(false)
-  const [open, setOpen] = useState(false)
-  const [snackbarPosition] = useState<SnackbarOrigin>({
-    vertical: 'top',
-    horizontal: 'center',
-  })
-  const searchInputRef = useRef<HTMLInputElement | null>(null)
+const Header: React.FC<HeaderProps> = () => {
+  const [, setShowEmptySearchAlert] = useState(false)
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null)
 
-  const handleSearchSubmit = (event: React.FormEvent) => {
-    event.preventDefault()
-
-    const searchTermValue: string = searchInputRef.current?.value || ''
-    setSearchTerm(searchTermValue)
-
-    if (!searchTermValue.trim()) {
-      setShowEmptySearchAlert(true)
-      setOpen(true)
-      return
-    }
-    void navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget)
   }
 
-  const handleClose = (
-    _event?: React.SyntheticEvent | Event,
-    reason?: string,
-  ) => {
-    if (reason === 'clickaway') {
-      return
-    }
-
-    setOpen(false)
+  const handleClose = () => {
+    setAnchorEl(null)
   }
+
+  const open = Boolean(anchorEl)
+  const id = open ? 'simple-popover' : undefined
 
   return (
     <>
       <AppBarStyle position="fixed">
-        {showEmptySearchAlert && (
-          <Snackbar
-            open={open}
-            autoHideDuration={1500}
-            onClose={handleClose}
-            anchorOrigin={snackbarPosition}
-          >
-            <Stack sx={{ width: '100' }} spacing={12}>
-              <Alert severity="warning">검색어를 입력해 주세요 :)</Alert>
-            </Stack>
-          </Snackbar>
-        )}
         <Toolbar style={{ justifyContent: 'space-between' }}>
-          <MenuList />
+          <MenuList setAlertOpen={setShowEmptySearchAlert} />
           <TypographyStyle
             variant="h6"
             noWrap
@@ -81,20 +48,44 @@ const Header: React.FC<HeaderProps> = ({ hideSearch }) => {
               &nbsp; 프론트엔드 : Ella의 개발 일지
             </LinkStyle>
           </TypographyStyle>
-
           <DarkModeToggle />
 
-          {!hideSearch && (
-            <Search>
-              <StyledInputBase
-                placeholder="검색어를 입력하세요."
-                inputProps={{ 'aria-label': 'search', ref: searchInputRef }}
-              />
-              <SearchIconWrapper type="submit" onClick={handleSearchSubmit}>
-                <SearchIcon />
-              </SearchIconWrapper>
-            </Search>
-          )}
+          <Portfolio onClick={handleClick}>
+            <PersonPinIcon fontSize="large" />
+          </Portfolio>
+          <StyledPopover
+            id={id}
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: 'bottom',
+              horizontal: 'center',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'center',
+            }}
+          >
+            <List>
+              <ListItem
+                button
+                onClick={() =>
+                  window.open('https://ellajang.github.io/ellajang/', '_blank')
+                }
+              >
+                <ListItemText primary="Portfolio" />
+              </ListItem>
+              <ListItem
+                button
+                onClick={() =>
+                  window.open('https://github.com/ellajang', '_blank')
+                }
+              >
+                <ListItemText primary="Github" />
+              </ListItem>
+            </List>
+          </StyledPopover>
         </Toolbar>
       </AppBarStyle>
     </>
@@ -121,54 +112,26 @@ const LogoImage = styled('img')({
   width: '50px',
   height: '50px',
 })
-
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  color: '#212121',
-  border: '1px solid #b0bec5',
-  borderRadius: '10px',
-  backgroundColor: alpha(theme.palette.grey[400], 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.grey[400], 0.15),
-    border: '1px solid #b0bec5',
-  },
-  marginLeft: 5,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(1),
-    width: 'auto',
-  },
-}))
-
-const SearchIconWrapper = styled('button')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  right: 0,
-  top: 0,
-  cursor: 'pointer',
-  border: 'none',
-  borderRadius: '10px',
-  background: '#7d64b1',
-  color: 'white',
-  alignItems: 'center',
-  justifyContent: 'center',
-}))
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: '25ch',
-      '&:focus': {
-        width: '40ch',
-      },
+const Portfolio = styled('button')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderRadius: '10px',
+    border: 'none',
+    display: 'flex',
+    height: '40px',
+    width: '54px',
+    position: 'relative',
+    cursor: 'pointer',
+    color: theme.theme === 'light' ? 'black' : '#CFD8DB',
+    backgroundColor: theme.theme === 'light' ? '#FFFFFF' : '#253237',
+    '&:hover': {
+      backgroundColor: theme.theme === 'light' ? '#f6ebb0' : '#a98aeda3',
     },
-  },
-}))
+  }
+})
+
 const LinkStyle = styled(Link)(() => {
   const theme = useContext(ThemeContext)
   return {
@@ -176,5 +139,13 @@ const LinkStyle = styled(Link)(() => {
     alignItems: 'center',
     color: theme.theme === 'dark' ? '#cfd8dc' : 'black',
     textDecoration: 'none',
+  }
+})
+const StyledPopover = styled(Popover)(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    '.MuiPopover-paper': {
+      backgroundColor: theme.theme === 'light' ? 'white' : '#263238',
+    },
   }
 })

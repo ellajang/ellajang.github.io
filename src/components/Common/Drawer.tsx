@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 
 import { styled } from '@mui/material/styles'
 import IconButton from '@mui/material/IconButton'
@@ -9,14 +9,27 @@ import ListItemText from '@mui/material/ListItemText'
 import MenuIcon from '@mui/icons-material/Menu'
 import FirstPageIcon from '@mui/icons-material/FirstPage'
 import { ExpandLessRounded, ExpandMoreRounded } from '@mui/icons-material'
-import { Collapse, ListItemSecondaryAction } from '@mui/material'
+import {
+  Collapse,
+  InputBase,
+  ListItemSecondaryAction,
+  Toolbar,
+  Tooltip,
+} from '@mui/material'
 import ArrowRightIcon from '@mui/icons-material/ArrowRight'
 import HomeIcon from '@mui/icons-material/Home'
 import { ThemeContext } from 'hooks/useTheme'
-import { Link } from 'gatsby'
+import { Link, navigate } from 'gatsby'
+import SearchIcon from '@mui/icons-material/Search'
 
-const MenuList: React.FC = () => {
+interface MenuListProps {
+  setAlertOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
+
+const MenuList: React.FC<MenuListProps> = () => {
   const [drawerOpen, setDrawerOpen] = useState<boolean>(false)
+  const [alertOpen, setAlertOpen] = useState<boolean>(false)
+  const searchInputRef = useRef<HTMLInputElement | null>(null)
   const [subMenuOpen, setSubMenuOpen] = useState<{
     [key: string]: boolean
   }>({
@@ -40,7 +53,16 @@ const MenuList: React.FC = () => {
       [category]: !prevMenuOpen[category],
     }))
   }
-
+  const handleSearchSubmit = (event: React.FormEvent) => {
+    event.preventDefault()
+    const searchTermValue: string = searchInputRef.current?.value || ''
+    if (!searchTermValue.trim()) {
+      // Handle empty search term.
+      setAlertOpen(true)
+      return
+    }
+    void navigate(`/search?term=${encodeURIComponent(searchTermValue)}`)
+  }
   return (
     <>
       <IconButtonStyle
@@ -59,7 +81,23 @@ const MenuList: React.FC = () => {
           </Link>
           <FirstPageIconStyle fontSize="large" onClick={handleDrawerClose} />
         </IconContainer>
-
+        <Toolbar>
+          <Tooltip
+            open={alertOpen}
+            title="검색어를 입력해 주세요 :)"
+            onClose={() => setAlertOpen(false)}
+          >
+            <Search>
+              <StyledInputBase
+                placeholder="검색어를 입력하세요."
+                inputProps={{ 'aria-label': 'search', ref: searchInputRef }}
+              />
+              <IconButtonStyle type="submit" onClick={handleSearchSubmit}>
+                <SearchIcon />
+              </IconButtonStyle>
+            </Search>
+          </Tooltip>
+        </Toolbar>
         <List>
           <ListItem>
             <LinkStyle to="/basicResource">
@@ -296,3 +334,24 @@ const IconContainer = styled('div')({
   display: 'flex',
   justifyContent: 'space-between',
 })
+
+const Search = styled('div')(() => {
+  const theme = useContext(ThemeContext)
+  return {
+    position: 'relative',
+    borderRadius: '10px',
+    backgroundColor: theme.theme === 'dark' ? '#4f6067' : '#e9e8e8',
+    '&:hover': {
+      backgroundColor: theme.theme === 'dark' ? '#77858b' : '#E1E1E1',
+    },
+  }
+})
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: 'inherit',
+  '& .MuiInputBase-input': {
+    padding: theme.spacing(1.5, 12, 1.5, 0),
+    paddingLeft: `calc(1em + ${theme.spacing(1)})`,
+    width: '100%',
+  },
+}))

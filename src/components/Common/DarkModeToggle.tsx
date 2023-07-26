@@ -61,7 +61,7 @@ const DarkModeToggle: React.FC = () => {
                 <DarkModeIcon
                   fontSize="large"
                   sx={{
-                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                    color: theme === 'light' ? 'black' : '#FEEA75',
                   }}
                 />
               </IconWrapper>
@@ -70,7 +70,7 @@ const DarkModeToggle: React.FC = () => {
                 <LightModeIcon
                   fontSize="large"
                   sx={{
-                    color: theme === 'light' ? '#f7dd4b' : '#f7dd4b',
+                    color: theme === 'light' ? 'black' : '#CFD8DB',
                   }}
                 />
               </IconWrapper>
@@ -101,14 +101,12 @@ const IconWrapper = styled('div')(({ theme }) => ({
   height: '40px',
   width: '54px',
   color: '#212121',
-  border: '1px solid #b0bec5',
   borderRadius: '8px',
   alignItems: 'center',
   justifyContent: 'center',
   display: 'flex',
-  backgroundColor: theme === 'light' ? '#F5F5F5' : '#3C474B',
+  backgroundColor: theme === 'light' ? '#FFFFFF' : '#253237',
   '&:hover': {
-    backgroundColor: '#7D64B1',
-    border: '1px solid #AA9CE4',
+    backgroundColor: theme === 'light' ? '#f6ebb0' : '#a98aeda3',
   },
 }))
