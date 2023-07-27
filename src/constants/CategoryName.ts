@@ -8,6 +8,7 @@ export const BASIC_RESOURCE_CATEGORIES = [
 
 export const DEV_ENV = [
   { value: 'REACT', label: 'REACT' },
+  { value: 'NEXT', label: 'NEXT' },
   { value: 'TYPESCRIPT', label: 'TYPESCRIPT' },
 ]
 
@@ -24,6 +25,7 @@ export const CATEGORY_MAP = [
   { value: 'NETWORK', label: 'NETWORK' },
   { value: 'OS', label: 'OS' },
   { value: 'REACT', label: 'REACT' },
+  { value: 'NEXT', label: 'NEXT' },
   { value: 'TYPESCRIPT', label: 'TYPESCRIPT' },
   { value: 'CSS', label: 'CSS' },
   { value: 'HTML', label: 'HTML' },

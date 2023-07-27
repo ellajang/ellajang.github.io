@@ -186,23 +186,23 @@ const Title = styled('span')(() => {
 
 const Category = styled('div')(() => {
   return {
-    width: '81%',
+    width: '77%',
     margin: '19px auto',
-    padding: '17px',
+    padding: '9px',
     boxSizing: 'border-box',
     cursor: 'pointer',
     position: 'relative',
-    marginLeft: '6px',
+    marginLeft: '10px',
     transition: ' 0.3s box-shadow',
     '@media (max-width: 1250px)': {
-      width: '76%',
+      width: '90%',
       minHeight: '220px',
       marginLeft: '20px',
       maxWidth: '350px',
       overflow: 'auto',
     },
     ' @media (max-width: 768px) ': {
-      width: '76%',
+      width: '77%',
       minHeight: '190px',
       marginLeft: '19px',
       maxWidth: '310px',

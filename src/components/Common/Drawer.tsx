@@ -237,6 +237,12 @@ const MenuList: React.FC<MenuListProps> = () => {
                 </LinkStyle>
               </ListItem>
               <ListItem>
+                <LinkStyle to="/devEnv/NEXT">
+                  <ArrowRightIcon />
+                  <ListItemText primary="NEXT" />
+                </LinkStyle>
+              </ListItem>
+              <ListItem>
                 <LinkStyle to="/devEnv/TYPESCRIPT">
                   <ArrowRightIcon />
                   <ListItemText primary="TypeScript" />
