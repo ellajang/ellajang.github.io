@@ -72,10 +72,7 @@ const Header: React.FC<HeaderProps> = () => {
                 <ListItem
                   button
                   onClick={() =>
-                    window.open(
-                      'https://ellajang.github.io/ellajang/',
-                      '_blank',
-                    )
+                    window.open('https://ellaportfolio.vercel.app/', '_blank')
                   }
                 >
                   <ListItemText primary="Portfolio" />
