@@ -7,7 +7,8 @@ thumbnail: '../baekjoon.jpeg'
 ---
 
 > 백준 브루트 포스 단계 중 1번부터 6번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
-> 부르트 포스 알고리즘 설계 기법 중 하나로 "무차별 대입" 또는 "완전 탐색"을 의미합니다. 알고리즘의 종류와 개념에 대한 설명은 저의 blog의 포스팅 된 글을 통해 참고 할 수 있습니다.[알고리즘(Algorithm) 종류 및 개념] (https://ellajang.github.io/algorithm/AlgorithmType/)
+> 부르트 포스 알고리즘 설계 기법 중 하나로 "무차별 대입" 또는 "완전 탐색"을 의미합니다. 알고리즘의 종류와 개념에 대한 설명은 제 blog에 포스팅 된 글을 통해 참고 하실 수 있습니다.<br/>
+> 📎 [알고리즘(Algorithm) 종류 및 개념] (https://ellajang.github.io/algorithm/AlgorithmType/)
 
 ## 단계 1. 블랙잭 (문제번호 : 2798)
 
@@ -171,21 +172,81 @@ for (let x = -999; x <= 999; x++) {
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
 const [N, M] = inputData[0].split(' ').map(Number)
+const board = inputData.slice(1).map(row => row.split(''))
 
-for (i = 1; i <= N; i++) {
-  inputData[i]
-  for (j = 0; j < M; j++) {}
+const models = [
+  ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
+  ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
+]
+
+for (let x = 0; x + 7 < N; x++) {
+  for (let y = 0; y + 7 < M; y++) {
+    for (let k = 0; k < 2; k++) {
+      let paint = 0
+      for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+          if (board[x + i][y + j] !== models[(i + k) % 2][j % 8]) {
+            paint++
+          }
+        }
+      }
+      minPaint = Math.min(minPaint, paint)
+    }
+  }
 }
+
+console.log(minPaint)
 ```
 
 <br/>
 
-<!-- #### \* 문제 풀이
+#### \* 문제 풀이
 
-1. 이 문제도 for문이 2번 중첩되므로 2차 다항식의 형태이므로 두번째에서 2를 출력하면 됩니다. 하지만 앞 문제와 다른 점은 for루프가 도는 범위입니다. MenOfPassion(A[], n) 함수에서, 내부 반복문이 첫 번째 순회 때에는 n-1번 실행되고, 두 번째 순회 때에는 n-2번 실행되고, 세 번째 순회 때에는 n-3번 실행되는 식으로 i가 증가함에 따라 실행 횟수가 점점 줄어듭니다. 따라서 이 모든 반복 횟수를 합하면 n-1, n-2, n-3, ..., 2, 1 이 됩니다. 이는 산수학에서 배운 일련의 숫자들의 합을 계산하는 공식인 (n \* (n-1)) / 2로 계산할 수 있습니다.
+1. models는 체스판의 두 가지 가능한 패턴을 나타냅니다: 하나는 흰색(W)에서 시작하고, 다른 하나는 검은색(B)에서 시작합니다.
+
+```javascript
+const models = [
+  ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
+  ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
+]
+```
+
+2. 첫번째와 두번째 for loop는 전체 보드에서 8x8 크기의 모든 가능한 영역을 조사하기 위한 것입니다. 처음 시작하는 8x8을 한칸씩 옮기면서 조사해주는 loop입니다.
+
+```javascript
+for (let x = 0; x + 7 < N; x++) {
+  for (let y = 0; y + 7 < M; y++) {
+
+```
+
+3. 세번째 for loop는 체스판의 두 가지 패턴을 모두 고려하기 위한 것입니다.
+
+```javascript
+    for (let k = 0; k < 2; k++) {
+
+```
+
+4. 네번째와 다섯번째 for loop는 현재 조사 중인 8x8 크기의 구역의 각 셀을 체크하기 위한 것입니다.
+
+```javascript
+     let paint = 0
+      for (let i = 0; i < 8; i++) {
+        for (let j = 0; j < 8; j++) {
+
+```
+
+5. if 문에서는 현재 셀의 색상이 체스판 패턴의 색상과 일치하지 않는 경우 paint를 1 증가시킵니다. 이는 해당 셀이 다시 칠해져야 함을 의미합니다. 각 8x8 영역에 대해 계산한 paint 값과 현재까지의 최소값 minPaint를 비교하여 더 작은 값으로 minPaint를 갱신합니다.
+
+```javascript
+     if (board[x + i][y + j] !== models[(i + k) % 2][j % 8]) {
+            paint++
+          }
+        }
+      }
+      minPaint = Math.min(minPaint, paint)
+```
 
 결과 : `성공`
--->
 
 ## 단계 5. 영화감독 숌 (문제번호 : 1436)
 
