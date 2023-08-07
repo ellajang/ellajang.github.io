@@ -24,9 +24,9 @@ React는 프론트엔드 개발을 위한 JavaScript 라이브러리로, 데이�
 
 #### **- 빠른 렌더링**
 
-: React는 Virtual DOM(VDOM)을 사용하여 실제 브라우저의 DOM 업데이트를 최적화합니다. 이를 통해 React는 데이터의 변화가 일어날 때마다 전체 UI를 새로 렌더링하는 대신, 변화가 발생한 부분만 업데이트하는 데 필요한 최소한의 동작을 수행합니다.
-<br/>
-<br/>
+: React는 Virtual DOM(VDOM)을 사용하여 실제 브라우저의 DOM 업데이트를 최적화합니다. 이를 통해 React는 데이터의 변화가 일어날 때마다 전체 UI를 새로 렌더링하는 대신, 변화가 발생한 부분만 업데이트하는 데 필요한 최소한의 동작을 수행합니다. React의 주요 특징 중 Virtual DOM(VDOM)을 사용한 것을 뽑은 이유는 가상 돔을 사용하여 UI를 업데이트하는 데 React에서 선두적인 역할을 하였고, 그 기법이 많은 주목을 받았기 때문입니다.<br/> [참고] 📎 [Dom과 Virtual Dom(가상돔)이란?] (https://ellajang.github.io/frontendCoreTech/dom/)
+
+<br/> <br/>
 
 #### **- React와 DOM간의 인터페이스: ReactDOM**
 

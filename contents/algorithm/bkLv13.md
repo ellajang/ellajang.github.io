@@ -1,149 +1,42 @@
 ---
-date: '2023-08-05'
+date: '2023-08-07'
 title: '백준-정렬'
 categories: ['algorithm']
 summary: '이 게시글은 백준 정렬 단계 중 1번부터 11번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 '
 thumbnail: '../baekjoon.jpeg'
 ---
 
-> 백준 백준 단계 중 1번부터 11번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
+> 백준 정렬 단계 중 1번부터 11번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
 
-## 단계 1. 블랙잭 (문제번호 : 2750)
+## 단계 1. 수 정렬하기 (문제번호 : 2750)
 
-#### \* 문제 : 카지노에서 제일 인기 있는 게임 블랙잭의 규칙은 상당히 쉽다. 카드의 합이 21을 넘지 않는 한도 내에서, 카드의 합을 최대한 크게 만드는 게임이다. 블랙잭은 카지노마다 다양한 규정이 있다. 한국 최고의 블랙잭 고수 김정인은 새로운 블랙잭 규칙을 만들어 상근, 창영이와 게임하려고 한다. 김정인 버전의 블랙잭에서 각 카드에는 양의 정수가 쓰여 있다. 그 다음, 딜러는 N장의 카드를 모두 숫자가 보이도록 바닥에 놓는다. 그런 후에 딜러는 숫자 M을 크게 외친다. 이제 플레이어는 제한된 시간 안에 N장의 카드 중에서 3장의 카드를 골라야 한다. 블랙잭 변형 게임이기 때문에, 플레이어가 고른 카드의 합은 M을 넘지 않으면서 M과 최대한 가깝게 만들어야 한다. N장의 카드에 써져 있는 숫자가 주어졌을 때, M을 넘지 않으면서 M에 최대한 가까운 카드 3장의 합을 구해 출력하시오.
+#### \* 문제 : N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
 
-- 입력 : 첫째 줄에 카드의 개수 N(3 ≤ N ≤ 100)과 M(10 ≤ M ≤ 300,000)이 주어진다. 둘째 줄에는 카드에 쓰여 있는 수가 주어지며, 이 값은 100,000을 넘지 않는 양의 정수이다. 합이 M을 넘지 않는 카드 3장을 찾을 수 있는 경우만 입력으로 주어진다.
+\*\*시간 복잡도가 O(n²)인 정렬 알고리즘으로 풀 수 있습니다. 예를 들면 삽입 정렬, 거품 정렬 등이 있습니다.
 
-- 출력 : 첫째 줄에 M을 넘지 않으면서 M에 최대한 가까운 카드 3장의 합을 출력한다.
+- 입력 : 첫째 줄에 수의 개수 N(1 ≤ N ≤ 1,000)이 주어진다. 둘째 줄부터 N개의 줄에는 수가 주어진다. 이 수는 절댓값이 1,000보다 작거나 같은 정수이다. 수는 중복되지 않는다.
+
+- 출력 : 첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const [N, M] = inputData[0].split(' ').map(Number)
-const cards = inputData[1].split(' ').map(Number)
+const N = parseInt(inputData[0])
 
-let maxSum = 0
-
-for (i = 0; i < N; i++) {
-  for (let j = i + 1; j < N; j++) {
-    for (let k = j + 1; k < N; k++) {
-      let sum = cards[i] + cards[j] + cards[k]
-      if (sum <= M && sum > maxSum) {
-        maxSum = sum
-      }
-    }
-  }
-}
-console.log(maxSum)
-```
-
-<br/>
-
-#### \* 문제 풀이
-
-1. sum <= M : 플레이어가 선택한 세 카드의 합계(sum)는 M보다 크지 않아야 합니다. 이 규칙은 블랙잭 게임의 규칙에 따라, 합계가 M을 초과하면 안 되기 때문입니다. sum > maxSum : 현재까지 발견한 합계(sum)가 이전에 발견한 가장 큰 합계(maxSum)보다 커야 합니다. 이는 M을 넘지 않는 한에서 가능한 한 M에 가깝게 만들기 위한 조건입니다
-
-```javascript
-if (sum <= M && sum > maxSum) {
-  maxSum = sum
-}
-```
-
-결과 : `성공`
-
-## 단계 2. 분해합 (문제번호 : 2231)
-
-#### \* 문제 : 어떤 자연수 N이 있을 때, 그 자연수 N의 분해합은 N과 N을 이루는 각 자리수의 합을 의미한다. 어떤 자연수 M의 분해합이 N인 경우, M을 N의 생성자라 한다. 예를 들어, 245의 분해합은 256(=245+2+4+5)이 된다. 따라서 245는 256의 생성자가 된다. 물론, 어떤 자연수의 경우에는 생성자가 없을 수도 있다. 반대로, 생성자가 여러 개인 자연수도 있을 수 있다. 자연수 N이 주어졌을 때, N의 가장 작은 생성자를 구해내는 프로그램을 작성하시오.
-
-- 입력 : 첫째 줄에 자연수 N(1 ≤ N ≤ 1,000,000)이 주어진다.
-
-- 출력 : 첫째 줄에 답을 출력한다. 생성자가 없는 경우에는 0을 출력한다.
-
-```javascript
-const fs = require('fs')
-const N = Number(fs.readFileSync(0).toString().trim())
-
-let result = 0
+let numArray = inputData.slice(1).map(Number)
 
 for (let i = 1; i < N; i++) {
-  let num = i
-  let sum = i
-  while (num !== 0) {
-    sum += num % 10
-    num = Math.floor(num / 10)
+  let key = numArray[i]
+  let j = i - 1
+  while (j >= 0 && numArray[j] > key) {
+    numArray[j + 1] = numArray[j]
+    j = j - 1
   }
-  if (sum === N) {
-    result = i
-    break
-  }
+  numArray[j + 1] = key
 }
 
-console.log(result)
-```
-
-<br/>
-
-#### \* 문제 풀이
-
-1. 해당 부분에서 num의 각 자리수를 sum에 더하는 작업을 수행합니다. 예를들어 예제에서 나온 것처럼 출력값인 198이 num이였을때, 초기 num: 198, sum: 198이 됩니다. 첫 번째 루프에서, sum에 num의 일의 자리 수(198 % 10 = 8)를 더하고, num은 일의 자리를 제거합니다 (Math.floor(198 / 10) = 19). 이후 num: 19, sum: 198+8 = 206이 됩니다. 두 번째 루프에서, sum에 num의 일의 자리 수(19 % 10 = 9)를 더하고, num은 일의 자리를 제거합니다 (Math.floor(19 / 10) = 1). 이후 num: 1, sum: 206 + 9 = 215가 됩니다. 세 번째 루프에서, sum에 num의 일의 자리 수(1 % 10 = 1)를 더하고, num은 일의 자리를 제거합니다 (Math.floor(1 / 10) = 0). 이후 num: 0, sum: 216이 됩니다. 입력값인 N과 일치하므로 M은 198이 됩니다.
-
-```javascript
-while (num !== 0) {
-  sum += num % 10
-  num = Math.floor(num / 10)
-}
-```
-
-   <br/>
-
-결과 : `성공`
-
-## 단계 3. 수학은 비대면강의입니다 (문제번호 : 19532)
-
-#### \* 문제 : 수현이는 4차 산업혁명 시대에 살고 있는 중학생이다. 코로나 19로 인해, 수현이는 버추얼 학교로 버추얼 출석해 버추얼 강의를 듣고 있다. 수현이의 버추얼 선생님은 문자가 2개인 연립방정식을 해결하는 방법에 대해 강의하고, 다음과 같은 문제를 숙제로 냈다.
-
-- 다음 연립방정식에서 x와 y의 값을 계산하시오.
-  ![Alt text](lv12.png)
-
-#### 4차 산업혁명 시대에 숙제나 하고 앉아있는 것보다 버추얼 친구들을 만나러 가는 게 더 가치있는 일이라고 생각했던 수현이는 이런 연립방정식을 풀 시간이 없었다. 다행히도, 버추얼 강의의 숙제 제출은 인터넷 창의 빈 칸에 수들을 입력하는 식이다. 각 칸에는 -999 이상 999 이하의 정수만 입력할 수 있다. 수현이가 버추얼 친구들을 만나러 버추얼 세계로 떠날 수 있게 도와주자.
-
-- 입력 : 정수 a,b,c,d,e,f가 공백으로 구분되어 차례대로 주어진다. (-999 ≤ a,b,c,d,e,f ≤ 999)
-  문제에서 언급한 방정식을 만족하는 (x,y)가 유일하게 존재하고, 이 때 x와 y가 각각 -999 이상 999 이하의 정수인 경우만 입력으로 주어짐이 보장된다.
-
-- 출력 : 문제의 답인 x와 y를 공백으로 구분해 출력한다.
-
-```javascript
-const fs = require('fs')
-const [a, b, c, d, e, f] = fs
-  .readFileSync(0)
-  .toString()
-  .trim()
-  .split(' ')
-  .map(Number)
-
-const x = (c * e - b * f) / (a * e - b * d)
-const y = (a * f - c * d) / (a * e - b * d)
-console.log(x, y)
-```
-
-결과 : <code class="language-text other-color">틀림</code>
-
-```javascript
-const fs = require('fs')
-const [a, b, c, d, e, f] = fs
-  .readFileSync(0)
-  .toString()
-  .trim()
-  .split(' ')
-  .map(Number)
-
-for (let x = -999; x <= 999; x++) {
-  for (let y = -999; y <= 999; y++) {
-    if (a * x + b * y === c && d * x + e * y === f) {
-      console.log(x + ' ' + y)
-      process.exit(0)
-    }
-  }
+for (let i = 0; i < N; i++) {
+  console.log(numArray[i])
 }
 ```
 
@@ -151,167 +44,390 @@ for (let x = -999; x <= 999; x++) {
 
 #### \* 문제 풀이
 
-1. 첫번째 방법으로 풀었을 때는 틀렸습니다. "(c*e - b*f) / (a*e - b*d)와 (a*f - c*d) / (a* e - b*d)" 식은 정수 결과를 반환하지 않을 수도 있기 때문인데, 나눗셈 연산이 포함되어 나눗셈은 자연스럽게 실수 결과를 초래 할 수 있어서 입니다. 내장함수를 사용하는 방법도 실수를 정수로 올림 또는 내림하는 방법을 사용하게 되면 문제의 조건을 충족하지 않기 때문에 두번째 방법으로 풀어야 합니다.
+1. 배열의 두 번째 요소(인덱스 1)부터 배열의 끝까지 모든 요소를 복사하여 새 배열을 생성합니다.
 
-<br/>
+```javascript
+let numArray = inputData.slice(1).map(Number)
+```
+
+2. while문은 두 가지 조건을 확인합니다. 첫 번째 조건인 j >= 0은 j가 0 이상, 즉 유효한 배열 인덱스인지 확인하는 것입니다. 두 번째 조건인 numArray[j] > key는 j가 가리키는 요소가 key보다 큰지 확인하는 것입니다. key보다 큰 요소를 만나면, 그 요소는 key 뒤로 이동해야 합니다.
+
+```javascript
+while (j >= 0 && numArray[j] > key) {
+  numArray[j + 1] = numArray[j]
+  j = j - 1
+}
+```
 
 결과 : `성공`
-<br/>
 
-## 단계 4. 체스판 다시 칠하기 (문제번호 : 1018)
+## 단계 2. 대표값2 (문제번호 : 2587)
 
-#### \* 문제 : 지민이는 자신의 저택에서 MN개의 단위 정사각형으로 나누어져 있는 M×N 크기의 보드를 찾았다. 어떤 정사각형은 검은색으로 칠해져 있고, 나머지는 흰색으로 칠해져 있다. 지민이는 이 보드를 잘라서 8×8 크기의 체스판으로 만들려고 한다. 체스판은 검은색과 흰색이 번갈아서 칠해져 있어야 한다. 구체적으로, 각 칸이 검은색과 흰색 중 하나로 색칠되어 있고, 변을 공유하는 두 개의 사각형은 다른 색으로 칠해져 있어야 한다. 따라서 이 정의를 따르면 체스판을 색칠하는 경우는 두 가지뿐이다. 하나는 맨 왼쪽 위 칸이 흰색인 경우, 하나는 검은색인 경우이다. 보드가 체스판처럼 칠해져 있다는 보장이 없어서, 지민이는 8×8 크기의 체스판으로 잘라낸 후에 몇 개의 정사각형을 다시 칠해야겠다고 생각했다. 당연히 8\*8 크기는 아무데서나 골라도 된다. 지민이가 다시 칠해야 하는 정사각형의 최소 개수를 구하는 프로그램을 작성하시오.
+#### \* 문제 : 어떤 수들이 있을 때, 그 수들을 대표하는 값으로 가장 흔하게 쓰이는 것은 평균이다. 평균은 주어진 모든 수의 합을 수의 개수로 나눈 것이다. 예를 들어 10, 40, 30, 60, 30의 평균은 (10 + 40 + 30 + 60 + 30) / 5 = 170 / 5 = 34가 된다. 평균 이외의 또 다른 대표값으로 중앙값이라는 것이 있다. 중앙값은 주어진 수를 크기 순서대로 늘어 놓았을 때 가장 중앙에 놓인 값이다. 예를 들어 10, 40, 30, 60, 30의 경우, 크기 순서대로 늘어 놓으면
 
-- 입력 : 첫째 줄에 N과 M이 주어진다. N과 M은 8보다 크거나 같고, 50보다 작거나 같은 자연수이다. 둘째 줄부터 N개의 줄에는 보드의 각 행의 상태가 주어진다. B는 검은색이며, W는 흰색이다.
+**10 30 30 40 60**
 
-- 출력 : 첫째 줄에 지민이가 다시 칠해야 하는 정사각형 개수의 최솟값을 출력한다.
+#### 이 되고 따라서 중앙값은 30이 된다. 다섯 개의 자연수가 주어질 때 이들의 평균과 중앙값을 구하는 프로그램을 작성하시오.
+
+- 입력 : 첫째 줄부터 다섯 번째 줄까지 한 줄에 하나씩 자연수가 주어진다. 주어지는 자연수는 100 보다 작은 10의 배수이다.
+
+- 출력 : 첫째 줄에는 평균을 출력하고, 둘째 줄에는 중앙값을 출력한다. 평균과 중앙값은 모두 자연수이다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const [N, M] = inputData[0].split(' ').map(Number)
-const board = inputData.slice(1).map(row => row.split(''))
 
-const models = [
-  ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
-  ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
-]
+let numArray = inputData.slice(0).map(Number)
 
-for (let x = 0; x + 7 < N; x++) {
-  for (let y = 0; y + 7 < M; y++) {
-    for (let k = 0; k < 2; k++) {
-      let paint = 0
-      for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-          if (board[x + i][y + j] !== models[(i + k) % 2][j % 8]) {
-            paint++
-          }
-        }
-      }
-      minPaint = Math.min(minPaint, paint)
-    }
-  }
+numArray.sort((a, b) => a - b)
+
+let average = 0
+
+for (i = 0; i < 5; i++) {
+  average += numArray[i]
 }
 
-console.log(minPaint)
+console.log(average / 5)
+console.log(numArray[2])
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. models는 체스판의 두 가지 가능한 패턴을 나타냅니다: 하나는 흰색(W)에서 시작하고, 다른 하나는 검은색(B)에서 시작합니다.
+1. ((a, b) => a - b) 함수를 통해 a-b의 결과를 반환하게 하고, sort() 메서드가 a,b의 순서를 정하게 합니다. a-b의 값이 0보다 작다면 a가 b보다 작다는 의미이므로 앞에 위치합니다. 0을 반환하면 같다는 의미이므로 위치를 바꾸지 않습니다. 0보다 큰 값을 반환하면, a가 b보다 크다는 의미이므로 뒤에 위치합니다. 이러한 방법으로 배열을 만들어줍니다. 또한
+   Array.prototype.sort() 메서드는 내부적으로 배열의 모든 요소를 순회하면서 비교 함수를 이용해 정렬을 순회합니다. 'for'반복문이 배열의 요소를 순회하는 것과 유사하게 동작합니다.
 
 ```javascript
-const models = [
-  ['W', 'B', 'W', 'B', 'W', 'B', 'W', 'B'],
-  ['B', 'W', 'B', 'W', 'B', 'W', 'B', 'W'],
-]
+numArray.sort((a, b) => a - b)
 ```
 
-2. 첫번째와 두번째 for loop는 전체 보드에서 8x8 크기의 모든 가능한 영역을 조사하기 위한 것입니다. 처음 시작하는 8x8을 한칸씩 옮기면서 조사해주는 loop입니다.
-
-```javascript
-for (let x = 0; x + 7 < N; x++) {
-  for (let y = 0; y + 7 < M; y++) {
-
-```
-
-3. 세번째 for loop는 체스판의 두 가지 패턴을 모두 고려하기 위한 것입니다.
-
-```javascript
-    for (let k = 0; k < 2; k++) {
-
-```
-
-4. 네번째와 다섯번째 for loop는 현재 조사 중인 8x8 크기의 구역의 각 셀을 체크하기 위한 것입니다.
-
-```javascript
-     let paint = 0
-      for (let i = 0; i < 8; i++) {
-        for (let j = 0; j < 8; j++) {
-
-```
-
-5. if 문에서는 현재 셀의 색상이 체스판 패턴의 색상과 일치하지 않는 경우 paint를 1 증가시킵니다. 이는 해당 셀이 다시 칠해져야 함을 의미합니다. 각 8x8 영역에 대해 계산한 paint 값과 현재까지의 최소값 minPaint를 비교하여 더 작은 값으로 minPaint를 갱신합니다.
-
-```javascript
-     if (board[x + i][y + j] !== models[(i + k) % 2][j % 8]) {
-            paint++
-          }
-        }
-      }
-      minPaint = Math.min(minPaint, paint)
-```
+<br/>
 
 결과 : `성공`
+<br/>
 
-## 단계 5. 영화감독 숌 (문제번호 : 1436)
+## 단계 3. 커트라인 (문제번호 : 25305)
 
-#### \* 문제 : 666은 종말을 나타내는 수라고 한다. 따라서, 많은 블록버스터 영화에서는 666이 들어간 제목을 많이 사용한다. 영화감독 숌은 세상의 종말 이라는 시리즈 영화의 감독이다. 조지 루카스는 스타워즈를 만들 때, 스타워즈 1, 스타워즈 2, 스타워즈 3, 스타워즈 4, 스타워즈 5, 스타워즈 6과 같이 이름을 지었고, 피터 잭슨은 반지의 제왕을 만들 때, 반지의 제왕 1, 반지의 제왕 2, 반지의 제왕 3과 같이 영화 제목을 지었다. 하지만 숌은 자신이 조지 루카스와 피터 잭슨을 뛰어넘는다는 것을 보여주기 위해서 영화 제목을 좀 다르게 만들기로 했다. 종말의 수란 어떤 수에 6이 적어도 3개 이상 연속으로 들어가는 수를 말한다. 제일 작은 종말의 수는 666이고, 그 다음으로 큰 수는 1666, 2666, 3666, .... 이다. 따라서, 숌은 첫 번째 영화의 제목은 "세상의 종말 666", 두 번째 영화의 제목은 "세상의 종말 1666"와 같이 이름을 지을 것이다. 일반화해서 생각하면, N번째 영화의 제목은 세상의 종말 (N번째로 작은 종말의 수) 와 같다. 숌이 만든 N번째 영화의 제목에 들어간 수를 출력하는 프로그램을 작성하시오. 숌은 이 시리즈를 항상 차례대로 만들고, 다른 영화는 만들지 않는다.
+#### \* 문제 : 2022 연세대학교 미래캠퍼스 슬기로운 코딩생활에 N명의 학생들이 응시했다. 이들 중 점수가 가장 높은 k명은 상을 받을 것이다. 이 때, 상을 받는 커트라인이 몇 점인지 구하라. 커트라인이란 상을 받는 사람들 중 점수가 가장 가장 낮은 사람의 점수를 말한다.
 
-- 입력 : 첫째 줄에 N이 주어진다. N은 10,000보다 작거나 같은 자연수이다.
-- 출력 : 첫째 줄에 N번째 영화의 제목에 들어간 수를 출력한다.
+- 입력 : 첫째 줄에는 응시자의 수 N과 상을 받는 사람의 수 k가 공백을 사이에 두고 주어진다. 둘째 줄에는 각 학생의 점수 x가 공백을 사이에 두고 주어진다.
+- 출력 : 상을 받는 커트라인을 출력하라.
 
 ```javascript
 const fs = require('fs')
-const N = parseInt(fs.readFileSync(0).toString().trim())
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const [N, k] = inputData[0].split(' ').map(Number)
 
-let num = 666
-let count = 0
+let numArray = inputData[1].split(' ').map(Number)
 
-while (true) {
-  if (String(num).includes('666')) count++
-  if (count === N) {
-    console.log(num)
-    break
-  }
-  num++
-}
+numArray.sort((a, b) => b - a)
+
+console.log(numArray[k - 1])
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. num이라는 변수를 1씩 증가시키면서 그 안에 '666'이라는 문자열이 포함되어 있는지를 검사해줍니다. 코드는 num을 666에서 시작하여 1씩 증가시키고, 이 숫자를 문자열로 변환하여 '666'이 포함되어 있는지 확인합니다. 만약 '666'이 포함되어 있다면, 그것은 우리가 찾고 있는 종말의 숫자 중 하나이므로 count를 1 증가시킵니다. num을 1씩 증가시키면서 666이 들어가있는지 하나하나 확인하는 작업입니다.
+1. 이미 정렬되어 있기 때문에 slice() 메서드가 필요없습니다.
+
+```javascript
+let numArray = inputData[1].split(' ').map(Number)
+```
+
+2. b-a로 순서를 바꿔서 내림차순으로 만들어줄 수 있습니다. 또는 reverse()메서드를 사용하여 순서를 반대로 바꿔 내림차순으로 만들어 줄 수도 있습니다.
+
+```javascript
+numArray.sort((a, b) => b - a)
+```
+
+<br/>
+
+결과 : `성공`
+<br/>
+
+## 단계 4. 수 정렬하기 2 (문제번호 : 2751)
+
+#### \* 문제 : N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
+
+\*\*시간 복잡도가 O(nlogn)인 정렬 알고리즘으로 풀 수 있습니다. 예를 들면 병합 정렬, 힙 정렬 등이 있지만, 어려운 알고리즘이므로 지금은 언어에 내장된 정렬 함수를 쓰는 것을 추천드립니다.
+
+- 입력 : 첫째 줄에 수의 개수 N(1 ≤ N ≤ 1,000,000)이 주어진다. 둘째 줄부터 N개의 줄에는 수가 주어진다. 이 수는 절댓값이 1,000,000보다 작거나 같은 정수이다. 수는 중복되지 않는다.
+- 출력 : 첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData[0])
+
+let numArray = inputData.slice(1).map(Number)
+
+numArray.sort((a, b) => a - b)
+
+console.log(numArray.join('\n'))
+```
+
+<br/>
+
+#### \* 문제 풀이
+
+1. Array.prototype.sort가 팀소트(TimSort) 알고리즘을 사용하여 O(n log n)의 시간 복잡도를 갖습니다.
+
+```javascript
+numArray.sort((a, b) => a - b)
+```
+
+2. 첫번째를 사용하여 문제를 풀었으나 **시간초과**가 나왔습니다. 느린 입출력 함수이기 때문이라고 생각합니다. 그래서 두번쨰 방법인 Array.prototype.join 메서드를 사용해서, 배열의 모든 요소를 한 번에 문자열로 연결할 수 있게했습니다. 이렇게 하면 console.log 함수를 한 번만 호출하면 되므로 효율적인 방법이 됩니다.
+
+```javascript
+for (i = 0; i < N; i++) {
+  console.log(numArray[i])
+}
+```
+
+```javascript
+console.log(numArray.join('\n'))
+```
+
+결과 : `성공`
+
+## 단계 5. 수 정렬하기 3 (문제번호 : 10989)
+
+#### \* 문제 : N개의 수가 주어졌을 때, 이를 오름차순으로 정렬하는 프로그램을 작성하시오.
+
+\*\*수의 범위가 작다면 카운팅 정렬을 사용하여 더욱 빠르게 정렬할 수 있습니다.
+
+- 입력 : 첫째 줄에 수의 개수 N(1 ≤ N ≤ 10,000,000)이 주어진다. 둘째 줄부터 N개의 줄에는 수가 주어진다. 이 수는 10,000보다 작거나 같은 자연수이다.
+- 출력 : 첫째 줄부터 N개의 줄에 오름차순으로 정렬한 결과를 한 줄에 하나씩 출력한다.
+
+**이 문제는 node.js로는 메모리 문제로 인해 풀 수 없는 문제라고 합니다.**
+
+<br/>
+
+#### \* 문제 풀이
+
+1. 카운팅 정렬의 기본 아이디어는 다음과 같습니다:<br/> 1) 입력값 중 가장 큰 정수를 찾습니다. 이 값을 배열의 크기로 사용합니다.<br/> 2) 배열의 인덱스를 입력값으로 하고, 해당 입력값의 등장 횟수를 배열의 값으로 저장합니다.<br/> 3)누적합을 계산하여 각 값이 정렬된 결과에서 어디에 위치해야 하는지를 결정합니다.
    <br/>
    <br/>
 
 결과 : `성공`
 
-## 단계 6. 설탕 배달 (문제번호 : 2839)
+## 단계 6. 소트인사이드 (문제번호 : 1427)
 
-#### \* 문제 : 상근이는 요즘 설탕공장에서 설탕을 배달하고 있다. 상근이는 지금 사탕가게에 설탕을 정확하게 N킬로그램을 배달해야 한다. 설탕공장에서 만드는 설탕은 봉지에 담겨져 있다. 봉지는 3킬로그램 봉지와 5킬로그램 봉지가 있다. 상근이는 귀찮기 때문에, 최대한 적은 봉지를 들고 가려고 한다. 예를 들어, 18킬로그램 설탕을 배달해야 할 때, 3킬로그램 봉지 6개를 가져가도 되지만, 5킬로그램 3개와 3킬로그램 1개를 배달하면, 더 적은 개수의 봉지를 배달할 수 있다. 상근이가 설탕을 정확하게 N킬로그램 배달해야 할 때, 봉지 몇 개를 가져가면 되는지 그 수를 구하는 프로그램을 작성하시오.
+#### \* 문제 : 배열을 정렬하는 것은 쉽다. 수가 주어지면, 그 수의 각 자리수를 내림차순으로 정렬해보자.
 
-- 입력 : 첫째 줄에 N이 주어진다. (3 ≤ N ≤ 5000)
-- 출력 : 상근이가 배달하는 봉지의 최소 개수를 출력한다. 만약, 정확하게 N킬로그램을 만들 수 없다면 -1을 출력한다.
+- 입력 : 첫째 줄에 정렬하려고 하는 수 N이 주어진다. N은 1,000,000,000보다 작거나 같은 자연수이다.
+- 출력 : 첫째 줄에 자리수를 내림차순으로 정렬한 수를 출력한다.
 
 ```javascript
 const fs = require('fs')
-const N = parseInt(fs.readFileSync(0).toString().trim())
+const N = fs.readFileSync(0).toString().trim()
 
-let count = 0
+let numArray = Array.from(N).map(Number)
 
-let tempN = N
-while (true) {
-  if (tempN % 5 === 0) {
-    console.log(tempN / 5 + count)
-    break
-  } else if (tempN <= 0) {
-    console.log(-1)
-    break
-  }
-  tempN -= 3
-  count++
+numArray.sort((a, b) => b - a)
+
+console.log(numArray.join(''))
+```
+
+#### \* 문제 풀이
+
+1.  문제에서 주어진 입력 조건에 따르면, 주어지는 N은 자연수이기 때문에, N을 문자열로 변환하여 각 자릿수를 분리해야 합니다. Array.from(N) 코드는 문자열 N의 각 문자를 배열로 변환합니다. 예를 들어, N이 '1234'라면 Array.from(N)의 결과는 ['1', '2', '3', '4']가 됩니다. .map(Number)은 변환된 배열의 각 요소에 Number 함수를 적용합니다.
+
+```javascript
+const N = fs.readFileSync(0).toString().trim()
+
+let numArray = Array.from(N).map(Number)
+```
+
+결과 : `성공`
+
+## 단계 7. 좌표 정렬하기 (문제번호 : 11650)
+
+#### \* 문제 : 2차원 평면 위의 점 N개가 주어진다. 좌표를 x좌표가 증가하는 순으로, x좌표가 같으면 y좌표가 증가하는 순서로 정렬한 다음 출력하는 프로그램을 작성하시오.
+
+- 입력 : 첫째 줄에 점의 개수 N (1 ≤ N ≤ 100,000)이 주어진다. 둘째 줄부터 N개의 줄에는 i번점의 위치 xi와 yi가 주어진다. (-100,000 ≤ xi, yi ≤ 100,000) 좌표는 항상 정수이고, 위치가 같은 두 점은 없다.
+- 출력 : 첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData[0])
+
+const points = []
+
+for (let i = 1; i <= N; i++) {
+  const point = inputData[i].split(' ').map(Number)
+  points.push(point)
 }
+
+points.sort((a, b) => {
+  if (a[0] !== b[0]) {
+    return a[0] - b[0]
+  }
+  return a[1] - b[1]
+})
+
+console.log(points.map(point => point.join(' ')).join('\n'))
+```
+
+#### \* 문제 풀이
+
+1. Array.prototype.sort()메소드에 조건문을 사용한 방법입니다. 이 코드에서는 먼저 두 점의 x 좌표(a[0]와 b[0])를 비교합니다. 만약 두 점의 x 좌표가 다르다면, x 좌표가 작은 순서대로 정렬합니다. 이를 위해 a[0] - b[0]를 반환하는데, 이 값이 음수라면 a가 b보다 앞에 오게 되고, 양수라면 a가 b보다 뒤에 오게 됩니다.
+   그러나 만약 두 점의 x 좌표가 같다면, y 좌표(a[1]과 b[1])를 비교합니다. 이 때 y 좌표가 작은 순서대로 정렬합니다.<br/>
+   예를 들어, 아래와 같이 입력을 받았다면 points 배열의 각 요소인 [1,2]와 [2,3]가 a와 b에 들어가게 됩니다. a[0] = 1 이고, b[0] = 2 입니다. 그리고 a[1] = 2 이고, b[1] = 3 입니다.<br/>
+   1 2<br/>
+   2 3
+
+```javascript
+points.sort((a, b) => {
+  if (a[0] !== b[0]) {
+    return a[0] - b[0]
+  }
+  return a[1] - b[1]
+})
+```
+
+결과 : `성공`
+
+## 단계 8. 좌표 정렬하기 2 (문제번호 : 11651)
+
+#### \* 문제 : 2차원 평면 위의 점 N개가 주어진다. 좌표를 y좌표가 증가하는 순으로, y좌표가 같으면 x좌표가 증가하는 순서로 정렬한 다음 출력하는 프로그램을 작성하시오.
+
+- 입력 : 첫째 줄에 점의 개수 N (1 ≤ N ≤ 100,000)이 주어진다. 둘째 줄부터 N개의 줄에는 i번점의 위치 xi와 yi가 주어진다. (-100,000 ≤ xi, yi ≤ 100,000) 좌표는 항상 정수이고, 위치가 같은 두 점은 없다.
+
+- 출력 : 첫째 줄부터 N개의 줄에 점을 정렬한 결과를 출력한다.
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData[0])
+
+const points = []
+
+for (let i = 1; i <= N; i++) {
+  const point = inputData[i].split(' ').map(Number)
+  points.push(point)
+}
+
+points.sort((a, b) => {
+  if (a[1] !== b[1]) {
+    return a[1] - b[1]
+  }
+  return a[0] - b[0]
+})
+
+console.log(points.map(point => point.join(' ')).join('\n'))
+```
+
+결과 : `성공`
+
+## 단계 9. 단어 정렬 (문제번호 : 1181)
+
+#### \* 문제 : 알파벳 소문자로 이루어진 N개의 단어가 들어오면 아래와 같은 조건에 따라 정렬하는 프로그램을 작성하시오.
+
+#### 1. 길이가 짧은 것부터
+
+#### 2. 길이가 같으면 사전 순으로
+
+#### 단, 중복된 단어는 하나만 남기고 제거해야 한다.
+
+- 입력 : 첫째 줄에 단어의 개수 N이 주어진다. (1 ≤ N ≤ 20,000) 둘째 줄부터 N개의 줄에 걸쳐 알파벳 소문자로 이루어진 단어가 한 줄에 하나씩 주어진다. 주어지는 문자열의 길이는 50을 넘지 않는다.
+- 출력 : 조건에 따라 정렬하여 단어들을 출력한다.
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData.shift())
+
+let wordSet = new Set(inputData)
+
+let wordArray = Array.from(wordSet).sort((a, b) => {
+  if (a.length !== b.length) {
+    return a.length - b.length
+  }
+  if (a < b) return -1
+  if (a > b) return 1
+  return 0
+})
+
+console.log(wordArray.join('\n'))
+```
+
+#### \* 문제 풀이
+
+1. shift() 메서드는 JavaScript 배열의 첫 번째 요소를 제거하고 그 요소를 반환합니다. 따라서 const N = parseInt(inputData.shift()) 코드는 inputData 배열의 첫 번째 요소를 제거하고 그 값을 숫자로 변환하여 N에 할당합니다.
+
+```javascript
+const N = parseInt(inputData.shift())
+```
+
+2. new Set(inputData)는 inputData 배열의 모든 요소를 포함하는 새로운 Set 객체를 생성합니다. Set은 JavaScript의 내장 데이터 구조 중 하나로, 중복된 요소를 포함하지 않는 컬렉션입니다. 즉, 같은 값을 가진 요소가 여러 개 있는 배열을 Set으로 변환하면 중복된 요소가 자동으로 제거됩니다.
+
+```javascript
+let wordSet = new Set(inputData)
+```
+
+3. if (a.length !== b.length) 구문은 두 문자열의 길이가 다르면 길이에 따라 먼저 정렬하도록 합니다. 그 이후 두 문자열의 길이가 동일한 경우에는 길이로 정렬할 수 없기 때문에 그 이후의 조건인 if (a < b) return -1; if (a > b) return 1; return 0; 구문이 사용됩니다. 이 조건은 길이가 동일한 두 문자열을 사전 순으로 정렬합니다. if (a < b) return -1; 이 구문은 문자열 a가 b보다 사전 순서상 앞에 오는 경우, 즉 a가 b보다 "작은" 경우를 처리합니다. 이 경우 정렬 함수는 -1을 반환하여 a가 b보다 앞에 위치하도록 합니다. if (a > b) return 1; 이 구문은 a가 b보다 "큰" 경우, 즉 a가 사전 순서상 b보다 뒤에 오는 경우를 처리합니다. 정렬 함수는 1을 반환하여 a가 b보다 뒤에 위치하도록 합니다.( JavaScript에서 문자열은 사전식(lexical) 비교를 사용하기 때문에 "<"와 ">"를 통해 비교 가능합니다.)
+
+```javascript
+if (a < b) return -1
+if (a > b) return 1
+return 0
+```
+
+결과 : `성공`
+
+## 단계 10. 나이순 정렬 (문제번호 : 10814)
+
+#### \* 문제 : 온라인 저지에 가입한 사람들의 나이와 이름이 가입한 순서대로 주어진다. 이때, 회원들을 나이가 증가하는 순으로, 나이가 같으면 먼저 가입한 사람이 앞에 오는 순서로 정렬하는 프로그램을 작성하시오.
+
+- 입력 : 첫째 줄에 온라인 저지 회원의 수 N이 주어진다. (1 ≤ N ≤ 100,000) 둘째 줄부터 N개의 줄에는 각 회원의 나이와 이름이 공백으로 구분되어 주어진다. 나이는 1보다 크거나 같으며, 200보다 작거나 같은 정수이고, 이름은 알파벳 대소문자로 이루어져 있고, 길이가 100보다 작거나 같은 문자열이다. 입력은 가입한 순서로 주어진다.
+
+- 출력 : 첫째 줄부터 총 N개의 줄에 걸쳐 온라인 저지 회원을 나이 순, 나이가 같으면 가입한 순으로 한 줄에 한 명씩 나이와 이름을 공백으로 구분해 출력한다.
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData[0])
+
+const array = []
+
+for (let i = 1; i <= N; i++) {
+  const temp = inputData[i].split(' ')
+  const age = parseInt(temp[0])
+  const name = temp[1]
+  array.push([age, name])
+}
+
+array.sort((a, b) => {
+  return a[0] - b[0]
+})
+
+console.log(array.map(point => point.join(' ')).join('\n'))
+```
+
+결과 : `성공`
+
+## 단계 11. 좌표 압축 (문제번호 : 18870)
+
+#### \* 문제 : 수직선 위에 N개의 좌표 X1, X2, ..., XN이 있다. 이 좌표에 좌표 압축을 적용하려고 한다. Xi를 좌표 압축한 결과 X'i의 값은 Xi > Xj를 만족하는 서로 다른 좌표 Xj의 개수와 같아야 한다. X1, X2, ..., XN에 좌표 압축을 적용한 결과 X'1, X'2, ..., X'N를 출력해보자.
+
+- 입력 : 첫째 줄에 N이 주어진다. 둘째 줄에는 공백 한 칸으로 구분된 X1, X2, ..., XN이 주어진다.
+- 출력 : 첫째 줄에 X'1, X'2, ..., X'N을 공백 한 칸으로 구분해서 출력한다.
+
+```javascript
+const fs = require('fs')
+const inputData = fs.readFileSync(0).toString().trim().split('\n')
+const N = parseInt(inputData[0])
+const array = inputData[1].split(' ').map(Number)
 ```
 
 결과 : `성공`
 
 <br/>
 <br/>
+- 백준코딩 단계 별 풀어보기 Step13 배열 링크
 
-- 백준코딩 단계 별 풀어보기 Step12 브루트 포스 링크
-
-  [<https://www.acmicpc.net/step/22>](https://www.acmicpc.net/step/22)
+[<https://www.acmicpc.net/step/9>](https://www.acmicpc.net/step/9)
