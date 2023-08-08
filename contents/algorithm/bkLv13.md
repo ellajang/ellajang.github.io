@@ -2,7 +2,7 @@
 date: '2023-08-07'
 title: '백준-정렬'
 categories: ['algorithm']
-summary: '이 게시글은 백준 정렬 단계 중 1번부터 11번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 '
+summary: '이 게시글은 백준 정렬 단계 중 1번부터 11번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	배열의 원소를 순서대로 나열하는 알고리즘을 배웁니다. '
 thumbnail: '../baekjoon.jpeg'
 ---
 
@@ -420,8 +420,55 @@ console.log(array.map(point => point.join(' ')).join('\n'))
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const N = parseInt(inputData[0])
-const array = inputData[1].split(' ').map(Number)
+const N = parseInt(inputData.shift())
+const array = inputData[0].split(' ').map(Number)
+
+const sortedArray = Array.from(new Set(array.slice())).sort((a, b) => a - b)
+const compressObj = {}
+
+for (let i = 0; i < sortedArray.length; i++) {
+  compressObj[sortedArray[i]] = i
+}
+
+const result = array.map(element => compressObj[element])
+
+console.log(result.join(' '))
+```
+
+#### \* 문제 풀이
+
+1. 문제 자체를 해석하는데 어려움을 겪어 먼저 문제를 해석하자면 입력받은 좌표들을 오름차순으로 정렬 했을 때, 해당 값들의 index값 즉, 순서에 대한 숫자를 출력하는 문제입니다.
+
+2. new Set(inputData)는 inputData 배열의 모든 요소를 포함하는 새로운 Set 객체를 생성합니다. Set은 JavaScript의 내장 데이터 구조 중 하나로, 중복된 요소를 포함하지 않는 컬렉션입니다. 즉, 같은 값을 가진 요소가 여러 개 있는 배열을 Set으로 변환하면 중복된 요소가 자동으로 제거됩니다. slice() 메서드를 이렇게 인자 없이 사용하면 원래의 배열을 그대로 복사하는 것입니다. 원본 배열을 변경하지 않고 새로운 배열을 만드는 것 입니다.
+
+```javascript
+const sortedArray = Array.from(new Set(array.slice())).sort((a, b) => a - b)
+```
+
+3. compressObj는 객체로 객체는 키-값 쌍의 모음입니다. 압축 결과를 매핑하기 위해 객체로 사용했습니다.
+
+```javascript
+const compressObj = {}
+```
+
+4. sortedArray에 있는 요소의 수 까지 반복되게 루프를 돌게 합니다. sortedArray에 있는 첫번째 요소의 값이 쌍을 이루어 compressObj에 입력되게 합니다. 예를들어, { '-10': 0 } -> { '-10': 0, '-9': 1 } -> { '2': 2, '-10': 0, '-9': 1 } -> { '2': 2, '4': 3, '-10': 0, '-9': 1 }로 추가되게 합니다.
+
+```javascript
+for (let i = 0; i < sortedArray.length; i++) {
+  compressObj[sortedArray[i]] = i
+}
+```
+
+5. JavaScript의 map 함수를 이용하여 원래의 배열인 array 배열의 각 요소를 compressObj 객체에 매핑한 결과를 새 배열로 만들어 줍니다.
+
+```javascript
+const result = array.map(element => compressObj[element])
+```
+
+6. .join(' ')메서드를 사용하여 result 배열의 모든 요소를 문자열로 변환하고, 그 사이에 공백 문자(' ')를 추가한 문자열을 출력되게 합니다.
+
+```javascript
+console.log(result.join(' '))
 ```
 
 결과 : `성공`

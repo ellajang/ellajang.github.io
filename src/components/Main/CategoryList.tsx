@@ -121,7 +121,7 @@ const CategoryContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-left: 80px;
+  margin-left: 90px;
   @media (max-width: 768px) {
     margin-top: 30px;
     margin-bottom: 40px;
@@ -192,7 +192,7 @@ const Category = styled('div')(() => {
     boxSizing: 'border-box',
     cursor: 'pointer',
     position: 'relative',
-    marginLeft: '10px',
+    marginLeft: '7px',
     transition: ' 0.3s box-shadow',
     '@media (max-width: 1250px)': {
       width: '90%',

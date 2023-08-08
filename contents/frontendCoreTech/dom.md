@@ -1,7 +1,7 @@
 ---
 date: '2023-08-06'
 title: 'Dom과 Virtual Dom(가상돔)이란?'
-categories: ['All']
+categories: ['All', 'HTML', 'JAVASCRIPT']
 summary: 'Dom과 Styed-Virtual Dom 대해 명확하게 알아보겠습니다.'
 thumbnail: './dom.png'
 ---
