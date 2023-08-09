@@ -2,7 +2,7 @@
 date: '2023-08-08'
 title: 'TypeScipt란?'
 categories: ['TYPESCRIPT']
-summary: 'TypeScipt가 무엇이고, 특징에 대해 정리했습니다.'
+summary: '웹 페이지를 개발하면서 이용했던,TypeScipt의 개념과 특징에 대해 정리했습니다.'
 thumbnail: './ts.png'
 ---
 

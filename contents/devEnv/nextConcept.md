@@ -2,7 +2,7 @@
 date: '2023-08-08'
 title: 'Next.js란?'
 categories: ['NEXT']
-summary: '웹 페이지를 개발하면서 이용했던, React에 대해서 정리했습니다.'
+summary: '웹 페이지(포트폴리오)를 개발하면서 이용했던, Next.js에 대해서 정리했습니다.'
 thumbnail: './next.png'
 ---
 
