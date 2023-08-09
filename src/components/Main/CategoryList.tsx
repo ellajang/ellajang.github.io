@@ -121,7 +121,7 @@ const CategoryContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-left: 90px;
+  margin-left: 100px;
   @media (max-width: 768px) {
     margin-top: 30px;
     margin-bottom: 40px;
@@ -219,7 +219,7 @@ const CategoryItemWrapper = styled('div')(() => {
     flexGrow: '1',
     flexWrap: 'wrap',
     boxSizing: 'border-box',
-    margin: '0px 0px 20px 20px',
+    margin: '0px 0px 20px 0px',
     '@media (max-width: 1250px)': {
       flexBasis: '45%',
       margin: '3px 0px 0px 20px',

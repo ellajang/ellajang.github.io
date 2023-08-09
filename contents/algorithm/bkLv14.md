@@ -72,7 +72,7 @@ console.log(count)
 결과 : `성공`
 <br/>
 
-<!-- ## 단계 3. 회사에 있는 사람 (문제번호 : 7785)
+## 단계 3. 회사에 있는 사람 (문제번호 : 7785)
 
 #### \* 문제 : 상근이는 세계적인 소프트웨어 회사 기글에서 일한다. 이 회사의 가장 큰 특징은 자유로운 출퇴근 시간이다. 따라서, 직원들은 반드시 9시부터 6시까지 회사에 있지 않아도 된다. 각 직원은 자기가 원할 때 출근할 수 있고, 아무때나 퇴근할 수 있다. 상근이는 모든 사람의 출입카드 시스템의 로그를 가지고 있다. 이 로그는 어떤 사람이 회사에 들어왔는지, 나갔는지가 기록되어져 있다. 로그가 주어졌을 때, 현재 회사에 있는 모든 사람을 구하는 프로그램을 작성하시오.
 
@@ -84,48 +84,51 @@ const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
 const n = parseInt(inputData[0])
 
-const log = []
+const currentMembers = new Set()
+
 for (let i = 1; i <= n; i++) {
-  const [name, action] = input[i].split(' ')
-  log.push({ name, action })
-}
-
-const currentMembers = []
-
-for (let [name, action] of log) {
+  const [name, action] = inputData[i].split(' ')
   if (action === 'enter') {
-    currentMembers.push(name)
+    currentMembers.add(name)
+  } else {
+    currentMembers.delete(name)
   }
 }
 
-currentMembers
-  .sort()
-  .reverse()
-  .forEach(name => console.log(name))
+const result = [...currentMembers].sort((a, b) => {
+  if (a > b) return -1
+  else if (a < b) return 1
+  else return 0
+})
+console.log(result.join('\n'))
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. 이미 정렬되어 있기 때문에 slice() 메서드가 필요없습니다.
+1. Array.prototype.sort() 메서드에서 사용되는 콜백 함수는 배열의 두 요소를 인자로 받아, 어느 것이 먼저 오는지를 결정합니다. sort() 함수의 콜백 내에서 문자열을 입력받을 경우, 이들은 사전순으로 비교됩니다.
 
 ```javascript
-let numArray = inputData[1].split(' ').map(Number)
+const result = [...currentMembers].sort((a, b) => {
+  if (a > b) return -1
+  else if (a < b) return 1
+  else return 0
+})
 ```
 
-2. b-a로 순서를 바꿔서 내림차순으로 만들어줄 수 있습니다. 또는 reverse()메서드를 사용하여 순서를 반대로 바꿔 내림차순으로 만들어 줄 수도 있습니다.
+2. return 되는 값 -1, 1, 0은 배열의 순서를 나타냅니다. 반환값이 음수일 경우, a를 b보다 배열에서 앞쪽에 배치합니다. 반환값이 양수일 경우, a를 b보다 배열에서 뒷쪽에 배치합니다. 반환 값이 0일 경우, a와 b의 위치를 변경하지 않습니다.
 
 ```javascript
-numArray.sort((a, b) => b - a)
+if (a > b) return -1
+else if (a < b) return 1
+else return 0
 ```
-
-<br/>
 
 결과 : `성공`
 <br/>
- -->
-<!-- ## 단계 4. 나는야 포켓몬 마스터 이다솜 (문제번호 : 1620)
+
+## 단계 4. 나는야 포켓몬 마스터 이다솜 (문제번호 : 1620)
 
 #### \* 문제 : (생략)
 
@@ -135,40 +138,58 @@ numArray.sort((a, b) => b - a)
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const N = parseInt(inputData[0])
+const [N, M] = inputData[0].split(' ').map(Number)
 
-let numArray = inputData.slice(1).map(Number)
+const nameToNumber = new Map()
+const numberToName = new Map()
 
-numArray.sort((a, b) => a - b)
+for (let i = 0; i < N; i++) {
+  const name = inputData[i + 1]
+  nameToNumber.set(name, i + 1)
+  numberToName.set(i + 1, name)
+}
 
-console.log(numArray.join('\n'))
+for (let i = 0; i < M; i++) {
+  const result = inputData[N + i + 1]
+
+  if (isNaN(result)) {
+    console.log(nameToNumber.get(result))
+  } else {
+    console.log(numberToName.get(Number(result)))
+  }
+}
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. Array.prototype.sort가 팀소트(TimSort) 알고리즘을 사용하여 O(n log n)의 시간 복잡도를 갖습니다.
+1. Map 객체는 JavaScript에서 제공하는 내장 객체로 키-값 쌍을 저장하게 됩니다. 하나의 Map을 사용하여 키를 출력할땐 키를 값을 출력할땐 값을 출력하게 코드를 작성할 수 있지만 키와 값을 반대로하는 별도의 함수가 추가로 필요하기 때문에 Map을 두 개로 나눴습니다.
 
 ```javascript
-numArray.sort((a, b) => a - b)
+const nameToNumber = new Map()
+const numberToName = new Map()
 ```
 
-2. 첫번째를 사용하여 문제를 풀었으나 **시간초과**가 나왔습니다. 느린 입출력 함수이기 때문이라고 생각합니다. 그래서 두번쨰 방법인 Array.prototype.join 메서드를 사용해서, 배열의 모든 요소를 한 번에 문자열로 연결할 수 있게했습니다. 이렇게 하면 console.log 함수를 한 번만 호출하면 되므로 효율적인 방법이 됩니다.
+2. nameToNumber.set(name, i + 1)는 nameToNumber 맵에 포켓몬 이름을 키로, 해당 포켓몬의 번호(인덱스 + 1)을 값으로 추가합니다. numberToName.set(i + 1, name)는 numberToName 맵에 포켓몬 번호를 키로, 해당 포켓몬의 이름을 값으로 추가합니다.
 
 ```javascript
-for (i = 0; i < N; i++) {
-  console.log(numArray[i])
+for (let i = 0; i < N; i++) {
+  const name = inputData[i + 1]
+  nameToNumber.set(name, i + 1)
+  numberToName.set(i + 1, name)
 }
 ```
 
+3. isNaN은 JavaScript 내장 함수로, "is Not a Number"의 약자입니다. 이 함수는 주어진 값이 숫자가 아니라면 true를 반환하고, 숫자라면 false를 반환합니다. 조건문이 문자일 때를 확인해야하므로 isNaN을 사용하였습니다.
+
 ```javascript
-console.log(numArray.join('\n'))
+ if (isNaN(result))
 ```
 
-결과 : `성공` -->
+결과 : `성공`
 
-<!-- ## 단계 5. 숫자 카드 2 (문제번호 : 10816)
+## 단계 5. 숫자 카드 2 (문제번호 : 10816)
 
 #### \* 문제 : 숫자 카드는 정수 하나가 적혀져 있는 카드이다. 상근이는 숫자 카드 N개를 가지고 있다. 정수 M개가 주어졌을 때, 이 수가 적혀있는 숫자 카드를 상근이가 몇 개 가지고 있는지 구하는 프로그램을 작성하시오.
 
@@ -180,18 +201,52 @@ console.log(numArray.join('\n'))
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
 const N = parseInt(inputData[0])
-const listN = new Set(inputData[1].split(' ').map(Number))
+const numbersN = new Set(inputData[1].split(' ').map(Number))
 const M = parseInt(inputData[2])
-const listM = new Set(inputData[3].split(' ').map(Number))
+const numbersM = new Set(inputData[3].split(' ').map(Number))
+
+const numberMap = new Map()
+
+for (let num of numbersN) {
+  if (numberMap.has(num)) {
+    numberMap.set(num, numberMap.get(num) + 1)
+  } else {
+    numberMap.set(num, 1)
+  }
+}
+let result = []
+for (let num of numbersM) {
+  if (numberMap.has(num)) {
+    result.push(numberMap.get(num))
+  } else {
+    result.push(0)
+  }
+}
+
+console.log(result.join(' '))
 ```
 
 #### \* 문제 풀이
 
-1. 카운팅 정렬의 기본 아이디어는 다음과 같습니다:<br/> 1) 입력값 중 가장 큰 정수를 찾습니다. 이 값을 배열의 크기로 사용합니다.<br/> 2) 배열의 인덱스를 입력값으로 하고, 해당 입력값의 등장 횟수를 배열의 값으로 저장합니다.<br/> 3)누적합을 계산하여 각 값이 정렬된 결과에서 어디에 위치해야 하는지를 결정합니다.
-   <br/>
-   <br/>
+1. 초기에는 numberMap이 비어 있기 때문에 numberMap.has(num)는 false를 반환하고, else 블록의 코드가 실행됩니다. 그러면 numberMap.set(num, 1)을 통해 해당 num 값을 key로 가지는 항목이 numberMap에 추가되고, 그 key의 value는 1로 설정됩니다.
 
-결과 : `성공` -->
+```javascript
+for (let num of numbersN) {
+  if (numberMap.has(num)) {
+    numberMap.set(num, numberMap.get(num) + 1)
+  } else {
+    numberMap.set(num, 1)
+  }
+}
+```
+
+2. numberMap.get(num)은 numberMap에서 해당 num 값의 key에 연결된 value를 반환합니다. 이 value는 상근이가 해당 num 값을 가진 카드를 몇 장 가지고 있는지를 나타냅니다. 이 값을 result 배열에 추가합니다.
+
+```javascript
+result.push(numberMap.get(num))
+```
+
+결과 : `성공`
 
 ## 단계 6. 듣보잡 (문제번호 : 1764)
 
@@ -265,7 +320,7 @@ console.log(dataA.size + dataB.size)
 
 결과 : `성공`
 
-<!-- ## 단계 8. 서로 다른 부분 문자열의 개수(문제번호 : 11478)
+## 단계 8. 서로 다른 부분 문자열의 개수(문제번호 : 11478)
 
 #### \* 문제 : 문자열 S가 주어졌을 때, S의 서로 다른 부분 문자열의 개수를 구하는 프로그램을 작성하시오. 부분 문자열은 S에서 연속된 일부분을 말하며, 길이가 1보다 크거나 같아야 한다. 예를 들어, ababc의 부분 문자열은 a, b, a, b, c, ab, ba, ab, bc, aba, bab, abc, abab, babc, ababc가 있고, 서로 다른것의 개수는 12개이다.
 
@@ -275,13 +330,31 @@ console.log(dataA.size + dataB.size)
 
 ```javascript
 const fs = require('fs')
-const inputData = fs.readFileSync(0).toString().trim()
+const S = fs.readFileSync(0).toString().trim()
+
+const result = new Set()
+
+for (i = 0; i < S.length; i++) {
+  for (j = i + 1; j <= S.length; j++) {
+    result.add(S.slice(i, j))
+  }
+}
+console.log(result.size)
+```
+
+#### \* 문제 풀이
+
+1. 중복을 허용하지 않으므로 서로 다른 부분 문자열만 저장시키기 위해 Set함수를 사용해줍니다.
+
+```javascript
+const result = new Set()
 ```
 
 결과 : `성공`
- -->
+
 <br/>
 <br/>
+
 - 백준코딩 단계 별 풀어보기 Step14 집합과 맵 링크
 
 [<https://www.acmicpc.net/step/49>](https://www.acmicpc.net/step/49)
