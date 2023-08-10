@@ -6,67 +6,91 @@ summary: '이 게시글은 백준 약수, 배수와 소수 2 단계 중 1번부�
 thumbnail: '../baekjoon.jpeg'
 ---
 
-> 백준 약수, 배수와 소수 2단계 중 1번부터 9번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다.
+> 백준 약수, 배수와 소수 2단계 중 1번부터 9번 문제에 대한 풀이입니다. 사용한 언어는 **_JavaScript(NodeJS)_** 입니다. 이전 단계에서는 함수를 사용하지 않고 직접 알고리즘을 코딩하는 방식을 사용하여 직관적으로 알 수 있게 문제를 풀이했었습니다. 이번 단계에서는 함수도 사용하여 문제를 풀이하겠습니다.
 
 ## 단계 1. 최소공배수 (문제번호 : 1934)
 
-#### \* 문제 : 숫자 카드는 정수 하나가 적혀져 있는 카드이다. 상근이는 숫자 카드 N개를 가지고 있다. 정수 M개가 주어졌을 때, 이 수가 적혀있는 숫자 카드를 상근이가 가지고 있는지 아닌지를 구하는 프로그램을 작성하시오.
+#### \* 문제 : 두 자연수 A와 B에 대해서, A의 배수이면서 B의 배수인 자연수를 A와 B의 공배수라고 한다. 이런 공배수 중에서 가장 작은 수를 최소공배수라고 한다. 예를 들어, 6과 15의 공배수는 30, 60, 90등이 있으며, 최소 공배수는 30이다. 두 자연수 A와 B가 주어졌을 때, A와 B의 최소공배수를 구하는 프로그램을 작성하시오.
 
-- 입력 : 첫째 줄에 상근이가 가지고 있는 숫자 카드의 개수 N(1 ≤ N ≤ 500,000)이 주어진다. 둘째 줄에는 숫자 카드에 적혀있는 정수가 주어진다. 숫자 카드에 적혀있는 수는 -10,000,000보다 크거나 같고, 10,000,000보다 작거나 같다. 두 숫자 카드에 같은 수가 적혀있는 경우는 없다. 셋째 줄에는 M(1 ≤ M ≤ 500,000)이 주어진다. 넷째 줄에는 상근이가 가지고 있는 숫자 카드인지 아닌지를 구해야 할 M개의 정수가 주어지며, 이 수는 공백으로 구분되어져 있다. 이 수도 -10,000,000보다 크거나 같고, 10,000,000보다 작거나 같다
+- 입력 : 첫째 줄에 테스트 케이스의 개수 T(1 ≤ T ≤ 1,000)가 주어진다. 둘째 줄부터 T개의 줄에 걸쳐서 A와 B가 주어진다. (1 ≤ A, B ≤ 45,000)
 
-- 출력 : 첫째 줄에 입력으로 주어진 M개의 수에 대해서, 각 수가 적힌 숫자 카드를 상근이가 가지고 있으면 1을, 아니면 0을 공백으로 구분해 출력한다.
+- 출력 : 첫째 줄부터 T개의 줄에 A와 B의 최소공배수를 입력받은 순서대로 한 줄에 하나씩 출력한다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const N = parseInt(inputData[0])
-const cards = inputData[1].split(' ').map(Number)
-const M = parseInt(inputData[2])
-const matchCards = inputData[3].split(' ').map(Number)
+const T = parseInt(inputData[0])
 
-const cardSet = new Set(cards)
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
+}
 
-const result = matchCards.map(card => (cardSet.has(card) ? 1 : 0))
-
-console.log(result.join(' '))
+for (let i = 1; i <= T; i++) {
+  const [A, B] = inputData[i].split(' ').map(Number)
+  const GCD = gcd(A, B)
+  const LCM = (A * B) / GCD
+  console.log(LCM)
+}
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. has() 메소드를 사용해서 특정 요소에 해당 객체가 존재하는지 확인해줍니다. 단 has()메소드는 Set또는 Map객체에서만 사용이 가능하기 때문에 유의해야합니다.
+1. 이 코드는 최대공약수를 찾는 함수입니다. b가 0일 경우 a는 b의 약수이므로 a를 반환합니다. b가 0이 아닐 경우, gcd(b, a % b)를 호출하여 재귀적으로 계산을 진행합니다. 여기서 a % b는 a를 b로 나눈 나머지입니다.재귀 호출을 계속 반복하다 보면 언젠가 b가 0이 되는 시점에 도달합니다. 그 때 a를 반환하고 재귀 호출을 종료합니다.
 
 ```javascript
-const cardSet = new Set(cards) // 먼제 Set객체로 배열을 만들어줍니다.
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
+}
+```
 
-const result = matchCards.map(card => (cardSet.has(card) ? 1 : 0)) // 이단계에서 요소가 있는지 아닌지 확인해주는 조건문을 사용해줍니다.
+2. 이 코드는 A와 b의 최소공배수를 구하는 공식입니다. 최소공배수를 구하는 공식은 최대공배수 = 두 자연수의 곱 나누기 최대공약수를 해주면 됩니다.
+
+```javascript
+const LCM = (A * B) / GCD
 ```
 
 결과 : `성공`
 
 ## 단계 2. 최소공배수 (문제번호 : 13241)
 
-#### \* 문제 : 총 N개의 문자열로 이루어진 집합 S가 주어진다. 입력으로 주어지는 M개의 문자열 중에서 집합 S에 포함되어 있는 것이 총 몇 개인지 구하는 프로그램을 작성하시오.
+#### \* 문제 : 정수 B에 0보다 큰 정수인 N을 곱해 정수 A를 만들 수 있다면, A는 B의 배수이다.
 
-- 입력 : 첫째 줄에 문자열의 개수 N과 M (1 ≤ N ≤ 10,000, 1 ≤ M ≤ 10,000)이 주어진다. 다음 N개의 줄에는 집합 S에 포함되어 있는 문자열들이 주어진다. 다음 M개의 줄에는 검사해야 하는 문자열들이 주어진다. 입력으로 주어지는 문자열은 알파벳 소문자로만 이루어져 있으며, 길이는 500을 넘지 않는다. 집합 S에 같은 문자열이 여러 번 주어지는 경우는 없다.
+##### 예:
 
-- 출력 : 첫째 줄에 M개의 문자열 중에 총 몇 개가 집합 S에 포함되어 있는지 출력한다.
+##### - 10은 5의 배수이다 (5\*2 = 10)
+
+##### - 10은 10의 배수이다(10\*1 = 10)
+
+##### - 6은 1의 배수이다(1\*6 = 6)
+
+##### - 20은 1, 2, 4,5,10,20의 배수이다.
+
+##### 다른 예:
+
+##### - 2와 5의 최소공배수는 10이고, 그 이유는 2와 5보다 작은 공배수가 없기 때문이다.
+
+##### - 10과 20의 최소공배수는 20이다.
+
+##### - 5와 3의 최소공배수는 15이다.
+
+#### 당신은 두 수에 대하여 최소공배수를 구하는 프로그램을 작성 하는 것이 목표이다.
+
+- 입력 : 한 줄에 두 정수 A와 B가 공백으로 분리되어 주어진다. 50%의 입력 중 A와 B는 1000(103)보다 작다. 다른 50%의 입력은 1000보다 크고 100000000(108)보다 작다. 추가: 큰 수 입력에 대하여 변수를 64비트 정수로 선언하시오. C/C++에서는 long long int를 사용하고, Java에서는 long을 사용하시오.
+
+- 출력 : A와 B의 최소공배수를 한 줄에 출력한다.
 
 ```javascript
 const fs = require('fs')
-const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const [N, M] = inputData[0].split(' ').map(Number)
-const words = inputData.slice(1, N + 1)
+const [A, B] = fs.readFileSync(0).toString().trim().split(' ').map(Number)
 
-const matchWords = inputData.slice(N + 1, M + N + 1)
-
-const wordSet = new Set(words)
-
-let count = 0
-const result = matchWords.map(word => (wordSet.has(word) ? ++count : 0))
-
-console.log(count)
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
+}
+const GCD = gcd(A, B)
+const LCM = (A * B) / GCD
+console.log(LCM)
 ```
 
 결과 : `성공`
@@ -74,55 +98,48 @@ console.log(count)
 
 ## 단계 3. 분수 합 (문제번호 : 1735)
 
-#### \* 문제 : 상근이는 세계적인 소프트웨어 회사 기글에서 일한다. 이 회사의 가장 큰 특징은 자유로운 출퇴근 시간이다. 따라서, 직원들은 반드시 9시부터 6시까지 회사에 있지 않아도 된다. 각 직원은 자기가 원할 때 출근할 수 있고, 아무때나 퇴근할 수 있다. 상근이는 모든 사람의 출입카드 시스템의 로그를 가지고 있다. 이 로그는 어떤 사람이 회사에 들어왔는지, 나갔는지가 기록되어져 있다. 로그가 주어졌을 때, 현재 회사에 있는 모든 사람을 구하는 프로그램을 작성하시오.
+#### \* 문제 : 분수 A/B는 분자가 A, 분모가 B인 분수를 의미한다. A와 B는 모두 자연수라고 하자. 두 분수의 합 또한 분수로 표현할 수 있다. 두 분수가 주어졌을 때, 그 합을 기약분수의 형태로 구하는 프로그램을 작성하시오. 기약분수란 더 이상 약분되지 않는 분수를 의미한다.
 
-- 입력 : 첫째 줄에 로그에 기록된 출입 기록의 수 n이 주어진다. (2 ≤ n ≤ 106) 다음 n개의 줄에는 출입 기록이 순서대로 주어지며, 각 사람의 이름이 주어지고 "enter"나 "leave"가 주어진다. "enter"인 경우는 출근, "leave"인 경우는 퇴근이다. 회사에는 동명이인이 없으며, 대소문자가 다른 경우에는 다른 이름이다. 사람들의 이름은 알파벳 대소문자로 구성된 5글자 이하의 문자열이다.
-- 출력 : 현재 회사에 있는 사람의 이름을 사전 순의 역순으로 한 줄에 한 명씩 출력한다.
+- 입력 : 첫째 줄과 둘째 줄에, 각 분수의 분자와 분모를 뜻하는 두 개의 자연수가 순서대로 주어진다. 입력되는 네 자연수는 모두 30,000 이하이다.
+- 출력 : 첫째 줄에 구하고자 하는 기약분수의 분자와 분모를 뜻하는 두 개의 자연수를 빈 칸을 사이에 두고 순서대로 출력한다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const n = parseInt(inputData[0])
+const [A, B] = inputData[0].split(' ').map(Number)
+const [C, D] = inputData[1].split(' ').map(Number)
 
-const currentMembers = new Set()
+const sumFraction = [A * D + B * C, B * D]
 
-for (let i = 1; i <= n; i++) {
-  const [name, action] = inputData[i].split(' ')
-  if (action === 'enter') {
-    currentMembers.add(name)
-  } else {
-    currentMembers.delete(name)
-  }
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
 }
 
-const result = [...currentMembers].sort((a, b) => {
-  if (a > b) return -1
-  else if (a < b) return 1
-  else return 0
-})
-console.log(result.join('\n'))
+const GCD = gcd(sumFraction[0], sumFraction[1])
+
+console.log(sumFraction[0] / GCD, sumFraction[1] / GCD)
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. Array.prototype.sort() 메서드에서 사용되는 콜백 함수는 배열의 두 요소를 인자로 받아, 어느 것이 먼저 오는지를 결정합니다. sort() 함수의 콜백 내에서 문자열을 입력받을 경우, 이들은 사전순으로 비교됩니다.
+1. 두 분수를 더했을때 결과값을 첫번째 값은 분자로, 두번쨰 값은 분모로 나눴습니다.
 
 ```javascript
-const result = [...currentMembers].sort((a, b) => {
-  if (a > b) return -1
-  else if (a < b) return 1
-  else return 0
-})
+const sumFraction = [A * D + B * C, B * D]
 ```
 
-2. return 되는 값 -1, 1, 0은 배열의 순서를 나타냅니다. 반환값이 음수일 경우, a를 b보다 배열에서 앞쪽에 배치합니다. 반환값이 양수일 경우, a를 b보다 배열에서 뒷쪽에 배치합니다. 반환 값이 0일 경우, a와 b의 위치를 변경하지 않습니다.
+2. 더한 분수의 분모와 분자의 최대공약수를 구했습니다.
 
 ```javascript
-if (a > b) return -1
-else if (a < b) return 1
-else return 0
+const GCD = gcd(sumFraction[0], sumFraction[1])
+```
+
+3. 각각 분자와 분모에 구한 최대공약수로 나눠, 더이상 나뉘지 않는 값인 기약분수 형태로 출력하게 합니다.
+
+```javascript
+console.log(sumFraction[0] / GCD, sumFraction[1] / GCD)
 ```
 
 결과 : `성공`
@@ -130,100 +147,67 @@ else return 0
 
 ## 단계 4. 가로수 (문제번호 : 2485)
 
-#### \* 문제 : (생략)
+#### \* 문제 : 직선으로 되어있는 도로의 한 편에 가로수가 임의의 간격으로 심어져있다. KOI 시에서는 가로수들이 모두 같은 간격이 되도록 가로수를 추가로 심는 사업을 추진하고 있다. KOI 시에서는 예산문제로 가능한 한 가장 적은 수의 나무를 심고 싶다. 편의상 가로수의 위치는 기준점으로 부터 떨어져 있는 거리로 표현되며, 가로수의 위치는 모두 양의 정수이다. 예를 들어, 가로수가 (1, 3, 7, 13)의 위치에 있다면 (5, 9, 11)의 위치에 가로수를 더 심으면 모든 가로수들의 간격이 같게 된다. 또한, 가로수가 (2, 6, 12, 18)에 있다면 (4, 8, 10, 14, 16)에 가로수를 더 심어야 한다. 심어져 있는 가로수의 위치가 주어질 때, 모든 가로수가 같은 간격이 되도록 새로 심어야 하는 가로수의 최소수를 구하는 프로그램을 작성하라. 단, 추가되는 나무는 기존의 나무들 사이에만 심을 수 있다.
 
-- 입력 : 첫째 줄에는 도감에 수록되어 있는 포켓몬의 개수 N이랑 내가 맞춰야 하는 문제의 개수 M이 주어져. N과 M은 1보다 크거나 같고, 100,000보다 작거나 같은 자연수인데, 자연수가 뭔지는 알지? 모르면 물어봐도 괜찮아. 나는 언제든지 질문에 답해줄 준비가 되어있어. 둘째 줄부터 N개의 줄에 포켓몬의 번호가 1번인 포켓몬부터 N번에 해당하는 포켓몬까지 한 줄에 하나씩 입력으로 들어와. 포켓몬의 이름은 모두 영어로만 이루어져있고, 또, 음... 첫 글자만 대문자이고, 나머지 문자는 소문자로만 이루어져 있어. 아참! 일부 포켓몬은 마지막 문자만 대문자일 수도 있어. 포켓몬 이름의 최대 길이는 20, 최소 길이는 2야. 그 다음 줄부터 총 M개의 줄에 내가 맞춰야하는 문제가 입력으로 들어와. 문제가 알파벳으로만 들어오면 포켓몬 번호를 말해야 하고, 숫자로만 들어오면, 포켓몬 번호에 해당하는 문자를 출력해야해. 입력으로 들어오는 숫자는 반드시 1보다 크거나 같고, N보다 작거나 같고, 입력으로 들어오는 문자는 반드시 도감에 있는 포켓몬의 이름만 주어져. 그럼 화이팅!!!
-- 출력 : 첫째 줄부터 차례대로 M개의 줄에 각각의 문제에 대한 답을 말해줬으면 좋겠어!!!. 입력으로 숫자가 들어왔다면 그 숫자에 해당하는 포켓몬의 이름을, 문자가 들어왔으면 그 포켓몬의 이름에 해당하는 번호를 출력하면 돼. 그럼 땡큐~ 이게 오박사님이 나에게 새로 주시려고 하는 도감이야. 너무 가지고 싶다ㅠㅜ. 꼭 만점을 받아줬으면 좋겠어!! 파이팅!!!
+- 입력 : 첫째 줄에는 이미 심어져 있는 가로수의 수를 나타내는 하나의 정수 N이 주어진다(3 ≤ N ≤ 100,000). 둘째 줄부터 N개의 줄에는 각 줄마다 심어져 있는 가로수의 위치가 양의 정수로 주어지며, 가로수의 위치를 나타내는 정수는 1,000,000,000 이하이다. 가로수의 위치를 나타내는 정수는 모두 다르고, N개의 가로수는 기준점으로부터 떨어진 거리가 가까운 순서대로 주어진다.
+
+- 출력 : 모든 가로수가 같은 간격이 되도록 새로 심어야 하는 가로수의 최소수를 첫 번째 줄에 출력한다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
-const [N, M] = inputData[0].split(' ').map(Number)
+const N = parseInt(inputData[0])
+const positions = inputData.slice(1).map(Number)
 
-const nameToNumber = new Map()
-const numberToName = new Map()
-
-for (let i = 0; i < N; i++) {
-  const name = inputData[i + 1]
-  nameToNumber.set(name, i + 1)
-  numberToName.set(i + 1, name)
+function gcd(a, b) {
+  return b === 0 ? a : gcd(b, a % b)
 }
 
-for (let i = 0; i < M; i++) {
-  const result = inputData[N + i + 1]
-
-  if (isNaN(result)) {
-    console.log(nameToNumber.get(result))
-  } else {
-    console.log(numberToName.get(Number(result)))
-  }
+let distances = []
+for (let i = 1; i < N; i++) {
+  distances.push(positions[i] - positions[i - 1])
 }
+
+let commonGCD = distances[0]
+for (let i = 1; i < distances.length; i++) {
+  commonGCD = gcd(commonGCD, distances[i])
+}
+
+let additionalTrees = 0
+for (let distance of distances) {
+  additionalTrees += distance / commonGCD - 1
+}
+
+console.log(additionalTrees)
 ```
 
 <br/>
 
 #### \* 문제 풀이
 
-1. Map 객체는 JavaScript에서 제공하는 내장 객체로 키-값 쌍을 저장하게 됩니다. 하나의 Map을 사용하여 키를 출력할땐 키를 값을 출력할땐 값을 출력하게 코드를 작성할 수 있지만 키와 값을 반대로하는 별도의 함수가 추가로 필요하기 때문에 Map을 두 개로 나눴습니다.
+1. 이 부분의 코드는 각 거리마다 새로 심어야 하는 나무의 수를 계산하고, 그 값을 additionalTrees에 더하는 역할을 합니다. 각 거리를 최대공약수로 나눠서 얼마나 많은 나무를 심어야 하는지 계산합니다. -1을 하는 이유는 현재 거리의 구간에서 이미 심어져 있는 나무의 수를 빼야하기 때문입니다.
 
 ```javascript
-const nameToNumber = new Map()
-const numberToName = new Map()
-```
-
-2. nameToNumber.set(name, i + 1)는 nameToNumber 맵에 포켓몬 이름을 키로, 해당 포켓몬의 번호(인덱스 + 1)을 값으로 추가합니다. numberToName.set(i + 1, name)는 numberToName 맵에 포켓몬 번호를 키로, 해당 포켓몬의 이름을 값으로 추가합니다.
-
-```javascript
-for (let i = 0; i < N; i++) {
-  const name = inputData[i + 1]
-  nameToNumber.set(name, i + 1)
-  numberToName.set(i + 1, name)
+let additionalTrees = 0
+for (let distance of distances) {
+  additionalTrees += distance / commonGCD - 1
 }
-```
-
-3. isNaN은 JavaScript 내장 함수로, "is Not a Number"의 약자입니다. 이 함수는 주어진 값이 숫자가 아니라면 true를 반환하고, 숫자라면 false를 반환합니다. 조건문이 문자일 때를 확인해야하므로 isNaN을 사용하였습니다.
-
-```javascript
- if (isNaN(result))
 ```
 
 결과 : `성공`
 
-## 단계 5. 다음 소수 (문제번호 : 4134)
+<!-- ## 단계 5. 다음 소수 (문제번호 : 4134)
 
-#### \* 문제 : 숫자 카드는 정수 하나가 적혀져 있는 카드이다. 상근이는 숫자 카드 N개를 가지고 있다. 정수 M개가 주어졌을 때, 이 수가 적혀있는 숫자 카드를 상근이가 몇 개 가지고 있는지 구하는 프로그램을 작성하시오.
+#### \* 문제 : 정수 n(0 ≤ n ≤ 4\*109)가 주어졌을 때, n보다 크거나 같은 소수 중 가장 작은 소수 찾는 프로그램을 작성하시오.
 
-- 입력 : 첫째 줄에 상근이가 가지고 있는 숫자 카드의 개수 N(1 ≤ N ≤ 500,000)이 주어진다. 둘째 줄에는 숫자 카드에 적혀있는 정수가 주어진다. 숫자 카드에 적혀있는 수는 -10,000,000보다 크거나 같고, 10,000,000보다 작거나 같다. 셋째 줄에는 M(1 ≤ M ≤ 500,000)이 주어진다. 넷째 줄에는 상근이가 몇 개 가지고 있는 숫자 카드인지 구해야 할 M개의 정수가 주어지며, 이 수는 공백으로 구분되어져 있다. 이 수도 -10,000,000보다 크거나 같고, 10,000,000보다 작거나 같다.
+- 입력 : 첫째 줄에 테스트 케이스의 개수가 주어진다. 각 테스트 케이스는 한 줄로 이루어져 있고, 정수 n이 주어진다.
 
-- 출력 : 첫째 줄에 입력으로 주어진 M개의 수에 대해서, 각 수가 적힌 숫자 카드를 상근이가 몇 개 가지고 있는지를 공백으로 구분해 출력한다.
+- 출력 : 각각의 테스트 케이스에 대해서 n보다 크거나 같은 소수 중 가장 작은 소수를 한 줄에 하나씩 출력한다.
 
 ```javascript
 const fs = require('fs')
 const inputData = fs.readFileSync(0).toString().trim().split('\n')
 const N = parseInt(inputData[0])
-const numbersN = new Set(inputData[1].split(' ').map(Number))
-const M = parseInt(inputData[2])
-const numbersM = new Set(inputData[3].split(' ').map(Number))
-
-const numberMap = new Map()
-
-for (let num of numbersN) {
-  if (numberMap.has(num)) {
-    numberMap.set(num, numberMap.get(num) + 1)
-  } else {
-    numberMap.set(num, 1)
-  }
-}
-let result = []
-for (let num of numbersM) {
-  if (numberMap.has(num)) {
-    result.push(numberMap.get(num))
-  } else {
-    result.push(0)
-  }
-}
-
-console.log(result.join(' '))
 ```
 
 #### \* 문제 풀이
@@ -250,10 +234,10 @@ result.push(numberMap.get(num))
 
 ## 단계 6. 소수 구하기 (문제번호 : 1929)
 
-#### \* 문제 : 김진영이 듣도 못한 사람의 명단과, 보도 못한 사람의 명단이 주어질 때, 듣도 보도 못한 사람의 명단을 구하는 프로그램을 작성하시오.
+#### \* 문제 : M이상 N이하의 소수를 모두 출력하는 프로그램을 작성하시오.
 
-- 입력 : 첫째 줄에 듣도 못한 사람의 수 N, 보도 못한 사람의 수 M이 주어진다. 이어서 둘째 줄부터 N개의 줄에 걸쳐 듣도 못한 사람의 이름과, N+2째 줄부터 보도 못한 사람의 이름이 순서대로 주어진다. 이름은 띄어쓰기 없이 알파벳 소문자로만 이루어지며, 그 길이는 20 이하이다. N, M은 500,000 이하의 자연수이다. 듣도 못한 사람의 명단에는 중복되는 이름이 없으며, 보도 못한 사람의 명단도 마찬가지이다.
-- 출력 : 듣보잡의 수와 그 명단을 사전순으로 출력한다.
+- 입력 : 첫째 줄에 자연수 M과 N이 빈 칸을 사이에 두고 주어진다. (1 ≤ M ≤ N ≤ 1,000,000) M이상 N이하의 소수가 하나 이상 있는 입력만 주어진다.
+- 출력 : 한 줄에 하나씩, 증가하는 순서대로 소수를 출력한다.
 
 ```javascript
 const fs = require('fs')
@@ -384,8 +368,8 @@ const result = new Set()
 
 결과 : `성공`
 <br/>
-<br/>
+<br/> -->
 
-- 백준코딩 단계 별 풀어보기 Step14 집합과 맵 링크
+- 백준코딩 단계 별 풀어보기 Step15 약수, 배수와 소수 2 링크
 
-[<https://www.acmicpc.net/step/49>](https://www.acmicpc.net/step/49)
+[<https://www.acmicpc.net/step/18>](https://www.acmicpc.net/step/18)
