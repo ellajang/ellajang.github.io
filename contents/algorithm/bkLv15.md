@@ -1,5 +1,5 @@
 ---
-date: '2023-08-10'
+date: '2023-08-14'
 title: '백준-약수, 배수와 소수 2'
 categories: ['algorithm']
 summary: '이 게시글은 백준 약수, 배수와 소수 2 단계 중 1번부터 9번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.'
