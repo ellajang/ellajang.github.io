@@ -28,7 +28,7 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 export default ProfileImage
 
 const ProfileWrapper = styled.div`
-  width: 930px;
+  width: 995px;
   height: 400px;
   @media (max-width: 768px) {
     width: 440px;
