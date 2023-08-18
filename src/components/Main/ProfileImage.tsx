@@ -2,12 +2,11 @@ import React, { useContext } from 'react'
 
 import styled from '@emotion/styled'
 import GlobalStyle from 'components/Common/GlobalStyle'
-import { GatsbyImage, IGatsbyImageData } from 'gatsby-plugin-image'
 import { ThemeContext } from 'hooks/useTheme'
 
 type ProfileImageProps = {
-  profileImage: IGatsbyImageData
-  darkModeImage: IGatsbyImageData
+  profileImage: string
+  darkModeImage: string
 }
 
 const ProfileImage: React.FC<ProfileImageProps> = ({
@@ -15,14 +14,12 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
   darkModeImage,
 }) => {
   const theme = useContext(ThemeContext)
+  const imageSrc = theme.theme === 'dark' ? darkModeImage : profileImage
   return (
     <>
       <ProfileWrapper>
         <GlobalStyle />
-        <ProfileImageWrapper
-          image={theme.theme === 'light' ? profileImage : darkModeImage}
-          alt="Profile Image"
-        />
+        <ProfileImageWrapper src={imageSrc} alt="Profile Image" />
       </ProfileWrapper>
     </>
   )
@@ -31,17 +28,17 @@ const ProfileImage: React.FC<ProfileImageProps> = ({
 export default ProfileImage
 
 const ProfileWrapper = styled.div`
-  width: 730px;
-  height: 380px;
+  width: 930px;
+  height: 400px;
   @media (max-width: 768px) {
     width: 440px;
     height: 250px;
   }
 `
 
-const ProfileImageWrapper = styled(GatsbyImage)`
-  width: 760px;
-  height: 440px;
+const ProfileImageWrapper = styled.img`
+  width: 1000px;
+  height: 540px;
   @media (max-width: 768px) {
     width: 450px;
     height: 250px;

@@ -32,15 +32,9 @@ type IndexPageProps = {
       edges: PostListItemType[]
     }
     file: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
-      }
       publicURL: string
     }
     darkModeImage: {
-      childImageSharp: {
-        gatsbyImageData: IGatsbyImageData
-      }
       publicURL: string
     }
     folderClose: {
@@ -76,13 +70,8 @@ const IndexPage: React.FC<IndexPageProps> = ({
       siteMetadata: { title, description, siteUrl },
     },
     allMarkdownRemark: { edges },
-    file: {
-      childImageSharp: { gatsbyImageData },
-      publicURL,
-    },
-    darkModeImage: {
-      childImageSharp: { gatsbyImageData: darkModeImageData },
-    },
+    file: { publicURL: profileImageURL },
+    darkModeImage: { publicURL: darkModeImageURL },
     folderClose: {
       childImageSharp: { gatsbyImageData: folderCloseData },
     },
@@ -118,11 +107,11 @@ const IndexPage: React.FC<IndexPageProps> = ({
           title={title}
           description={description}
           url={siteUrl}
-          image={publicURL}
+          image={profileImageURL}
         >
           <Introduction
-            profileImage={gatsbyImageData}
-            darkModeImage={darkModeImageData}
+            profileImage={profileImageURL}
+            darkModeImage={darkModeImageURL}
           />
           <PostList posts={edges} selectedCategory={selectedCategory} />
           <Divider />
@@ -175,15 +164,9 @@ export const getPostList = graphql`
       }
     }
     file(name: { eq: "profile-image" }) {
-      childImageSharp {
-        gatsbyImageData
-      }
       publicURL
     }
     darkModeImage: file(name: { eq: "profile-image-dark" }) {
-      childImageSharp {
-        gatsbyImageData
-      }
       publicURL
     }
     folderClose: file(name: { eq: "folderClose" }) {
