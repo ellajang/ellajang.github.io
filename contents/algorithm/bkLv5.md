@@ -1,6 +1,6 @@
 ---
 date: '2023-07-20'
-title: '백준-문자열'
+title: '백준-문자열(단계5)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 문자열 단계 중 1번부터 11번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.'
 thumbnail: '../baekjoon.jpeg'

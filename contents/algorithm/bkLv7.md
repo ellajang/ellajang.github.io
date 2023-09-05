@@ -1,6 +1,6 @@
 ---
 date: '2023-07-24'
-title: '백준-2차원 배열'
+title: '백준-2차원 배열(단계7)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 2차원 배열 단계 중 1번부터 4번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 배열 안에 배열을 넣는 문제입니다. '
 thumbnail: '../baekjoon.jpeg'

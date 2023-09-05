@@ -1,6 +1,6 @@
 ---
 date: '2023-07-21'
-title: '백준-심화1'
+title: '백준-심화1(단계6)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 심화1 단계 중 1번부터 8번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 입출력과 사칙연산, 조건문, 반복문, 1차원배열, 문자열에서 사용했던 프로그래밍 문법으로 더 어렵게 응용한 문제들입니다. '
 thumbnail: '../baekjoon.jpeg'

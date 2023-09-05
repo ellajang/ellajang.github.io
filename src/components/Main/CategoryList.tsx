@@ -219,7 +219,7 @@ const CategoryItemWrapper = styled('div')(() => {
     flexGrow: '1',
     flexWrap: 'wrap',
     boxSizing: 'border-box',
-    margin: '0px 0px 20px 0px',
+    margin: '0px 0px 20px 27px',
     '@media (max-width: 1250px)': {
       flexBasis: '45%',
       margin: '3px 0px 0px 20px',

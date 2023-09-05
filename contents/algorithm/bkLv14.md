@@ -1,6 +1,6 @@
 ---
 date: '2023-08-08'
-title: '백준-집합과 맵'
+title: '백준-집합과 맵(단계14)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 집합과 맵 단계 중 1번부터 8번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다. 특정 원소가 속해 있는지 빠르게 찾거나, 각 원소에 대응되는 원소를 빠르게 찾는 자료구조를 배웁니다.	 '
 thumbnail: '../baekjoon.jpeg'

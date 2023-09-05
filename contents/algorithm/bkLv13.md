@@ -1,6 +1,6 @@
 ---
 date: '2023-08-07'
-title: '백준-정렬'
+title: '백준-정렬(단계13)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 정렬 단계 중 1번부터 11번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	배열의 원소를 순서대로 나열하는 알고리즘을 배웁니다. '
 thumbnail: '../baekjoon.jpeg'

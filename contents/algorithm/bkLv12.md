@@ -1,6 +1,6 @@
 ---
 date: '2023-08-03'
-title: '백준-브루트 포스'
+title: '백준-브루트 포스(단계12)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 브루트 포스 단계 중 1번부터 6번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다. 가장 간단한 알고리즘인, 모든 경우의 수를 검사하는 브루트 포스 알고리즘을 배웁니다.	 '
 thumbnail: '../baekjoon.jpeg'

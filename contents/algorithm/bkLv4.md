@@ -1,6 +1,6 @@
 ---
 date: '2023-07-19'
-title: '백준-1차원 배열'
+title: '백준-1차원 배열(단계4)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 1차원 배열 단계 중 1번부터 10번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다. map,forEach등 배열에 필요한 메소드를 사용합니다.'
 thumbnail: '../baekjoon.jpeg'

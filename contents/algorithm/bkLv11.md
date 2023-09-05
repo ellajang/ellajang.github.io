@@ -1,6 +1,6 @@
 ---
 date: '2023-08-01'
-title: '백준-시간 복잡도'
+title: '백준-시간 복잡도(단계11)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 시간 복잡도 단계 중 1번부터 7번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 '
 thumbnail: '../baekjoon.jpeg'

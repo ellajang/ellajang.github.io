@@ -1,6 +1,6 @@
 ---
 date: '2023-07-10'
-title: '백준-입출력과 사칙연산'
+title: '백준-입출력과 사칙연산(단계1)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 입출력과 사칙연산 단계 중 1번부터 13번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다. '
 thumbnail: '../baekjoon.jpeg'

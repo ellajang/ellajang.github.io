@@ -1,6 +1,6 @@
 ---
 date: '2023-07-17'
-title: '백준-반복문'
+title: '백준-반복문(단계3)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 반복문 단계 중 1번부터 12번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	for, while 등의 반복문을 사용합니다 '
 thumbnail: '../baekjoon.jpeg'

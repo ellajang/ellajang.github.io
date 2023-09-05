@@ -1,6 +1,6 @@
 ---
 date: '2023-07-26'
-title: '백준-약수, 배수와 소수'
+title: '백준-약수, 배수와 소수(단계9)'
 categories: ['algorithm']
 summary: '이 게시글은 백준 약수, 배수와 소수 단계 중 1번부터 6번에 해당하는 문제를 JavaScript(NodeJS)언어로 풀이 방법에 대한 내용입니다.	 '
 thumbnail: '../baekjoon.jpeg'
