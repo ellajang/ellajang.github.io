@@ -121,7 +121,7 @@ const CategoryContainer = styled.div`
   justify-content: space-between;
   margin-top: 50px;
   margin-bottom: 50px;
-  margin-left: 100px;
+  margin-left: 150px;
   @media (max-width: 768px) {
     margin-top: 30px;
     margin-bottom: 40px;
@@ -144,9 +144,14 @@ const CategoryHeader = styled('h3')(() => {
   }
 })
 
-const CategoryContent = styled.ul`
-  justify-content: space-between;
-`
+const CategoryContent = styled('ul')(() => {
+  return {
+    justifyContent: 'space-between',
+    '@media (min-width: 1800px)': {
+      padding: '0px 50px 0px 0px',
+    },
+  }
+})
 
 const NameWrapper = styled('li')(() => {
   const theme = useContext(ThemeContext)
