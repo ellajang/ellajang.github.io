@@ -8,7 +8,6 @@
 <div class="gatsby-highlight" data-language="javascript"><pre class="language-javascript"><code class="language-javascript"><span class="token keyword">let</span> numbers <span class="token operator">=</span> <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">3</span><span class="token punctuation">]</span>
 <span class="token keyword">let</span> squaredNumbers <span class="token operator">=</span> numbers<span class="token punctuation">.</span><span class="token function">map</span><span class="token punctuation">(</span><span class="token parameter">x</span> <span class="token operator">=></span> x <span class="token operator">*</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token comment">// [2, 4, 6]</span></code></pre></div>
 <h3>2. forEach 메서드</h3>
-<h4><strong>1. 구조 분해(Destructuring)</strong></h4>
 <p>: forEach 메서드는 배열의 각 요소에 대해 주어진 함수를 실행합니다. 그러나 <strong>새로운 배열을 생성하지 않습니다.</strong> 배열의 각 요소에 대해 부수 효과(side effect)를 일으키는 작업을 할 때 사용됩니다. 예를 들어, 각 요소를 콘솔에 출력하거나, 배열의 각 요소에 대해 특정작업을 수행하고 자 할 때 사용되며 이 과정에서 원본 배열은 변경되지 않습니다. 이해하기 쉽게 두 가지 예시를 가져왔습니다.</p>
 <br/>
 <h4><strong>예시코드 1</strong></h4>
